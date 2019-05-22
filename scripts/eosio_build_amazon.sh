@@ -27,13 +27,13 @@ DISPLAY=""
 DEP=""
 
 if [[ "${OS_NAME}" == "Amazon Linux AMI" && "${OS_VER}" -lt 2017 ]]; then
-	printf "You must be running Amazon Linux 2017.09 or higher to install EOSIO.\\n"
+	printf "You must be running Amazon Linux 2017.09 or higher to install HAWK-NETWORK.\\n"
 	printf "exiting now.\\n"
 	exit 1
 fi
 
 if [ "${DISK_AVAIL}" -lt "${DISK_MIN}" ]; then
-	printf "You must have at least %sGB of available storage to install EOSIO.\\n" "${DISK_MIN}"
+	printf "You must have at least %sGB of available storage to install HAWK-NETWORK.\\n" "${DISK_MIN}"
 	printf "exiting now.\\n"
 	exit 1
 fi
@@ -75,7 +75,7 @@ for (( i=0; i<${#DEP_ARRAY[@]}; i++ )); do
 	fi
 done
 if [ "${COUNT}" -gt 1 ]; then
-	printf "\\nThe following dependencies are required to install EOSIO:\\n"
+	printf "\\nThe following dependencies are required to install HAWK-NETWORK:\\n"
 	printf "${DISPLAY}\\n\\n"
 	if [ $ANSWER != 1 ]; then read -p "Do you wish to install these dependencies? (y/n) " ANSWER; fi
 	case $ANSWER in

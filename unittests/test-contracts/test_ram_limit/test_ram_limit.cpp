@@ -77,4 +77,4 @@ CONTRACT test_ram_limit : public contract {
 
 #pragma clang diagnostic pop
 
-EOSIO_DISPATCH( test_ram_limit, (setentry)(rmentry)(printentry) )
+HAWK-NETWORK_DISPATCH( test_ram_limit, (setentry)(rmentry)(printentry) )

@@ -12,8 +12,8 @@ prog=nodeos
 # Quote any args that are "*", so they are not expanded
 qargs=`echo "$*" | sed -e 's/ \* / "*" /' -e 's/ \*$/ "*"/'`
 
-if [ "$PWD" != "$EOSIO_HOME" ]; then
-    echo $0 must only be run from $EOSIO_HOME
+if [ "$PWD" != "$HAWK-NETWORK_HOME" ]; then
+    echo $0 must only be run from $HAWK-NETWORK_HOME
     exit -1
 fi
 
@@ -22,12 +22,12 @@ if [ ! -e $rundir/$prog ]; then
     exit -1
 fi
 
-if [ -z "$EOSIO_NODE" ]; then
+if [ -z "$HAWK-NETWORK_NODE" ]; then
     echo data directory not set
     exit -1
 fi
 
-datadir=var/lib/node_$EOSIO_NODE
+datadir=var/lib/node_$HAWK-NETWORK_NODE
 now=`date +'%Y_%m_%d_%H_%M_%S'`
 log=stderr.$now.txt
 touch $datadir/$log
@@ -35,8 +35,8 @@ rm $datadir/stderr.txt
 ln -s $log $datadir/stderr.txt
 
 relaunch() {
-    echo "$rundir/$prog $qargs $* --data-dir $datadir --config-dir etc/eosio/node_$EOSIO_NODE > $datadir/stdout.txt  2>> $datadir/$log "
-    nohup $rundir/$prog $qargs $* --data-dir $datadir --config-dir etc/eosio/node_$EOSIO_NODE > $datadir/stdout.txt  2>> $datadir/$log &
+    echo "$rundir/$prog $qargs $* --data-dir $datadir --config-dir etc/eosio/node_$HAWK-NETWORK_NODE > $datadir/stdout.txt  2>> $datadir/$log "
+    nohup $rundir/$prog $qargs $* --data-dir $datadir --config-dir etc/eosio/node_$HAWK-NETWORK_NODE > $datadir/stdout.txt  2>> $datadir/$log &
     pid=$!
     echo pid = $pid
     echo $pid > $datadir/$prog.pid
@@ -56,26 +56,26 @@ relaunch() {
     done
 }
 
-if [ -z "$EOSIO_LEVEL" ]; then
+if [ -z "$HAWK-NETWORK_LEVEL" ]; then
     echo starting with no modifiers
     relaunch
     if [ "$connected" -eq 0 ]; then
-        EOSIO_LEVEL=replay
+        HAWK-NETWORK_LEVEL=replay
     else
         exit 0
     fi
 fi
 
-if [ "$EOSIO_LEVEL" == replay ]; then
+if [ "$HAWK-NETWORK_LEVEL" == replay ]; then
     echo starting with replay
     relaunch --hard-replay-blockchain
     if [  "$connected" -eq 0 ]; then
-        EOSIO_LEVEL=resync
+        HAWK-NETWORK_LEVEL=resync
     else
         exit 0
     fi
 fi
-if [ "$EOSIO_LEVEL" == resync ]; then
+if [ "$HAWK-NETWORK_LEVEL" == resync ]; then
     echo starting with delete-all-blocks
     relaunch --delete-all-blocks
 fi

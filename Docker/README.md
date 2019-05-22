@@ -15,7 +15,7 @@ Simple and fast setup of EOS.IO on Docker is also available.
 ## Build eos image
 
 ```bash
-git clone https://github.com/EOSIO/eos.git --recursive  --depth 1
+git clone https://github.com/HAWK-NETWORK/eos.git --recursive  --depth 1
 cd eos/Docker
 docker build . -t eosio/eos
 ```
@@ -135,9 +135,9 @@ docker volume rm keosd-data-volume
 
 Docker Hub images are now deprecated. New build images were discontinued on January 1st, 2019. The existing old images will be removed on June 1st, 2019.
 
-### EOSIO Testnet
+### HAWK-NETWORK Testnet
 
-We can easily set up a EOSIO local testnet using docker images. Just run the following commands:
+We can easily set up a HAWK-NETWORK local testnet using docker images. Just run the following commands:
 
 Note: if you want to use the mongo db plugin, you have to enable it in your `data-dir/config.ini` first.
 

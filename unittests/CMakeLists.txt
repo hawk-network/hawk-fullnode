@@ -3,8 +3,8 @@ find_package( Gperftools QUIET )
 ### Build contracts with cdt if available ###
 include(ExternalProject)
 
-if( EOSIO_COMPILE_TEST_CONTRACTS )
-   set(EOSIO_WASM_OLD_BEHAVIOR "Off")
+if( HAWK-NETWORK_COMPILE_TEST_CONTRACTS )
+   set(HAWK-NETWORK_WASM_OLD_BEHAVIOR "Off")
    find_package(eosio.cdt REQUIRED)
 
    message( STATUS "Building contracts in directory `eos/unittests/test-contracts/`" )
@@ -12,7 +12,7 @@ if( EOSIO_COMPILE_TEST_CONTRACTS )
       test_contracts_project
       SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/test-contracts
       BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/test-contracts
-      CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${EOSIO_CDT_ROOT}/lib/cmake/eosio.cdt/EosioWasmToolchain.cmake -DEOSIO_COMPILE_TEST_CONTRACTS=${EOSIO_COMPILE_TEST_CONTRACTS}
+      CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${HAWK-NETWORK_CDT_ROOT}/lib/cmake/eosio.cdt/EosioWasmToolchain.cmake -DHAWK-NETWORK_COMPILE_TEST_CONTRACTS=${HAWK-NETWORK_COMPILE_TEST_CONTRACTS}
       UPDATE_COMMAND ""
       PATCH_COMMAND ""
       TEST_COMMAND ""
