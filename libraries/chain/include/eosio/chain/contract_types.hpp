@@ -1,13 +1,13 @@
 #pragma once
 
-#include <eosio/chain/authority.hpp>
-#include <eosio/chain/chain_config.hpp>
-#include <eosio/chain/config.hpp>
-#include <eosio/chain/types.hpp>
+#include <hawknwk/chain/authority.hpp>
+#include <hawknwk/chain/chain_config.hpp>
+#include <hawknwk/chain/config.hpp>
+#include <hawknwk/chain/types.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
-using action_name    = eosio::chain::action_name;
+using action_name    = hawknwk::chain::action_name;
 
 struct newaccount {
    account_name                     creator;
@@ -154,14 +154,14 @@ struct onerror {
    }
 };
 
-} } /// namespace eosio::chain
+} } /// namespace hawknwk::chain
 
-FC_REFLECT( eosio::chain::newaccount                       , (creator)(name)(owner)(active) )
-FC_REFLECT( eosio::chain::setcode                          , (account)(vmtype)(vmversion)(code) )
-FC_REFLECT( eosio::chain::setabi                           , (account)(abi) )
-FC_REFLECT( eosio::chain::updateauth                       , (account)(permission)(parent)(auth) )
-FC_REFLECT( eosio::chain::deleteauth                       , (account)(permission) )
-FC_REFLECT( eosio::chain::linkauth                         , (account)(code)(type)(requirement) )
-FC_REFLECT( eosio::chain::unlinkauth                       , (account)(code)(type) )
-FC_REFLECT( eosio::chain::canceldelay                      , (canceling_auth)(trx_id) )
-FC_REFLECT( eosio::chain::onerror                          , (sender_id)(sent_trx) )
+FC_REFLECT( hawknwk::chain::newaccount                       , (creator)(name)(owner)(active) )
+FC_REFLECT( hawknwk::chain::setcode                          , (account)(vmtype)(vmversion)(code) )
+FC_REFLECT( hawknwk::chain::setabi                           , (account)(abi) )
+FC_REFLECT( hawknwk::chain::updateauth                       , (account)(permission)(parent)(auth) )
+FC_REFLECT( hawknwk::chain::deleteauth                       , (account)(permission) )
+FC_REFLECT( hawknwk::chain::linkauth                         , (account)(code)(type)(requirement) )
+FC_REFLECT( hawknwk::chain::unlinkauth                       , (account)(code)(type) )
+FC_REFLECT( hawknwk::chain::canceldelay                      , (canceling_auth)(trx_id) )
+FC_REFLECT( hawknwk::chain::onerror                          , (sender_id)(sent_trx) )

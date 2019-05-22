@@ -1,10 +1,10 @@
-#include <eosio/chain/name.hpp>
+#include <hawknwk/chain/name.hpp>
 #include <fc/variant.hpp>
 #include <boost/algorithm/string.hpp>
 #include <fc/exception/exception.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 
-namespace eosio { namespace chain { 
+namespace hawknwk { namespace chain { 
 
    void name::set( const char* str ) {
       const auto len = strnlen(str, 14);
@@ -32,9 +32,9 @@ namespace eosio { namespace chain {
       return str;
    }
 
-} } /// eosio::chain
+} } /// hawknwk::chain
 
 namespace fc {
-  void to_variant(const eosio::chain::name& c, fc::variant& v) { v = std::string(c); }
-  void from_variant(const fc::variant& v, eosio::chain::name& check) { check = v.get_string(); }
+  void to_variant(const hawknwk::chain::name& c, fc::variant& v) { v = std::string(c); }
+  void from_variant(const fc::variant& v, hawknwk::chain::name& check) { check = v.get_string(); }
 } // fc

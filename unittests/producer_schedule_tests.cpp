@@ -2,8 +2,8 @@
  *  @file
  *  @copyright defined in eos/LICENSE.txt
  */
-#include <eosio/chain/global_property_object.hpp>
-#include <eosio/testing/tester.hpp>
+#include <hawknwk/chain/global_property_object.hpp>
+#include <hawknwk/testing/tester.hpp>
 
 #include <boost/range/algorithm.hpp>
 #include <boost/test/unit_test.hpp>
@@ -14,8 +14,8 @@
 #define TESTER validating_tester
 #endif
 
-using namespace eosio::testing;
-using namespace eosio::chain;
+using namespace hawknwk::testing;
+using namespace hawknwk::chain;
 using mvo = fc::mutable_variant_object;
 
 BOOST_AUTO_TEST_SUITE(producer_schedule_tests)

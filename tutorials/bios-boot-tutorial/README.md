@@ -10,18 +10,18 @@ The `bios-boot-tutorial.py` script simulates the HAWK-NETWORK bios boot sequence
 
 ``Steps``:
 
-1. Install eosio binaries by following the steps outlined in below tutorial
-[Install eosio binaries](https://github.com/HAWK-NETWORK/eos#mac-os-x-brew-install)
+1. Install hawknwk binaries by following the steps outlined in below tutorial
+[Install hawknwk binaries](https://github.com/HAWK-NETWORK/eos#mac-os-x-brew-install)
 
-2. Install eosio.cdt binaries by following the steps outlined in below tutorial
-[Install eosio.cdt binaries](https://github.com/HAWK-NETWORK/eosio.cdt#binary-releases)
+2. Install hawknwk.cdt binaries by following the steps outlined in below tutorial
+[Install hawknwk.cdt binaries](https://github.com/HAWK-NETWORK/hawknwk.cdt#binary-releases)
 
-3. Compile eosio.contracts
+3. Compile hawknwk.contracts
 
 ```bash
 $ cd ~
-$ git clone https://github.com/HAWK-NETWORK/eosio.contracts.git
-$ cd ./eosio.contracts/
+$ git clone https://github.com/HAWK-NETWORK/hawknwk.contracts.git
+$ cd ./hawknwk.contracts/
 $ ./build.sh
 $ pwd
 

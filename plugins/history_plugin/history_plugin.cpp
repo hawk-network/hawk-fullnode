@@ -1,16 +1,16 @@
-#include <eosio/history_plugin/history_plugin.hpp>
-#include <eosio/history_plugin/account_control_history_object.hpp>
-#include <eosio/history_plugin/public_key_history_object.hpp>
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/trace.hpp>
-#include <eosio/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/history_plugin/history_plugin.hpp>
+#include <hawknwk/history_plugin/account_control_history_object.hpp>
+#include <hawknwk/history_plugin/public_key_history_object.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/trace.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
 
 #include <fc/io/json.hpp>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/signals2/connection.hpp>
 
-namespace eosio {
+namespace hawknwk {
    using namespace chain;
    using boost::signals2::scoped_connection;
 
@@ -73,12 +73,12 @@ namespace eosio {
       >
    >;
 
-} /// namespace eosio
+} /// namespace hawknwk
 
-CHAINBASE_SET_INDEX_TYPE(eosio::account_history_object, eosio::account_history_index)
-CHAINBASE_SET_INDEX_TYPE(eosio::action_history_object, eosio::action_history_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::account_history_object, hawknwk::account_history_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::action_history_object, hawknwk::action_history_index)
 
-namespace eosio {
+namespace hawknwk {
 
    template<typename MultiIndex, typename LookupType>
    static void remove(chainbase::database& db, const account_name& account_name, const permission_name& permission)
@@ -587,4 +587,4 @@ namespace eosio {
 
 
 
-} /// namespace eosio
+} /// namespace hawknwk

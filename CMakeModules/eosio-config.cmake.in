@@ -1,8 +1,8 @@
 if(HAWK-NETWORK_ROOT STREQUAL "" OR NOT HAWK-NETWORK_ROOT)
    set(HAWK-NETWORK_ROOT "@EOS_ROOT_DIR@")
 endif()
-list(APPEND CMAKE_MODULE_PATH ${HAWK-NETWORK_ROOT}/lib/cmake/eosio)
-list(APPEND CMAKE_MODULE_PATH ${HAWK-NETWORK_ROOT}/lib64/cmake/eosio)
+list(APPEND CMAKE_MODULE_PATH ${HAWK-NETWORK_ROOT}/lib/cmake/hawknwk)
+list(APPEND CMAKE_MODULE_PATH ${HAWK-NETWORK_ROOT}/lib64/cmake/hawknwk)
 include(EosioTester)
 
 function(EXTRACT_MAJOR_MINOR_FROM_VERSION version success major minor)

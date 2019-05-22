@@ -1,19 +1,19 @@
 #include <algorithm>
-#include <eosio/chain/apply_context.hpp>
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/transaction_context.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/wasm_interface.hpp>
-#include <eosio/chain/generated_transaction_object.hpp>
-#include <eosio/chain/authorization_manager.hpp>
-#include <eosio/chain/resource_limits.hpp>
-#include <eosio/chain/account_object.hpp>
-#include <eosio/chain/global_property_object.hpp>
+#include <hawknwk/chain/apply_context.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/transaction_context.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/wasm_interface.hpp>
+#include <hawknwk/chain/generated_transaction_object.hpp>
+#include <hawknwk/chain/authorization_manager.hpp>
+#include <hawknwk/chain/resource_limits.hpp>
+#include <hawknwk/chain/account_object.hpp>
+#include <hawknwk/chain/global_property_object.hpp>
 #include <boost/container/flat_set.hpp>
 
 using boost::container::flat_set;
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 static inline void print_debug(account_name receiver, const action_trace& ar) {
    if (!ar.console.empty()) {
@@ -242,7 +242,7 @@ void apply_context::execute_inline( action&& a ) {
          control.get_authorization_manager()
                 .check_authorization( {a},
                                       {},
-                                      {{receiver, config::eosio_code_name}},
+                                      {{receiver, config::hawknwk_code_name}},
                                       control.pending_block_time() - trx_context.published,
                                       std::bind(&transaction_context::checktime, &this->trx_context),
                                       false,
@@ -335,7 +335,7 @@ void apply_context::schedule_deferred_transaction( const uint128_t& sender_id, a
          control.get_authorization_manager()
                 .check_authorization( trx.actions,
                                       {},
-                                      {{receiver, config::eosio_code_name}},
+                                      {{receiver, config::hawknwk_code_name}},
                                       delay,
                                       std::bind(&transaction_context::checktime, &this->trx_context),
                                       false
@@ -735,4 +735,4 @@ void apply_context::add_ram_usage( account_name account, int64_t ram_delta ) {
 }
 
 
-} } /// eosio::chain
+} } /// hawknwk::chain

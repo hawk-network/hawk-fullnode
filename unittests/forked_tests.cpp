@@ -2,11 +2,11 @@
  *  @file
  *  @copyright defined in eos/LICENSE.txt
  */
-#include <eosio/chain/abi_serializer.hpp>
-#include <eosio/chain/abi_serializer.hpp>
-#include <eosio/testing/tester.hpp>
+#include <hawknwk/chain/abi_serializer.hpp>
+#include <hawknwk/chain/abi_serializer.hpp>
+#include <hawknwk/testing/tester.hpp>
 
-#include <eosio/chain/fork_database.hpp>
+#include <hawknwk/chain/fork_database.hpp>
 
 #include <Runtime/Runtime.h>
 
@@ -16,8 +16,8 @@
 
 #include <contracts.hpp>
 
-using namespace eosio::chain;
-using namespace eosio::testing;
+using namespace hawknwk::chain;
+using namespace hawknwk::testing;
 
 private_key_type get_private_key( name keyname, string role ) {
    return private_key_type::regenerate<fc::ecc::private_key_shim>(fc::sha256::hash(string(keyname)+role));
@@ -162,21 +162,21 @@ BOOST_AUTO_TEST_CASE( forking ) try {
    wlog("set producer schedule to [dan,sam,pam]");
    c.produce_blocks(30);
 
-   auto r2 = c.create_accounts( {N(eosio.token)} );
+   auto r2 = c.create_accounts( {N(hawknwk.token)} );
    wdump((fc::json::to_pretty_string(r2)));
-   c.set_code( N(eosio.token), contracts::eosio_token_wasm() );
-   c.set_abi( N(eosio.token), contracts::eosio_token_abi().data() );
+   c.set_code( N(hawknwk.token), contracts::hawknwk_token_wasm() );
+   c.set_abi( N(hawknwk.token), contracts::hawknwk_token_abi().data() );
    c.produce_blocks(10);
 
 
-   auto cr = c.push_action( N(eosio.token), N(create), N(eosio.token), mutable_variant_object()
-              ("issuer",       "eosio" )
+   auto cr = c.push_action( N(hawknwk.token), N(create), N(hawknwk.token), mutable_variant_object()
+              ("issuer",       "hawknwk" )
               ("maximum_supply", core_from_string("10000000.0000"))
       );
 
    wdump((fc::json::to_pretty_string(cr)));
 
-   cr = c.push_action( N(eosio.token), N(issue), config::system_account_name, mutable_variant_object()
+   cr = c.push_action( N(hawknwk.token), N(issue), config::system_account_name, mutable_variant_object()
               ("to",       "dan" )
               ("quantity", core_from_string("100.0000"))
               ("memo", "")

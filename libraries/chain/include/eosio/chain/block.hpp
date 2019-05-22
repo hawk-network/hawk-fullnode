@@ -1,8 +1,8 @@
 #pragma once
-#include <eosio/chain/block_header.hpp>
-#include <eosio/chain/transaction.hpp>
+#include <hawknwk/chain/block_header.hpp>
+#include <hawknwk/chain/transaction.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    /**
     * When a transaction is referenced by a block it could imply one of several outcomes which
@@ -76,11 +76,11 @@ namespace eosio { namespace chain {
       signature_type  sig;
    };
 
-} } /// eosio::chain
+} } /// hawknwk::chain
 
-FC_REFLECT_ENUM( eosio::chain::transaction_receipt::status_enum,
+FC_REFLECT_ENUM( hawknwk::chain::transaction_receipt::status_enum,
                  (executed)(soft_fail)(hard_fail)(delayed)(expired) )
 
-FC_REFLECT(eosio::chain::transaction_receipt_header, (status)(cpu_usage_us)(net_usage_words) )
-FC_REFLECT_DERIVED(eosio::chain::transaction_receipt, (eosio::chain::transaction_receipt_header), (trx) )
-FC_REFLECT_DERIVED(eosio::chain::signed_block, (eosio::chain::signed_block_header), (transactions)(block_extensions) )
+FC_REFLECT(hawknwk::chain::transaction_receipt_header, (status)(cpu_usage_us)(net_usage_words) )
+FC_REFLECT_DERIVED(hawknwk::chain::transaction_receipt, (hawknwk::chain::transaction_receipt_header), (trx) )
+FC_REFLECT_DERIVED(hawknwk::chain::signed_block, (hawknwk::chain::signed_block_header), (transactions)(block_extensions) )

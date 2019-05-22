@@ -4,15 +4,15 @@
  */
 #include <sstream>
 
-#include <eosio/chain/snapshot.hpp>
-#include <eosio/testing/tester.hpp>
+#include <hawknwk/chain/snapshot.hpp>
+#include <hawknwk/testing/tester.hpp>
 
 #include <boost/mpl/list.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include <contracts.hpp>
 
-using namespace eosio;
+using namespace hawknwk;
 using namespace testing;
 using namespace chain;
 

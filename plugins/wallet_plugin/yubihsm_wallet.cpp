@@ -4,8 +4,8 @@
  */
 #include <appbase/application.hpp>
 
-#include <eosio/wallet_plugin/yubihsm_wallet.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/wallet_plugin/yubihsm_wallet.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 #include <yubihsm.h>
 
 #include <fc/crypto/openssl.hpp>
@@ -17,7 +17,7 @@
 
 #include <dlfcn.h>
 
-namespace eosio { namespace wallet {
+namespace hawknwk { namespace wallet {
 
 using namespace fc::crypto::r1;
 

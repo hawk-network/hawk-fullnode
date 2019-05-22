@@ -4,14 +4,14 @@
  */
 #pragma once
 
-#include <eosio/eosio.hpp>
+#include <hawknwk/hawknwk.hpp>
 
-class [[eosio::contract]] noop : public eosio::contract {
+class [[hawknwk::contract]] noop : public hawknwk::contract {
 public:
-   using eosio::contract::contract;
+   using hawknwk::contract::contract;
 
-   [[eosio::action]]
-   void anyaction( eosio::name                       from,
-                   const eosio::ignore<std::string>& type,
-                   const eosio::ignore<std::string>& data );
+   [[hawknwk::action]]
+   void anyaction( hawknwk::name                       from,
+                   const hawknwk::ignore<std::string>& type,
+                   const hawknwk::ignore<std::string>& data );
 };

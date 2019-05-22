@@ -4,8 +4,8 @@
  */
 #include <cmath>
 
-#include <eosiolib/eosio.hpp>
-#include <eosiolib/datastream.hpp>
+#include <hawknwklib/hawknwk.hpp>
+#include <hawknwklib/datastream.hpp>
 
 #include "test_api.hpp"
 
@@ -13,12 +13,12 @@ template <typename T>
 struct testtype {
     static void run( const T &v, const char *errmsg = "" )  {
         char buf[128];
-        eosio::datastream<char *> ds( buf, sizeof(buf) );
+        hawknwk::datastream<char *> ds( buf, sizeof(buf) );
         ds << v;
         T v2;
         ds.seekp(0);
         ds >> v2;
-        eosio_assert ( v == v2, errmsg );   
+        hawknwk_assert ( v == v2, errmsg );   
     }
 };
 
@@ -26,12 +26,12 @@ template <>
 struct testtype<double> {
    static void run( const double &v, const char *errmsg = "" ) {
       char buf[128];
-      eosio::datastream<char *> ds( buf, sizeof(buf) );
+      hawknwk::datastream<char *> ds( buf, sizeof(buf) );
       ds << v;
       double v2;
       ds.seekp(0);
       ds >> v2;
-      eosio_assert( std::abs(v - v2) < 1e-20, errmsg );
+      hawknwk_assert( std::abs(v - v2) < 1e-20, errmsg );
    }
 };
 
@@ -39,12 +39,12 @@ template <>
 struct testtype<float> {
    static void run( const float &v, const char *errmsg = "" ) {
       char buf[128];
-      eosio::datastream<char *> ds( buf, sizeof(buf) );
+      hawknwk::datastream<char *> ds( buf, sizeof(buf) );
       ds << v;
       float v2;
       ds.seekp(0);
       ds >> v2;
-      eosio_assert( std::abs(v - v2) < float(1e-10), errmsg );
+      hawknwk_assert( std::abs(v - v2) < float(1e-10), errmsg );
    }
 };
 

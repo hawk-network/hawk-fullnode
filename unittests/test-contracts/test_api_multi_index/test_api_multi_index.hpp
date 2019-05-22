@@ -4,106 +4,106 @@
  */
 #pragma once
 
-#include <eosio/eosio.hpp>
+#include <hawknwk/hawknwk.hpp>
 
-class [[eosio::contract]] test_api_multi_index : public eosio::contract {
+class [[hawknwk::contract]] test_api_multi_index : public hawknwk::contract {
 public:
-   using eosio::contract::contract;
+   using hawknwk::contract::contract;
 
-   [[eosio::action("s1g")]]
+   [[hawknwk::action("s1g")]]
    void idx64_general();
 
-   [[eosio::action("s1store")]]
+   [[hawknwk::action("s1store")]]
    void idx64_store_only();
 
-   [[eosio::action("s1check")]]
+   [[hawknwk::action("s1check")]]
    void idx64_check_without_storing();
 
-   [[eosio::action("s1findfail1")]]
+   [[hawknwk::action("s1findfail1")]]
    void idx64_require_find_fail();
 
-   [[eosio::action("s1findfail2")]]
+   [[hawknwk::action("s1findfail2")]]
    void idx64_require_find_fail_with_msg();
 
-   [[eosio::action("s1findfail3")]]
+   [[hawknwk::action("s1findfail3")]]
    void idx64_require_find_sk_fail();
 
-   [[eosio::action("s1findfail4")]]
+   [[hawknwk::action("s1findfail4")]]
    void idx64_require_find_sk_fail_with_msg();
 
-   [[eosio::action("s1pkend")]]
+   [[hawknwk::action("s1pkend")]]
    void idx64_pk_iterator_exceed_end();
 
-   [[eosio::action("s1skend")]]
+   [[hawknwk::action("s1skend")]]
    void idx64_sk_iterator_exceed_end();
 
-   [[eosio::action("s1pkbegin")]]
+   [[hawknwk::action("s1pkbegin")]]
    void idx64_pk_iterator_exceed_begin();
 
-   [[eosio::action("s1skbegin")]]
+   [[hawknwk::action("s1skbegin")]]
    void idx64_sk_iterator_exceed_begin();
 
-   [[eosio::action("s1pkref")]]
+   [[hawknwk::action("s1pkref")]]
    void idx64_pass_pk_ref_to_other_table();
 
-   [[eosio::action("s1skref")]]
+   [[hawknwk::action("s1skref")]]
    void idx64_pass_sk_ref_to_other_table();
 
-   [[eosio::action("s1pkitrto")]]
+   [[hawknwk::action("s1pkitrto")]]
    void idx64_pass_pk_end_itr_to_iterator_to();
 
-   [[eosio::action("s1pkmodify")]]
+   [[hawknwk::action("s1pkmodify")]]
    void idx64_pass_pk_end_itr_to_modify();
 
-   [[eosio::action("s1pkerase")]]
+   [[hawknwk::action("s1pkerase")]]
    void idx64_pass_pk_end_itr_to_erase();
 
-   [[eosio::action("s1skitrto")]]
+   [[hawknwk::action("s1skitrto")]]
    void idx64_pass_sk_end_itr_to_iterator_to();
 
-   [[eosio::action("s1skmodify")]]
+   [[hawknwk::action("s1skmodify")]]
    void idx64_pass_sk_end_itr_to_modify();
 
-   [[eosio::action("s1skerase")]]
+   [[hawknwk::action("s1skerase")]]
    void idx64_pass_sk_end_itr_to_erase();
 
-   [[eosio::action("s1modpk")]]
+   [[hawknwk::action("s1modpk")]]
    void idx64_modify_primary_key();
 
-   [[eosio::action("s1exhaustpk")]]
+   [[hawknwk::action("s1exhaustpk")]]
    void idx64_run_out_of_avl_pk();
 
-   [[eosio::action("s1skcache")]]
+   [[hawknwk::action("s1skcache")]]
    void idx64_sk_cache_pk_lookup();
 
-   [[eosio::action("s1pkcache")]]
+   [[hawknwk::action("s1pkcache")]]
    void idx64_pk_cache_sk_lookup();
 
-   [[eosio::action("s2g")]]
+   [[hawknwk::action("s2g")]]
    void idx128_general();
 
-   [[eosio::action("s2store")]]
+   [[hawknwk::action("s2store")]]
    void idx128_store_only();
 
-   [[eosio::action("s2check")]]
+   [[hawknwk::action("s2check")]]
    void idx128_check_without_storing();
 
-   [[eosio::action("s2autoinc")]]
+   [[hawknwk::action("s2autoinc")]]
    void idx128_autoincrement_test();
 
-   [[eosio::action("s2autoinc1")]]
+   [[hawknwk::action("s2autoinc1")]]
    void idx128_autoincrement_test_part1();
 
-   [[eosio::action("s2autoinc2")]]
+   [[hawknwk::action("s2autoinc2")]]
    void idx128_autoincrement_test_part2();
 
-   [[eosio::action("s3g")]]
+   [[hawknwk::action("s3g")]]
    void idx256_general();
 
-   [[eosio::action("sdg")]]
+   [[hawknwk::action("sdg")]]
    void idx_double_general();
 
-   [[eosio::action("sldg")]]
+   [[hawknwk::action("sldg")]]
    void idx_long_double_general();
 
 };

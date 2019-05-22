@@ -1,9 +1,9 @@
 #pragma once
-#include <eosio/chain/block_header.hpp>
-#include <eosio/chain/incremental_merkle.hpp>
+#include <hawknwk/chain/block_header.hpp>
+#include <hawknwk/chain/incremental_merkle.hpp>
 #include <future>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 /**
  *  @struct block_header_state
@@ -57,9 +57,9 @@ struct block_header_state {
 
 
 
-} } /// namespace eosio::chain
+} } /// namespace hawknwk::chain
 
-FC_REFLECT( eosio::chain::block_header_state,
+FC_REFLECT( hawknwk::chain::block_header_state,
             (id)(block_num)(header)(dpos_proposed_irreversible_blocknum)(dpos_irreversible_blocknum)(bft_irreversible_blocknum)
             (pending_schedule_lib_num)(pending_schedule_hash)
             (pending_schedule)(active_schedule)(blockroot_merkle)

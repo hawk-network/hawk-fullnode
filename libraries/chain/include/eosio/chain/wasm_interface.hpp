@@ -1,10 +1,10 @@
 #pragma once
-#include <eosio/chain/types.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 #include "Runtime/Linker.h"
 #include "Runtime/Runtime.h"
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    class apply_context;
    class wasm_runtime_interface;
@@ -70,13 +70,13 @@ namespace eosio { namespace chain {
 
       private:
          unique_ptr<struct wasm_interface_impl> my;
-         friend class eosio::chain::webassembly::common::intrinsics_accessor;
+         friend class hawknwk::chain::webassembly::common::intrinsics_accessor;
    };
 
-} } // eosio::chain
+} } // hawknwk::chain
 
-namespace eosio{ namespace chain {
+namespace hawknwk{ namespace chain {
    std::istream& operator>>(std::istream& in, wasm_interface::vm_type& runtime);
 }}
 
-FC_REFLECT_ENUM( eosio::chain::wasm_interface::vm_type, (wavm)(wabt) )
+FC_REFLECT_ENUM( hawknwk::chain::wasm_interface::vm_type, (wavm)(wabt) )

@@ -8,11 +8,11 @@
 #include <fstream>
 #include <stdint.h>
 
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/types.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/types.hpp>
 #include <fc/log/logger.hpp>
 
-namespace eosio {
+namespace hawknwk {
 
 /*
  *   *.log:
@@ -276,4 +276,4 @@ class state_history_log {
    }
 }; // state_history_log
 
-} // namespace eosio
+} // namespace hawknwk

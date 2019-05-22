@@ -2,8 +2,8 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/chain/block_log.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/block_log.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 #include <fstream>
 #include <fc/io/raw.hpp>
 
@@ -11,7 +11,7 @@
 #define LOG_WRITE (std::ios::out | std::ios::binary | std::ios::app)
 #define LOG_RW ( std::ios::in | std::ios::out | std::ios::binary )
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    const uint32_t block_log::min_supported_version = 1;
 
@@ -540,4 +540,4 @@ namespace eosio { namespace chain {
       return gs;
    }
 
-} } /// eosio::chain
+} } /// hawknwk::chain

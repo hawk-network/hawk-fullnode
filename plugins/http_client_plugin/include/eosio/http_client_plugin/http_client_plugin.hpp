@@ -6,7 +6,7 @@
 #include <appbase/application.hpp>
 #include <fc/network/http/http_client.hpp>
 
-namespace eosio {
+namespace hawknwk {
    using namespace appbase;
    using fc::http_client;
 

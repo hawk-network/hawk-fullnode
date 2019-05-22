@@ -3,9 +3,9 @@
  *  @copyright defined in eos/LICENSE
  */
 #include "deferred_test.hpp"
-#include <eosio/transaction.hpp>
+#include <hawknwk/transaction.hpp>
 
-using namespace eosio;
+using namespace hawknwk;
 
 void deferred_test::defercall( name payer, uint64_t sender_id, name contract, uint64_t payload ) {
    print( "defercall called on ", get_self(), "\n" );

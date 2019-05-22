@@ -4,10 +4,10 @@
  */
 #pragma once
 #include <fc/filesystem.hpp>
-#include <eosio/chain/block.hpp>
-#include <eosio/chain/genesis_state.hpp>
+#include <hawknwk/chain/block.hpp>
+#include <hawknwk/chain/genesis_state.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    namespace detail { class block_log_impl; }
 

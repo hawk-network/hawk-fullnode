@@ -18,7 +18,7 @@ import random
 # --kill-sig <kill signal [term|kill]>
 # --kill-count <nodeos instances to kill>
 # --dont-kill <Leave cluster running after test finishes>
-# --dump-error-details <Upon error print etc/eosio/node_*/config.ini and var/lib/node_*/stderr.log to stdout>
+# --dump-error-details <Upon error print etc/hawknwk/node_*/config.ini and var/lib/node_*/stderr.log to stdout>
 # --keep-logs <Don't delete var/lib/node_* folders upon test completion>
 ###############################################################
 
@@ -78,21 +78,21 @@ try:
     accountsCount=total_nodes
     walletName="MyWallet"
     Print("Creating wallet %s if one doesn't already exist." % walletName)
-    wallet=walletMgr.create(walletName, [cluster.eosioAccount,cluster.defproduceraAccount,cluster.defproducerbAccount])
+    wallet=walletMgr.create(walletName, [cluster.hawknwkAccount,cluster.defproduceraAccount,cluster.defproducerbAccount])
 
     Print ("Populate wallet with %d accounts." % (accountsCount))
     if not cluster.populateWallet(accountsCount, wallet):
         errorExit("Wallet initialization failed.")
 
     defproduceraAccount=cluster.defproduceraAccount
-    eosioAccount=cluster.eosioAccount
+    hawknwkAccount=cluster.hawknwkAccount
 
     Print("Importing keys for account %s into wallet %s." % (defproduceraAccount.name, wallet.name))
     if not walletMgr.importKey(defproduceraAccount, wallet):
         errorExit("Failed to import key for account %s" % (defproduceraAccount.name))
 
     Print("Create accounts.")
-    if not cluster.createAccounts(eosioAccount):
+    if not cluster.createAccounts(hawknwkAccount):
         errorExit("Accounts creation failed.")
 
     Print("Wait on cluster sync.")

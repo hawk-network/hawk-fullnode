@@ -4,17 +4,17 @@
  */
 #pragma once
 #include <appbase/application.hpp>
-#include <eosio/chain/asset.hpp>
-#include <eosio/chain/authority.hpp>
-#include <eosio/chain/account_object.hpp>
-#include <eosio/chain/block.hpp>
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/contract_table_objects.hpp>
-#include <eosio/chain/resource_limits.hpp>
-#include <eosio/chain/transaction.hpp>
-#include <eosio/chain/abi_serializer.hpp>
-#include <eosio/chain/plugin_interface.hpp>
-#include <eosio/chain/types.hpp>
+#include <hawknwk/chain/asset.hpp>
+#include <hawknwk/chain/authority.hpp>
+#include <hawknwk/chain/account_object.hpp>
+#include <hawknwk/chain/block.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/contract_table_objects.hpp>
+#include <hawknwk/chain/resource_limits.hpp>
+#include <hawknwk/chain/transaction.hpp>
+#include <hawknwk/chain/abi_serializer.hpp>
+#include <hawknwk/chain/plugin_interface.hpp>
+#include <hawknwk/chain/types.hpp>
 
 #include <boost/container/flat_set.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
@@ -23,7 +23,7 @@
 
 namespace fc { class variant; }
 
-namespace eosio {
+namespace hawknwk {
    using chain::controller;
    using std::unique_ptr;
    using std::pair;
@@ -410,10 +410,10 @@ public:
 
          const auto& secidx = d.get_index<IndexType, chain::by_secondary>();
          auto lower_bound_lookup_tuple = std::make_tuple( index_t_id->id._id,
-                                                          eosio::chain::secondary_key_traits<secondary_key_type>::true_lowest(),
+                                                          hawknwk::chain::secondary_key_traits<secondary_key_type>::true_lowest(),
                                                           std::numeric_limits<uint64_t>::lowest() );
          auto upper_bound_lookup_tuple = std::make_tuple( index_t_id->id._id,
-                                                          eosio::chain::secondary_key_traits<secondary_key_type>::true_highest(),
+                                                          hawknwk::chain::secondary_key_traits<secondary_key_type>::true_highest(),
                                                           std::numeric_limits<uint64_t>::max() );
 
          if( p.lower_bound.size() ) {
@@ -705,55 +705,55 @@ private:
 
 }
 
-FC_REFLECT( eosio::chain_apis::permission, (perm_name)(parent)(required_auth) )
-FC_REFLECT(eosio::chain_apis::empty, )
-FC_REFLECT(eosio::chain_apis::read_only::get_info_results,
+FC_REFLECT( hawknwk::chain_apis::permission, (perm_name)(parent)(required_auth) )
+FC_REFLECT(hawknwk::chain_apis::empty, )
+FC_REFLECT(hawknwk::chain_apis::read_only::get_info_results,
 (server_version)(chain_id)(head_block_num)(last_irreversible_block_num)(last_irreversible_block_id)(head_block_id)(head_block_time)(head_block_producer)(virtual_block_cpu_limit)(virtual_block_net_limit)(block_cpu_limit)(block_net_limit)(server_version_string) )
-FC_REFLECT(eosio::chain_apis::read_only::get_block_params, (block_num_or_id))
-FC_REFLECT(eosio::chain_apis::read_only::get_block_header_state_params, (block_num_or_id))
+FC_REFLECT(hawknwk::chain_apis::read_only::get_block_params, (block_num_or_id))
+FC_REFLECT(hawknwk::chain_apis::read_only::get_block_header_state_params, (block_num_or_id))
 
-FC_REFLECT( eosio::chain_apis::read_write::push_transaction_results, (transaction_id)(processed) )
+FC_REFLECT( hawknwk::chain_apis::read_write::push_transaction_results, (transaction_id)(processed) )
 
-FC_REFLECT( eosio::chain_apis::read_only::get_table_rows_params, (json)(code)(scope)(table)(table_key)(lower_bound)(upper_bound)(limit)(key_type)(index_position)(encode_type)(reverse)(show_payer) )
-FC_REFLECT( eosio::chain_apis::read_only::get_table_rows_result, (rows)(more) );
+FC_REFLECT( hawknwk::chain_apis::read_only::get_table_rows_params, (json)(code)(scope)(table)(table_key)(lower_bound)(upper_bound)(limit)(key_type)(index_position)(encode_type)(reverse)(show_payer) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_table_rows_result, (rows)(more) );
 
-FC_REFLECT( eosio::chain_apis::read_only::get_table_by_scope_params, (code)(table)(lower_bound)(upper_bound)(limit)(reverse) )
-FC_REFLECT( eosio::chain_apis::read_only::get_table_by_scope_result_row, (code)(scope)(table)(payer)(count));
-FC_REFLECT( eosio::chain_apis::read_only::get_table_by_scope_result, (rows)(more) );
+FC_REFLECT( hawknwk::chain_apis::read_only::get_table_by_scope_params, (code)(table)(lower_bound)(upper_bound)(limit)(reverse) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_table_by_scope_result_row, (code)(scope)(table)(payer)(count));
+FC_REFLECT( hawknwk::chain_apis::read_only::get_table_by_scope_result, (rows)(more) );
 
-FC_REFLECT( eosio::chain_apis::read_only::get_currency_balance_params, (code)(account)(symbol));
-FC_REFLECT( eosio::chain_apis::read_only::get_currency_stats_params, (code)(symbol));
-FC_REFLECT( eosio::chain_apis::read_only::get_currency_stats_result, (supply)(max_supply)(issuer));
+FC_REFLECT( hawknwk::chain_apis::read_only::get_currency_balance_params, (code)(account)(symbol));
+FC_REFLECT( hawknwk::chain_apis::read_only::get_currency_stats_params, (code)(symbol));
+FC_REFLECT( hawknwk::chain_apis::read_only::get_currency_stats_result, (supply)(max_supply)(issuer));
 
-FC_REFLECT( eosio::chain_apis::read_only::get_producers_params, (json)(lower_bound)(limit) )
-FC_REFLECT( eosio::chain_apis::read_only::get_producers_result, (rows)(total_producer_vote_weight)(more) );
+FC_REFLECT( hawknwk::chain_apis::read_only::get_producers_params, (json)(lower_bound)(limit) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_producers_result, (rows)(total_producer_vote_weight)(more) );
 
-FC_REFLECT_EMPTY( eosio::chain_apis::read_only::get_producer_schedule_params )
-FC_REFLECT( eosio::chain_apis::read_only::get_producer_schedule_result, (active)(pending)(proposed) );
+FC_REFLECT_EMPTY( hawknwk::chain_apis::read_only::get_producer_schedule_params )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_producer_schedule_result, (active)(pending)(proposed) );
 
-FC_REFLECT( eosio::chain_apis::read_only::get_scheduled_transactions_params, (json)(lower_bound)(limit) )
-FC_REFLECT( eosio::chain_apis::read_only::get_scheduled_transactions_result, (transactions)(more) );
+FC_REFLECT( hawknwk::chain_apis::read_only::get_scheduled_transactions_params, (json)(lower_bound)(limit) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_scheduled_transactions_result, (transactions)(more) );
 
-FC_REFLECT( eosio::chain_apis::read_only::get_account_results,
+FC_REFLECT( hawknwk::chain_apis::read_only::get_account_results,
             (account_name)(head_block_num)(head_block_time)(privileged)(last_code_update)(created)
             (core_liquid_balance)(ram_quota)(net_weight)(cpu_weight)(net_limit)(cpu_limit)(ram_usage)(permissions)
             (total_resources)(self_delegated_bandwidth)(refund_request)(voter_info) )
 // @swap code_hash
-FC_REFLECT( eosio::chain_apis::read_only::get_code_results, (account_name)(code_hash)(wast)(wasm)(abi) )
-FC_REFLECT( eosio::chain_apis::read_only::get_code_hash_results, (account_name)(code_hash) )
-FC_REFLECT( eosio::chain_apis::read_only::get_abi_results, (account_name)(abi) )
-FC_REFLECT( eosio::chain_apis::read_only::get_account_params, (account_name)(expected_core_symbol) )
-FC_REFLECT( eosio::chain_apis::read_only::get_code_params, (account_name)(code_as_wasm) )
-FC_REFLECT( eosio::chain_apis::read_only::get_code_hash_params, (account_name) )
-FC_REFLECT( eosio::chain_apis::read_only::get_abi_params, (account_name) )
-FC_REFLECT( eosio::chain_apis::read_only::get_raw_code_and_abi_params, (account_name) )
-FC_REFLECT( eosio::chain_apis::read_only::get_raw_code_and_abi_results, (account_name)(wasm)(abi) )
-FC_REFLECT( eosio::chain_apis::read_only::get_raw_abi_params, (account_name)(abi_hash) )
-FC_REFLECT( eosio::chain_apis::read_only::get_raw_abi_results, (account_name)(code_hash)(abi_hash)(abi) )
-FC_REFLECT( eosio::chain_apis::read_only::producer_info, (producer_name) )
-FC_REFLECT( eosio::chain_apis::read_only::abi_json_to_bin_params, (code)(action)(args) )
-FC_REFLECT( eosio::chain_apis::read_only::abi_json_to_bin_result, (binargs) )
-FC_REFLECT( eosio::chain_apis::read_only::abi_bin_to_json_params, (code)(action)(binargs) )
-FC_REFLECT( eosio::chain_apis::read_only::abi_bin_to_json_result, (args) )
-FC_REFLECT( eosio::chain_apis::read_only::get_required_keys_params, (transaction)(available_keys) )
-FC_REFLECT( eosio::chain_apis::read_only::get_required_keys_result, (required_keys) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_code_results, (account_name)(code_hash)(wast)(wasm)(abi) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_code_hash_results, (account_name)(code_hash) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_abi_results, (account_name)(abi) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_account_params, (account_name)(expected_core_symbol) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_code_params, (account_name)(code_as_wasm) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_code_hash_params, (account_name) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_abi_params, (account_name) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_raw_code_and_abi_params, (account_name) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_raw_code_and_abi_results, (account_name)(wasm)(abi) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_raw_abi_params, (account_name)(abi_hash) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_raw_abi_results, (account_name)(code_hash)(abi_hash)(abi) )
+FC_REFLECT( hawknwk::chain_apis::read_only::producer_info, (producer_name) )
+FC_REFLECT( hawknwk::chain_apis::read_only::abi_json_to_bin_params, (code)(action)(args) )
+FC_REFLECT( hawknwk::chain_apis::read_only::abi_json_to_bin_result, (binargs) )
+FC_REFLECT( hawknwk::chain_apis::read_only::abi_bin_to_json_params, (code)(action)(binargs) )
+FC_REFLECT( hawknwk::chain_apis::read_only::abi_bin_to_json_result, (args) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_required_keys_params, (transaction)(available_keys) )
+FC_REFLECT( hawknwk::chain_apis::read_only::get_required_keys_result, (required_keys) )

@@ -3,11 +3,11 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/block.hpp>
-#include <eosio/chain/types.hpp>
+#include <hawknwk/chain/block.hpp>
+#include <hawknwk/chain/types.hpp>
 #include <chrono>
 
-namespace eosio {
+namespace hawknwk {
    using namespace chain;
    using namespace fc;
 
@@ -142,23 +142,23 @@ namespace eosio {
                                       signed_block,         // which = 7
                                       packed_transaction>;  // which = 8
 
-} // namespace eosio
+} // namespace hawknwk
 
-FC_REFLECT( eosio::select_ids<fc::sha256>, (mode)(pending)(ids) )
-FC_REFLECT( eosio::chain_size_message,
+FC_REFLECT( hawknwk::select_ids<fc::sha256>, (mode)(pending)(ids) )
+FC_REFLECT( hawknwk::chain_size_message,
             (last_irreversible_block_num)(last_irreversible_block_id)
             (head_num)(head_id))
-FC_REFLECT( eosio::handshake_message,
+FC_REFLECT( hawknwk::handshake_message,
             (network_version)(chain_id)(node_id)(key)
             (time)(token)(sig)(p2p_address)
             (last_irreversible_block_num)(last_irreversible_block_id)
             (head_num)(head_id)
             (os)(agent)(generation) )
-FC_REFLECT( eosio::go_away_message, (reason)(node_id) )
-FC_REFLECT( eosio::time_message, (org)(rec)(xmt)(dst) )
-FC_REFLECT( eosio::notice_message, (known_trx)(known_blocks) )
-FC_REFLECT( eosio::request_message, (req_trx)(req_blocks) )
-FC_REFLECT( eosio::sync_request_message, (start_block)(end_block) )
+FC_REFLECT( hawknwk::go_away_message, (reason)(node_id) )
+FC_REFLECT( hawknwk::time_message, (org)(rec)(xmt)(dst) )
+FC_REFLECT( hawknwk::notice_message, (known_trx)(known_blocks) )
+FC_REFLECT( hawknwk::request_message, (req_trx)(req_blocks) )
+FC_REFLECT( hawknwk::sync_request_message, (start_block)(end_block) )
 
 /**
  *

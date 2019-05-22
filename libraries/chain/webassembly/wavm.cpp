@@ -1,8 +1,8 @@
-#include <eosio/chain/webassembly/wavm.hpp>
-#include <eosio/chain/wasm_eosio_constraints.hpp>
-#include <eosio/chain/wasm_eosio_injection.hpp>
-#include <eosio/chain/apply_context.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/webassembly/wavm.hpp>
+#include <hawknwk/chain/wasm_hawknwk_constraints.hpp>
+#include <hawknwk/chain/wasm_hawknwk_injection.hpp>
+#include <hawknwk/chain/apply_context.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 
 #include "IR/Module.h"
 #include "Platform/Platform.h"
@@ -17,7 +17,7 @@
 using namespace IR;
 using namespace Runtime;
 
-namespace eosio { namespace chain { namespace webassembly { namespace wavm {
+namespace hawknwk { namespace chain { namespace webassembly { namespace wavm {
 
 running_instance_context the_running_instance_context;
 
@@ -119,7 +119,7 @@ std::unique_ptr<wasm_instantiated_module_interface> wavm_runtime::instantiate_mo
       EOS_ASSERT(false, wasm_serialization_error, e.message.c_str());
    }
 
-   eosio::chain::webassembly::common::root_resolver resolver;
+   hawknwk::chain::webassembly::common::root_resolver resolver;
    LinkResult link_result = linkModule(*module, resolver);
    ModuleInstance *instance = instantiateModule(*module, std::move(link_result.resolvedImports));
    EOS_ASSERT(instance != nullptr, wasm_exception, "Fail to Instantiate WAVM Module");

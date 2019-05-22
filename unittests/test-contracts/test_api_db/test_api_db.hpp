@@ -4,43 +4,43 @@
  */
 #pragma once
 
-#include <eosio/eosio.hpp>
+#include <hawknwk/hawknwk.hpp>
 
-class [[eosio::contract]] test_api_db : public eosio::contract {
+class [[hawknwk::contract]] test_api_db : public hawknwk::contract {
 public:
-   using eosio::contract::contract;
+   using hawknwk::contract::contract;
 
-   [[eosio::action("pg")]]
+   [[hawknwk::action("pg")]]
    void primary_i64_general();
 
-   [[eosio::action("pl")]]
+   [[hawknwk::action("pl")]]
    void primary_i64_lowerbound();
 
-   [[eosio::action("pu")]]
+   [[hawknwk::action("pu")]]
    void primary_i64_upperbound();
 
-   [[eosio::action("s1g")]]
+   [[hawknwk::action("s1g")]]
    void idx64_general();
 
-   [[eosio::action("s1l")]]
+   [[hawknwk::action("s1l")]]
    void idx64_lowerbound();
 
-   [[eosio::action("s1u")]]
+   [[hawknwk::action("s1u")]]
    void idx64_upperbound();
 
-   [[eosio::action("tia")]]
-   void test_invalid_access( eosio::name code, uint64_t val, uint32_t index, bool store );
+   [[hawknwk::action("tia")]]
+   void test_invalid_access( hawknwk::name code, uint64_t val, uint32_t index, bool store );
 
-   [[eosio::action("sdnancreate")]]
+   [[hawknwk::action("sdnancreate")]]
    void idx_double_nan_create_fail();
 
-   [[eosio::action("sdnanmodify")]]
+   [[hawknwk::action("sdnanmodify")]]
    void idx_double_nan_modify_fail();
 
-   [[eosio::action("sdnanlookup")]]
+   [[hawknwk::action("sdnanlookup")]]
    void idx_double_nan_lookup_fail( uint32_t lookup_type );
 
-   [[eosio::action("sk32align")]]
+   [[hawknwk::action("sk32align")]]
    void misaligned_secondary_key256_tests();
 
 };

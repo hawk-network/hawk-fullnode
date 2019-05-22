@@ -4,12 +4,12 @@
  */
 #pragma once
 #include <chainbase/chainbase.hpp>
-#include <eosio/chain/transaction.hpp>
-#include <eosio/chain/config.hpp>
+#include <hawknwk/chain/transaction.hpp>
+#include <hawknwk/chain/config.hpp>
 
 #include <type_traits>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 
 struct permission_level_weight {
@@ -195,11 +195,11 @@ inline bool validate( const Authority& auth ) {
    return total_weight >= auth.threshold;
 }
 
-} } // namespace eosio::chain
+} } // namespace hawknwk::chain
 
 
-FC_REFLECT(eosio::chain::permission_level_weight, (permission)(weight) )
-FC_REFLECT(eosio::chain::key_weight, (key)(weight) )
-FC_REFLECT(eosio::chain::wait_weight, (wait_sec)(weight) )
-FC_REFLECT(eosio::chain::authority, (threshold)(keys)(accounts)(waits) )
-FC_REFLECT(eosio::chain::shared_authority, (threshold)(keys)(accounts)(waits) )
+FC_REFLECT(hawknwk::chain::permission_level_weight, (permission)(weight) )
+FC_REFLECT(hawknwk::chain::key_weight, (key)(weight) )
+FC_REFLECT(hawknwk::chain::wait_weight, (wait_sec)(weight) )
+FC_REFLECT(hawknwk::chain::authority, (threshold)(keys)(accounts)(waits) )
+FC_REFLECT(hawknwk::chain::shared_authority, (threshold)(keys)(accounts)(waits) )

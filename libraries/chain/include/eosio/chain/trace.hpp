@@ -4,11 +4,11 @@
  */
 #pragma once
 
-#include <eosio/chain/action.hpp>
-#include <eosio/chain/action_receipt.hpp>
-#include <eosio/chain/block.hpp>
+#include <hawknwk/chain/action.hpp>
+#include <hawknwk/chain/action_receipt.hpp>
+#include <hawknwk/chain/block.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    struct account_delta {
       account_delta( const account_name& n, int64_t d):account(n),delta(d){}
@@ -63,18 +63,18 @@ namespace eosio { namespace chain {
       std::exception_ptr                         except_ptr;
    };
 
-} }  /// namespace eosio::chain
+} }  /// namespace hawknwk::chain
 
-FC_REFLECT( eosio::chain::account_delta,
+FC_REFLECT( hawknwk::chain::account_delta,
             (account)(delta) )
 
-FC_REFLECT( eosio::chain::base_action_trace,
+FC_REFLECT( hawknwk::chain::base_action_trace,
                     (receipt)(act)(context_free)(elapsed)(console)(trx_id)
                     (block_num)(block_time)(producer_block_id)(account_ram_deltas)(except) )
 
-FC_REFLECT_DERIVED( eosio::chain::action_trace,
-                    (eosio::chain::base_action_trace), (inline_traces) )
+FC_REFLECT_DERIVED( hawknwk::chain::action_trace,
+                    (hawknwk::chain::base_action_trace), (inline_traces) )
 
-FC_REFLECT( eosio::chain::transaction_trace, (id)(block_num)(block_time)(producer_block_id)
+FC_REFLECT( hawknwk::chain::transaction_trace, (id)(block_num)(block_time)(producer_block_id)
                                              (receipt)(elapsed)(net_usage)(scheduled)
                                              (action_traces)(failed_dtrx_trace)(except) )

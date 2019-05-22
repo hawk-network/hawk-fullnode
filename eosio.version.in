@@ -1,7 +1,7 @@
 #pragma once
 
 /// VERSION @VERSION_FULL@
-namespace eosio {
+namespace hawknwk {
    enum version {
       MAJOR @VERSION_MAJOR@,
       MINOR @VERSION_MINOR@,

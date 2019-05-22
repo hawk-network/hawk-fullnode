@@ -3,10 +3,10 @@
  *  @copyright defined in eos/LICENSE
  */
 
-#include <eosio/chain/genesis_state.hpp>
+#include <hawknwk/chain/genesis_state.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
-const string genesis_state::eosio_root_key = "${HAWK-NETWORK_ROOT_KEY}";
+const string genesis_state::hawknwk_root_key = "${HAWK-NETWORK_ROOT_KEY}";
 
-} } // namespace eosio::chain
+} } // namespace hawknwk::chain

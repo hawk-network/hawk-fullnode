@@ -3,12 +3,12 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/wasm_interface.hpp>
+#include <hawknwk/chain/wasm_interface.hpp>
 #include <fc/time.hpp>
 
 #pragma GCC diagnostic ignored "-Wunused-variable"
 
-namespace eosio { namespace chain { namespace config {
+namespace hawknwk { namespace chain { namespace config {
 
 typedef __uint128_t uint128_t;
 
@@ -23,21 +23,21 @@ const static auto default_state_size            = 1*1024*1024*1024ll;
 const static auto default_state_guard_size      =    128*1024*1024ll;
 
 
-const static uint64_t system_account_name    = N(eosio);
-const static uint64_t null_account_name      = N(eosio.null);
-const static uint64_t producers_account_name = N(eosio.prods);
+const static uint64_t system_account_name    = N(hawknwk);
+const static uint64_t null_account_name      = N(hawknwk.null);
+const static uint64_t producers_account_name = N(hawknwk.prods);
 
 // Active permission of producers account requires greater than 2/3 of the producers to authorize
 const static uint64_t majority_producers_permission_name = N(prod.major); // greater than 1/2 of producers needed to authorize
 const static uint64_t minority_producers_permission_name = N(prod.minor); // greater than 1/3 of producers needed to authorize0
 
-const static uint64_t eosio_auth_scope       = N(eosio.auth);
-const static uint64_t eosio_all_scope        = N(eosio.all);
+const static uint64_t hawknwk_auth_scope       = N(hawknwk.auth);
+const static uint64_t hawknwk_all_scope        = N(hawknwk.all);
 
 const static uint64_t active_name = N(active);
 const static uint64_t owner_name  = N(owner);
-const static uint64_t eosio_any_name = N(eosio.any);
-const static uint64_t eosio_code_name = N(eosio.code);
+const static uint64_t hawknwk_any_name = N(hawknwk.any);
+const static uint64_t hawknwk_code_name = N(hawknwk.code);
 
 const static int      block_interval_ms = 500;
 const static int      block_interval_us = block_interval_ms*1000;
@@ -95,7 +95,7 @@ const static uint32_t   setcode_ram_bytes_multiplier       = 10;     ///< multip
 
 const static uint32_t   hashing_checktime_block_size       = 10*1024;  /// call checktime from hashing intrinsic once per this number of bytes
 
-const static eosio::chain::wasm_interface::vm_type default_wasm_runtime = eosio::chain::wasm_interface::vm_type::wabt;
+const static hawknwk::chain::wasm_interface::vm_type default_wasm_runtime = hawknwk::chain::wasm_interface::vm_type::wabt;
 const static uint32_t   default_abi_serializer_max_time_ms = 15*1000; ///< default deadline for abi serialization methods
 
 /**
@@ -125,13 +125,13 @@ template<typename T>
 constexpr uint64_t billable_size_v = ((billable_size<T>::value + billable_alignment - 1) / billable_alignment) * billable_alignment;
 
 
-} } } // namespace eosio::chain::config
+} } } // namespace hawknwk::chain::config
 
 constexpr uint64_t EOS_PERCENT(uint64_t value, uint32_t percentage) {
-   return (value * percentage) / eosio::chain::config::percent_100;
+   return (value * percentage) / hawknwk::chain::config::percent_100;
 }
 
 template<typename Number>
 Number EOS_PERCENT_CEIL(Number value, uint32_t percentage) {
-   return ((value * percentage) + eosio::chain::config::percent_100 - eosio::chain::config::percent_1)  / eosio::chain::config::percent_100;
+   return ((value * percentage) + hawknwk::chain::config::percent_100 - hawknwk::chain::config::percent_1)  / hawknwk::chain::config::percent_100;
 }

@@ -4,16 +4,16 @@
  */
 #pragma once
 
-#include <eosio/eosio.hpp>
+#include <hawknwk/hawknwk.hpp>
 
-class [[eosio::contract]] integration_test : public eosio::contract {
+class [[hawknwk::contract]] integration_test : public hawknwk::contract {
 public:
-   using eosio::contract::contract;
+   using hawknwk::contract::contract;
 
-   [[eosio::action]]
-   void store( eosio::name from, eosio::name to, uint64_t num );
+   [[hawknwk::action]]
+   void store( hawknwk::name from, hawknwk::name to, uint64_t num );
 
-   struct [[eosio::table("payloads")]] payload {
+   struct [[hawknwk::table("payloads")]] payload {
       uint64_t              key;
       std::vector<uint64_t> data;
 
@@ -22,6 +22,6 @@ public:
       EOSLIB_SERIALIZE( payload, (key)(data) )
    };
 
-   using payloads_table = eosio::multi_index< "payloads"_n,  payload >;
+   using payloads_table = hawknwk::multi_index< "payloads"_n,  payload >;
 
 };

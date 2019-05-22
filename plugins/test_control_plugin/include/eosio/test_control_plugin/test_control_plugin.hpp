@@ -4,13 +4,13 @@
  */
 #pragma once
 #include <appbase/application.hpp>
-#include <eosio/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
 #include <fc/variant.hpp>
 #include <memory>
 
 namespace fc { class variant; }
 
-namespace eosio {
+namespace hawknwk {
    using namespace appbase;
    typedef std::shared_ptr<class test_control_plugin_impl> test_control_ptr;
 
@@ -63,5 +63,5 @@ private:
 
 }
 
-FC_REFLECT(eosio::test_control_apis::empty, )
-FC_REFLECT(eosio::test_control_apis::read_write::kill_node_on_producer_params, (producer)(where_in_sequence)(based_on_lib) )
+FC_REFLECT(hawknwk::test_control_apis::empty, )
+FC_REFLECT(hawknwk::test_control_apis::read_write::kill_node_on_producer_params, (producer)(where_in_sequence)(based_on_lib) )

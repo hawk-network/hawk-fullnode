@@ -12,7 +12,7 @@
   @section intro Introduction to cleos
 
   `cleos` is a command line tool that interfaces with the REST api exposed by @ref nodeos. In order to use `cleos` you will need to
-  have a local copy of `nodeos` running and configured to load the 'eosio::chain_api_plugin'.
+  have a local copy of `nodeos` running and configured to load the 'hawknwk::chain_api_plugin'.
 
    cleos contains documentation for all of its commands. For a list of all commands known to cleos, simply run it with no arguments:
 ```
@@ -86,12 +86,12 @@ Options:
 #include <fc/variant_object.hpp>
 #include <fc/static_variant.hpp>
 
-#include <eosio/chain/name.hpp>
-#include <eosio/chain/config.hpp>
-#include <eosio/chain/wast_to_wasm.hpp>
-#include <eosio/chain/trace.hpp>
-#include <eosio/chain_plugin/chain_plugin.hpp>
-#include <eosio/chain/contract_types.hpp>
+#include <hawknwk/chain/name.hpp>
+#include <hawknwk/chain/config.hpp>
+#include <hawknwk/chain/wast_to_wasm.hpp>
+#include <hawknwk/chain/trace.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/chain/contract_types.hpp>
 
 #pragma push_macro("N")
 #undef N
@@ -127,12 +127,12 @@ Options:
 #include "httpc.hpp"
 
 using namespace std;
-using namespace eosio;
-using namespace eosio::chain;
-using namespace eosio::client::help;
-using namespace eosio::client::http;
-using namespace eosio::client::localize;
-using namespace eosio::client::config;
+using namespace hawknwk;
+using namespace hawknwk::chain;
+using namespace hawknwk::client::help;
+using namespace hawknwk::client::http;
+using namespace hawknwk::client::localize;
+using namespace hawknwk::client::config;
 using namespace boost::filesystem;
 using auth_type = fc::static_variant<public_key_type, permission_level>;
 
@@ -166,7 +166,7 @@ bfs::path determine_home_directory()
 }
 
 string url = "http://127.0.0.1:8888/";
-string default_wallet_url = "unix://" + (determine_home_directory() / "eosio-wallet" / (string(key_store_executable_name) + ".sock")).string();
+string default_wallet_url = "unix://" + (determine_home_directory() / "hawknwk-wallet" / (string(key_store_executable_name) + ".sock")).string();
 string wallet_url; //to be set to default_wallet_url in main
 bool no_verify = false;
 vector<string> headers;
@@ -191,7 +191,7 @@ uint32_t delaysec = 0;
 
 vector<string> tx_permission;
 
-eosio::client::http::http_context context;
+hawknwk::client::http::http_context context;
 
 void add_standard_transaction_options(CLI::App* cmd, string default_permission = "") {
    CLI::callback_t parse_expiration = [](CLI::results_t res) -> bool {
@@ -247,8 +247,8 @@ fc::variant call( const std::string& url,
                   const std::string& path,
                   const T& v ) {
    try {
-      auto sp = std::make_unique<eosio::client::http::connection_param>(context, parse_url(url) + path, no_verify ? false : true, headers);
-      return eosio::client::http::do_http_call(*sp, fc::variant(v), print_request, print_response );
+      auto sp = std::make_unique<hawknwk::client::http::connection_param>(context, parse_url(url) + path, no_verify ? false : true, headers);
+      return hawknwk::client::http::do_http_call(*sp, fc::variant(v), print_request, print_response );
    }
    catch(boost::system::system_error& e) {
       if(url == ::url)
@@ -267,8 +267,8 @@ template<>
 fc::variant call( const std::string& url,
                   const std::string& path) { return call( url, path, fc::variant() ); }
 
-eosio::chain_apis::read_only::get_info_results get_info() {
-   return call(url, get_info_func).as<eosio::chain_apis::read_only::get_info_results>();
+hawknwk::chain_apis::read_only::get_info_results get_info() {
+   return call(url, get_info_func).as<hawknwk::chain_apis::read_only::get_info_results>();
 }
 
 string generate_nonce_string() {
@@ -364,7 +364,7 @@ void print_action( const fc::variant& at ) {
    auto console = at["console"].as_string();
 
    /*
-   if( code == "eosio" && func == "setcode" )
+   if( code == "hawknwk" && func == "setcode" )
       args = args.substr(40)+"...";
    if( name(code) == config::system_account_name && func == "setabi" )
       args = args.substr(40)+"...";
@@ -387,7 +387,7 @@ auto abi_serializer_resolver = [](const name& account) -> optional<abi_serialize
    auto it = abi_cache.find( account );
    if ( it == abi_cache.end() ) {
       auto result = call(get_abi_func, fc::mutable_variant_object("account_name", account));
-      auto abi_results = result.as<eosio::chain_apis::read_only::get_abi_results>();
+      auto abi_results = result.as<hawknwk::chain_apis::read_only::get_abi_results>();
 
       optional<abi_serializer> abis;
       if( abi_results.abi.valid() ) {
@@ -528,7 +528,7 @@ chain::permission_level to_permission_level(const std::string& s) {
 chain::action create_newaccount(const name& creator, const name& newaccount, auth_type owner, auth_type active) {
    return action {
       get_account_permissions(tx_permission, {creator,config::active_name}),
-      eosio::chain::newaccount{
+      hawknwk::chain::newaccount{
          .creator      = creator,
          .name         = newaccount,
          .owner        = owner.contains<public_key_type>() ? authority(owner.get<public_key_type>()) : authority(owner.get<permission_level>()),
@@ -659,15 +659,15 @@ authority parse_json_authority_or_key(const std::string& authorityJsonOrFile) {
       } EOS_RETHROW_EXCEPTIONS(public_key_type_exception, "Invalid public key: ${public_key}", ("public_key", authorityJsonOrFile))
    } else {
       auto result = parse_json_authority(authorityJsonOrFile);
-      EOS_ASSERT( eosio::chain::validate(result), authority_type_exception, "Authority failed validation! ensure that keys, accounts, and waits are sorted and that the threshold is valid and satisfiable!");
+      EOS_ASSERT( hawknwk::chain::validate(result), authority_type_exception, "Authority failed validation! ensure that keys, accounts, and waits are sorted and that the threshold is valid and satisfiable!");
       return result;
    }
 }
 
 asset to_asset( account_name code, const string& s ) {
-   static map< pair<account_name, eosio::chain::symbol_code>, eosio::chain::symbol> cache;
+   static map< pair<account_name, hawknwk::chain::symbol_code>, hawknwk::chain::symbol> cache;
    auto a = asset::from_string( s );
-   eosio::chain::symbol_code sym = a.get_symbol().to_symbol_code();
+   hawknwk::chain::symbol_code sym = a.get_symbol().to_symbol_code();
    auto it = cache.find( make_pair(code, sym) );
    auto sym_str = a.symbol_name();
    if ( it == cache.end() ) {
@@ -678,7 +678,7 @@ asset to_asset( account_name code, const string& s ) {
       auto obj = json.get_object();
       auto obj_it = obj.find( sym_str );
       if (obj_it != obj.end()) {
-         auto result = obj_it->value().as<eosio::chain_apis::read_only::get_currency_stats_result>();
+         auto result = obj_it->value().as<hawknwk::chain_apis::read_only::get_currency_stats_result>();
          auto p = cache.emplace( make_pair( code, sym ), result.max_supply.get_symbol() );
          it = p.first;
       } else {
@@ -696,7 +696,7 @@ asset to_asset( account_name code, const string& s ) {
 }
 
 inline asset to_asset( const string& s ) {
-   return to_asset( N(eosio.token), s );
+   return to_asset( N(hawknwk.token), s );
 }
 
 struct set_account_permission_subcommand {
@@ -713,8 +713,8 @@ struct set_account_permission_subcommand {
       permissions->add_option("permission", permission, localized("The permission name to set/delete an authority for"))->required();
       permissions->add_option("authority", authority_json_or_file, localized("[delete] NULL, [create/update] public key, JSON string or filename defining the authority, [code] contract name"));
       permissions->add_option("parent", parent, localized("[create] The permission name of this parents permission, defaults to 'active'"));
-      permissions->add_flag("--add-code", add_code, localized("[code] add '${code}' permission to specified permission authority", ("code", name(config::eosio_code_name))));
-      permissions->add_flag("--remove-code", remove_code, localized("[code] remove '${code}' permission from specified permission authority", ("code", name(config::eosio_code_name))));
+      permissions->add_flag("--add-code", add_code, localized("[code] add '${code}' permission to specified permission authority", ("code", name(config::hawknwk_code_name))));
+      permissions->add_flag("--remove-code", remove_code, localized("[code] remove '${code}' permission from specified permission authority", ("code", name(config::hawknwk_code_name))));
 
       add_standard_transaction_options(permissions, "account@active");
 
@@ -734,7 +734,7 @@ struct set_account_permission_subcommand {
 
          if ( need_parent || need_auth ) {
             fc::variant json = call(get_account_func, fc::mutable_variant_object("account_name", account.to_string()));
-            auto res = json.as<eosio::chain_apis::read_only::get_account_results>();
+            auto res = json.as<hawknwk::chain_apis::read_only::get_account_results>();
             auto itr = std::find_if(res.permissions.begin(), res.permissions.end(), [&](const auto& perm) {
                return perm.perm_name == permission;
             });
@@ -751,7 +751,7 @@ struct set_account_permission_subcommand {
 
             if ( need_auth ) {
                auto actor = (authority_json_or_file.empty()) ? account : name(authority_json_or_file);
-               auto code_name = name(config::eosio_code_name);
+               auto code_name = name(config::hawknwk_code_name);
 
                if ( itr != res.permissions.end() ) {
                   // fetch existing authority
@@ -1106,7 +1106,7 @@ struct vote_producer_proxy_subcommand {
 
 struct vote_producers_subcommand {
    string voter_str;
-   vector<eosio::name> producer_names;
+   vector<hawknwk::name> producer_names;
 
    vote_producers_subcommand(CLI::App* actionRoot) {
       auto vote_producers = actionRoot->add_subcommand("prods", localized("Vote for one or more producers"));
@@ -1129,8 +1129,8 @@ struct vote_producers_subcommand {
 };
 
 struct approve_producer_subcommand {
-   eosio::name voter;
-   eosio::name producer_name;
+   hawknwk::name voter;
+   hawknwk::name producer_name;
 
    approve_producer_subcommand(CLI::App* actionRoot) {
       auto approve_producer = actionRoot->add_subcommand("approve", localized("Add one producer to list of voted producers"));
@@ -1150,7 +1150,7 @@ struct approve_producer_subcommand {
                                // Change to voter.value when cleos no longer needs to support nodeos versions older than 1.5.0
                                ("limit", 1)
             );
-            auto res = result.as<eosio::chain_apis::read_only::get_table_rows_result>();
+            auto res = result.as<hawknwk::chain_apis::read_only::get_table_rows_result>();
             // Condition in if statement below can simply be res.rows.empty() when cleos no longer needs to support nodeos versions older than 1.5.0
             // Although since this subcommand will actually change the voter's vote, it is probably better to just keep this check to protect
             //  against future potential chain_plugin bugs.
@@ -1160,7 +1160,7 @@ struct approve_producer_subcommand {
             }
             EOS_ASSERT( 1 == res.rows.size(), multiple_voter_info, "More than one voter_info for account" );
             auto prod_vars = res.rows[0]["producers"].get_array();
-            vector<eosio::name> prods;
+            vector<hawknwk::name> prods;
             for ( auto& x : prod_vars ) {
                prods.push_back( name(x.as_string()) );
             }
@@ -1182,8 +1182,8 @@ struct approve_producer_subcommand {
 };
 
 struct unapprove_producer_subcommand {
-   eosio::name voter;
-   eosio::name producer_name;
+   hawknwk::name voter;
+   hawknwk::name producer_name;
 
    unapprove_producer_subcommand(CLI::App* actionRoot) {
       auto approve_producer = actionRoot->add_subcommand("unapprove", localized("Remove one producer from list of voted producers"));
@@ -1203,7 +1203,7 @@ struct unapprove_producer_subcommand {
                                // Change to voter.value when cleos no longer needs to support nodeos versions older than 1.5.0
                                ("limit", 1)
             );
-            auto res = result.as<eosio::chain_apis::read_only::get_table_rows_result>();
+            auto res = result.as<hawknwk::chain_apis::read_only::get_table_rows_result>();
             // Condition in if statement below can simply be res.rows.empty() when cleos no longer needs to support nodeos versions older than 1.5.0
             // Although since this subcommand will actually change the voter's vote, it is probably better to just keep this check to protect
             //  against future potential chain_plugin bugs.
@@ -1213,7 +1213,7 @@ struct unapprove_producer_subcommand {
             }
             EOS_ASSERT( 1 == res.rows.size(), multiple_voter_info, "More than one voter_info for account" );
             auto prod_vars = res.rows[0]["producers"].get_array();
-            vector<eosio::name> prods;
+            vector<hawknwk::name> prods;
             for ( auto& x : prod_vars ) {
                prods.push_back( name(x.as_string()) );
             }
@@ -1250,7 +1250,7 @@ struct list_producers_subcommand {
             std::cout << fc::json::to_pretty_string(rawResult) << std::endl;
             return;
          }
-         auto result = rawResult.as<eosio::chain_apis::read_only::get_producers_result>();
+         auto result = rawResult.as<hawknwk::chain_apis::read_only::get_producers_result>();
          if ( result.rows.empty() ) {
             std::cout << "No producers found" << std::endl;
             return;
@@ -1418,7 +1418,7 @@ struct bidname_info_subcommand {
       list_producers->add_option("newname", newname, localized("The bidding name"))->required();
       list_producers->set_callback([this] {
          auto rawResult = call(get_table_func, fc::mutable_variant_object("json", true)
-                               ("code", "eosio")("scope", "eosio")("table", "namebids")
+                               ("code", "hawknwk")("scope", "hawknwk")("table", "namebids")
                                ("lower_bound", newname.value)
                                ("upper_bound", newname.value + 1)
                                // Less than ideal upper_bound usage preserved so cleos can still work with old buggy nodeos versions
@@ -1428,7 +1428,7 @@ struct bidname_info_subcommand {
             std::cout << fc::json::to_pretty_string(rawResult) << std::endl;
             return;
          }
-         auto result = rawResult.as<eosio::chain_apis::read_only::get_table_rows_result>();
+         auto result = rawResult.as<hawknwk::chain_apis::read_only::get_table_rows_result>();
          // Condition in if statement below can simply be res.rows.empty() when cleos no longer needs to support nodeos versions older than 1.5.0
          if( result.rows.empty() || result.rows[0].get_object()["newname"].as_string() != newname.to_string() ) {
             std::cout << "No bidname record found" << std::endl;
@@ -1451,7 +1451,7 @@ struct bidname_info_subcommand {
 };
 
 struct list_bw_subcommand {
-   eosio::name account;
+   hawknwk::name account;
    bool print_json = false;
 
    list_bw_subcommand(CLI::App* actionRoot) {
@@ -1467,7 +1467,7 @@ struct list_bw_subcommand {
                                ("table", "delband")
             );
             if (!print_json) {
-               auto res = result.as<eosio::chain_apis::read_only::get_table_rows_result>();
+               auto res = result.as<hawknwk::chain_apis::read_only::get_table_rows_result>();
                if ( !res.rows.empty() ) {
                   std::cout << std::setw(13) << std::left << "Receiver" << std::setw(21) << std::left << "Net bandwidth"
                             << std::setw(21) << std::left << "CPU bandwidth" << std::endl;
@@ -2018,7 +2018,7 @@ void get_account( const string& accountName, const string& coresym, bool json_fo
       json = call(get_account_func, fc::mutable_variant_object("account_name", accountName)("expected_core_symbol", symbol::from_string(coresym)));
    }
 
-   auto res = json.as<eosio::chain_apis::read_only::get_account_results>();
+   auto res = json.as<hawknwk::chain_apis::read_only::get_account_results>();
    if (!json_format) {
       asset staked;
       asset unstaking;
@@ -2038,7 +2038,7 @@ void get_account( const string& accountName, const string& coresym, bool json_fo
       std::cout << "permissions: " << std::endl;
       unordered_map<name, vector<name>/*children*/> tree;
       vector<name> roots; //we don't have multiple roots, but we can easily handle them here, so let's do it just in case
-      unordered_map<name, eosio::chain_apis::permission> cache;
+      unordered_map<name, hawknwk::chain_apis::permission> cache;
       for ( auto& perm : res.permissions ) {
          if ( perm.parent ) {
             tree[perm.parent].push_back( perm.perm_name );
@@ -2224,7 +2224,7 @@ void get_account( const string& accountName, const string& coresym, bool json_fo
             std::cout << "unstaking tokens:" << std::endl;
             std::cout << indent << std::left << std::setw(25) << "time of unstake request:" << std::right << std::setw(20) << string(request_time);
             if( now >= refund_time ) {
-               std::cout << " (available to claim now with 'eosio::refund' action)\n";
+               std::cout << " (available to claim now with 'hawknwk::refund' action)\n";
             } else {
                std::cout << " (funds will be available in " << to_pretty_time( (refund_time - now).count(), 0 ) << ")\n";
             }
@@ -2288,7 +2288,7 @@ int main( int argc, char** argv ) {
    setlocale(LC_ALL, "");
    bindtextdomain(locale_domain, locale_path);
    textdomain(locale_domain);
-   context = eosio::client::http::create_http_context();
+   context = hawknwk::client::http::create_http_context();
    wallet_url = default_wallet_url;
 
    CLI::App app{"Command Line Interface to HAWK-NETWORK Client"};
@@ -2314,7 +2314,7 @@ int main( int argc, char** argv ) {
    version->require_subcommand();
 
    version->add_subcommand("client", localized("Retrieve version information of the client"))->set_callback([] {
-     std::cout << localized("Build version: ${ver}", ("ver", eosio::client::config::version_str)) << std::endl;
+     std::cout << localized("Build version: ${ver}", ("ver", hawknwk::client::config::version_str)) << std::endl;
    });
 
    // Create subcommand
@@ -3019,7 +3019,7 @@ int main( int argc, char** argv ) {
    auto setActionPermission = set_action_permission_subcommand(setAction);
 
    // Transfer subcommand
-   string con = "eosio.token";
+   string con = "hawknwk.token";
    string sender;
    string recipient;
    string amount;
@@ -3442,7 +3442,7 @@ int main( int argc, char** argv ) {
          ("requested", requested_perm_var)
          ("trx", trx_var);
 
-      send_actions({chain::action{accountPermissions, "eosio.msig", "propose", variant_to_bin( N(eosio.msig), N(propose), args ) }});
+      send_actions({chain::action{accountPermissions, "hawknwk.msig", "propose", variant_to_bin( N(hawknwk.msig), N(propose), args ) }});
    });
 
    //multisig propose transaction
@@ -3482,7 +3482,7 @@ int main( int argc, char** argv ) {
          ("requested", requested_perm_var)
          ("trx", trx_var);
 
-      send_actions({chain::action{accountPermissions, "eosio.msig", "propose", variant_to_bin( N(eosio.msig), N(propose), args ) }});
+      send_actions({chain::action{accountPermissions, "hawknwk.msig", "propose", variant_to_bin( N(hawknwk.msig), N(propose), args ) }});
    });
 
 
@@ -3495,7 +3495,7 @@ int main( int argc, char** argv ) {
 
    review->set_callback([&] {
       const auto result1 = call(get_table_func, fc::mutable_variant_object("json", true)
-                                 ("code", "eosio.msig")
+                                 ("code", "hawknwk.msig")
                                  ("scope", proposer)
                                  ("table", "proposal")
                                  ("table_key", "")
@@ -3523,7 +3523,7 @@ int main( int argc, char** argv ) {
       };
 
       std::map<permission_level, std::pair<fc::time_point, approval_status>>                               all_approvals;
-      std::map<eosio::account_name, std::pair<fc::time_point, vector<decltype(all_approvals)::iterator>>>  provided_approvers;
+      std::map<hawknwk::account_name, std::pair<fc::time_point, vector<decltype(all_approvals)::iterator>>>  provided_approvers;
 
       bool new_multisig = true;
       if( show_approvals_in_multisig_review ) {
@@ -3531,7 +3531,7 @@ int main( int argc, char** argv ) {
 
          try {
             const auto& result2 = call(get_table_func, fc::mutable_variant_object("json", true)
-                                       ("code", "eosio.msig")
+                                       ("code", "hawknwk.msig")
                                        ("scope", proposer)
                                        ("table", "approvals2")
                                        ("table_key", "")
@@ -3563,7 +3563,7 @@ int main( int argc, char** argv ) {
             }
          } else {
             const auto result3 = call(get_table_func, fc::mutable_variant_object("json", true)
-                                       ("code", "eosio.msig")
+                                       ("code", "hawknwk.msig")
                                        ("scope", proposer)
                                        ("table", "approvals")
                                        ("table_key", "")
@@ -3596,8 +3596,8 @@ int main( int argc, char** argv ) {
          if( new_multisig ) {
             for( auto& a : provided_approvers ) {
                const auto result4 = call(get_table_func, fc::mutable_variant_object("json", true)
-                                          ("code", "eosio.msig")
-                                          ("scope", "eosio.msig")
+                                          ("code", "hawknwk.msig")
+                                          ("scope", "hawknwk.msig")
                                           ("table", "invals")
                                           ("table_key", "")
                                           ("lower_bound", a.first.value)
@@ -3607,7 +3607,7 @@ int main( int argc, char** argv ) {
                                           ("limit", 1)
                                     );
                const auto& rows4 = result4.get_object()["rows"].get_array();
-               if( rows4.empty() || rows4[0].get_object()["account"].as<eosio::name>() != a.first ) {
+               if( rows4.empty() || rows4[0].get_object()["account"].as<hawknwk::name>() != a.first ) {
                   continue;
                }
 
@@ -3702,7 +3702,7 @@ int main( int argc, char** argv ) {
       }
 
       auto accountPermissions = get_account_permissions(tx_permission, {proposer,config::active_name});
-      send_actions({chain::action{accountPermissions, "eosio.msig", action, variant_to_bin( N(eosio.msig), action, args ) }});
+      send_actions({chain::action{accountPermissions, "hawknwk.msig", action, variant_to_bin( N(hawknwk.msig), action, args ) }});
    };
 
    // multisig approve
@@ -3732,7 +3732,7 @@ int main( int argc, char** argv ) {
          ("account", invalidator);
 
       auto accountPermissions = get_account_permissions(tx_permission, {invalidator,config::active_name});
-      send_actions({chain::action{accountPermissions, "eosio.msig", "invalidate", variant_to_bin( N(eosio.msig), "invalidate", args ) }});
+      send_actions({chain::action{accountPermissions, "hawknwk.msig", "invalidate", variant_to_bin( N(hawknwk.msig), "invalidate", args ) }});
    });
 
    // multisig cancel
@@ -3759,7 +3759,7 @@ int main( int argc, char** argv ) {
          ("proposal_name", proposal_name)
          ("canceler", canceler);
 
-      send_actions({chain::action{accountPermissions, "eosio.msig", "cancel", variant_to_bin( N(eosio.msig), N(cancel), args ) }});
+      send_actions({chain::action{accountPermissions, "hawknwk.msig", "cancel", variant_to_bin( N(hawknwk.msig), N(cancel), args ) }});
       }
    );
 
@@ -3788,7 +3788,7 @@ int main( int argc, char** argv ) {
          ("proposal_name", proposal_name)
          ("executer", executer);
 
-      send_actions({chain::action{accountPermissions, "eosio.msig", "exec", variant_to_bin( N(eosio.msig), N(exec), args ) }});
+      send_actions({chain::action{accountPermissions, "hawknwk.msig", "exec", variant_to_bin( N(hawknwk.msig), N(exec), args ) }});
       }
    );
 
@@ -3797,7 +3797,7 @@ int main( int argc, char** argv ) {
    wrap->require_subcommand();
 
    // wrap exec
-   string wrap_con = "eosio.wrap";
+   string wrap_con = "hawknwk.wrap";
    executer = "";
    string trx_to_exec;
    auto wrap_exec = wrap->add_subcommand("exec", localized("Execute a transaction while bypassing authorization checks"));
@@ -3825,7 +3825,7 @@ int main( int argc, char** argv ) {
    });
 
    // system subcommand
-   auto system = app.add_subcommand("system", localized("Send eosio.system contract action to the blockchain."), false);
+   auto system = app.add_subcommand("system", localized("Send hawknwk.system contract action to the blockchain."), false);
    system->require_subcommand();
 
    auto createAccountSystem = create_account_subcommand( system, false /*simple*/ );

@@ -2,29 +2,29 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/chain/eosio_contract.hpp>
-#include <eosio/chain/contract_table_objects.hpp>
+#include <hawknwk/chain/hawknwk_contract.hpp>
+#include <hawknwk/chain/contract_table_objects.hpp>
 
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/transaction_context.hpp>
-#include <eosio/chain/apply_context.hpp>
-#include <eosio/chain/transaction.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/transaction_context.hpp>
+#include <hawknwk/chain/apply_context.hpp>
+#include <hawknwk/chain/transaction.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 
-#include <eosio/chain/account_object.hpp>
-#include <eosio/chain/permission_object.hpp>
-#include <eosio/chain/permission_link_object.hpp>
-#include <eosio/chain/global_property_object.hpp>
-#include <eosio/chain/contract_types.hpp>
-#include <eosio/chain/producer_object.hpp>
+#include <hawknwk/chain/account_object.hpp>
+#include <hawknwk/chain/permission_object.hpp>
+#include <hawknwk/chain/permission_link_object.hpp>
+#include <hawknwk/chain/global_property_object.hpp>
+#include <hawknwk/chain/contract_types.hpp>
+#include <hawknwk/chain/producer_object.hpp>
 
-#include <eosio/chain/wasm_interface.hpp>
-#include <eosio/chain/abi_serializer.hpp>
+#include <hawknwk/chain/wasm_interface.hpp>
+#include <hawknwk/chain/abi_serializer.hpp>
 
-#include <eosio/chain/authorization_manager.hpp>
-#include <eosio/chain/resource_limits.hpp>
+#include <hawknwk/chain/authorization_manager.hpp>
+#include <hawknwk/chain/resource_limits.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 
 
@@ -44,7 +44,7 @@ void validate_authority_precondition( const apply_context& context, const author
       if( a.permission.permission == config::owner_name || a.permission.permission == config::active_name )
          continue; // account was already checked to exist, so its owner and active permissions should exist
 
-      if( a.permission.permission == config::eosio_code_name ) // virtual eosio.code permission does not really exist but is allowed
+      if( a.permission.permission == config::hawknwk_code_name ) // virtual hawknwk.code permission does not really exist but is allowed
          continue;
 
       try {
@@ -67,11 +67,11 @@ void validate_authority_precondition( const apply_context& context, const author
 /**
  *  This method is called assuming precondition_system_newaccount succeeds a
  */
-void apply_eosio_newaccount(apply_context& context) {
+void apply_hawknwk_newaccount(apply_context& context) {
    auto create = context.act.data_as<newaccount>();
    try {
    context.require_authorization(create.creator);
-//   context.require_write_lock( config::eosio_auth_scope );
+//   context.require_write_lock( config::hawknwk_auth_scope );
    auto& authorization = context.control.get_mutable_authorization_manager();
 
    EOS_ASSERT( validate(create.owner), action_validate_exception, "Invalid owner authority");
@@ -87,8 +87,8 @@ void apply_eosio_newaccount(apply_context& context) {
    // Check if the creator is privileged
    const auto &creator = db.get<account_object, by_name>(create.creator);
    if( !creator.privileged ) {
-      EOS_ASSERT( name_str.find( "eosio." ) != 0, action_validate_exception,
-                  "only privileged accounts can have names that start with 'eosio.'" );
+      EOS_ASSERT( name_str.find( "hawknwk." ) != 0, action_validate_exception,
+                  "only privileged accounts can have names that start with 'hawknwk.'" );
    }
 
    auto existing_account = db.find<account_object, by_name>(create.name);
@@ -125,7 +125,7 @@ void apply_eosio_newaccount(apply_context& context) {
 
 } FC_CAPTURE_AND_RETHROW( (create) ) }
 
-void apply_eosio_setcode(apply_context& context) {
+void apply_hawknwk_setcode(apply_context& context) {
    const auto& cfg = context.control.get_global_properties().configuration;
 
    auto& db = context.db;
@@ -172,7 +172,7 @@ void apply_eosio_setcode(apply_context& context) {
    }
 }
 
-void apply_eosio_setabi(apply_context& context) {
+void apply_hawknwk_setabi(apply_context& context) {
    auto& db  = context.db;
    auto  act = context.act.data_as<setabi>();
 
@@ -203,7 +203,7 @@ void apply_eosio_setabi(apply_context& context) {
    }
 }
 
-void apply_eosio_updateauth(apply_context& context) {
+void apply_hawknwk_updateauth(apply_context& context) {
 
    auto update = context.act.data_as<updateauth>();
    context.require_authorization(update.account); // only here to mark the single authority on this action as used
@@ -212,8 +212,8 @@ void apply_eosio_updateauth(apply_context& context) {
    auto& db = context.db;
 
    EOS_ASSERT(!update.permission.empty(), action_validate_exception, "Cannot create authority with empty name");
-   EOS_ASSERT( update.permission.to_string().find( "eosio." ) != 0, action_validate_exception,
-               "Permission names that start with 'eosio.' are reserved" );
+   EOS_ASSERT( update.permission.to_string().find( "hawknwk." ) != 0, action_validate_exception,
+               "Permission names that start with 'hawknwk.' are reserved" );
    EOS_ASSERT(update.permission != update.parent, action_validate_exception, "Cannot set an authority as its own parent");
    db.get<account_object, by_name>(update.account);
    EOS_ASSERT(validate(update.auth), action_validate_exception,
@@ -267,8 +267,8 @@ void apply_eosio_updateauth(apply_context& context) {
    }
 }
 
-void apply_eosio_deleteauth(apply_context& context) {
-//   context.require_write_lock( config::eosio_auth_scope );
+void apply_hawknwk_deleteauth(apply_context& context) {
+//   context.require_write_lock( config::hawknwk_auth_scope );
 
    auto remove = context.act.data_as<deleteauth>();
    context.require_authorization(remove.account); // only here to mark the single authority on this action as used
@@ -298,8 +298,8 @@ void apply_eosio_deleteauth(apply_context& context) {
 
 }
 
-void apply_eosio_linkauth(apply_context& context) {
-//   context.require_write_lock( config::eosio_auth_scope );
+void apply_hawknwk_linkauth(apply_context& context) {
+//   context.require_write_lock( config::hawknwk_auth_scope );
 
    auto requirement = context.act.data_as<linkauth>();
    try {
@@ -314,7 +314,7 @@ void apply_eosio_linkauth(apply_context& context) {
       const auto *code = db.find<account_object, by_name>(requirement.code);
       EOS_ASSERT(code != nullptr, account_query_exception,
                  "Failed to retrieve code for account: ${account}", ("account", requirement.code));
-      if( requirement.requirement != config::eosio_any_name ) {
+      if( requirement.requirement != config::hawknwk_any_name ) {
          const auto *permission = db.find<permission_object, by_name>(requirement.requirement);
          EOS_ASSERT(permission != nullptr, permission_query_exception,
                     "Failed to retrieve permission: ${permission}", ("permission", requirement.requirement));
@@ -346,8 +346,8 @@ void apply_eosio_linkauth(apply_context& context) {
   } FC_CAPTURE_AND_RETHROW((requirement))
 }
 
-void apply_eosio_unlinkauth(apply_context& context) {
-//   context.require_write_lock( config::eosio_auth_scope );
+void apply_hawknwk_unlinkauth(apply_context& context) {
+//   context.require_write_lock( config::hawknwk_auth_scope );
 
    auto& db = context.db;
    auto unlink = context.act.data_as<unlinkauth>();
@@ -365,7 +365,7 @@ void apply_eosio_unlinkauth(apply_context& context) {
    db.remove(*link);
 }
 
-void apply_eosio_canceldelay(apply_context& context) {
+void apply_hawknwk_canceldelay(apply_context& context) {
    auto cancel = context.act.data_as<canceldelay>();
    context.require_authorization(cancel.canceling_auth.actor); // only here to mark the single authority on this action as used
 
@@ -374,4 +374,4 @@ void apply_eosio_canceldelay(apply_context& context) {
    context.cancel_deferred_transaction(transaction_id_to_sender_id(trx_id), account_name());
 }
 
-} } // namespace eosio::chain
+} } // namespace hawknwk::chain

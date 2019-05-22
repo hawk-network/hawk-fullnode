@@ -4,10 +4,10 @@
  */
 #pragma once
 
-#include <eosio/chain/types.hpp>
-#include <eosio/chain/config.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/chain/config.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 /**
  * @brief Producer-voted blockchain configuration parameters
@@ -105,9 +105,9 @@ struct chain_config {
 
 };
 
-} } // namespace eosio::chain
+} } // namespace hawknwk::chain
 
-FC_REFLECT(eosio::chain::chain_config,
+FC_REFLECT(hawknwk::chain::chain_config,
            (max_block_net_usage)(target_block_net_usage_pct)
            (max_transaction_net_usage)(base_per_transaction_net_usage)(net_usage_leeway)
            (context_free_discount_net_usage_num)(context_free_discount_net_usage_den)

@@ -9,8 +9,8 @@
 #include <type_traits>
 
 #include <fc/exception/exception.hpp>
-#include <eosio/chain/exceptions.hpp>
-namespace eosio {
+#include <hawknwk/chain/exceptions.hpp>
+namespace hawknwk {
 
    using chain::uint128_t;
 

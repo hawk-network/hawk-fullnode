@@ -4,9 +4,9 @@
  */
 #include <vector>
 
-#include <eosiolib/crypto.h>
-#include <eosiolib/eosio.hpp>
-#include <eosiolib/print.h>
+#include <hawknwklib/crypto.h>
+#include <hawknwklib/hawknwk.hpp>
+#include <hawknwklib/print.h>
 
 #include "test_api.hpp"
 
@@ -15,7 +15,7 @@ void test_checktime::checktime_pass() {
    for ( int i = 0; i < 10000; i++ )
       p += i;
 
-   eosio::print(p);
+   hawknwk::print(p);
 }
 
 
@@ -28,7 +28,7 @@ void test_checktime::checktime_failure() {
       for ( unsigned long long j = 0; j < bound; j++ )
          p += i+j+bound;
 
-   eosio::print(p);
+   hawknwk::print(p);
 }
 
 constexpr size_t size = 20000000;

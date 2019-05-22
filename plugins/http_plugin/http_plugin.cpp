@@ -2,9 +2,9 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/http_plugin/http_plugin.hpp>
-#include <eosio/http_plugin/local_endpoint.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/http_plugin/http_plugin.hpp>
+#include <hawknwk/http_plugin/local_endpoint.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 
 #include <fc/network/ip.hpp>
 #include <fc/log/logger_config.hpp>
@@ -26,7 +26,7 @@
 #include <memory>
 #include <regex>
 
-namespace eosio {
+namespace hawknwk {
 
    static appbase::abstract_plugin& _http_plugin = app().register_plugin<http_plugin>();
 

@@ -5,7 +5,7 @@
 #pragma once
 #include <appbase/application.hpp>
 
-#include <eosio/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
 
 template <typename T>
 struct history_serial_big_vector_wrapper {
@@ -16,7 +16,7 @@ namespace fc {
 class variant;
 }
 
-namespace eosio {
+namespace hawknwk {
 using chain::bytes;
 using std::shared_ptr;
 
@@ -89,13 +89,13 @@ class state_history_plugin : public plugin<state_history_plugin> {
    state_history_ptr my;
 };
 
-} // namespace eosio
+} // namespace hawknwk
 
 // clang-format off
-FC_REFLECT(eosio::table_delta, (struct_version)(name)(rows));
-FC_REFLECT(eosio::block_position, (block_num)(block_id));
-FC_REFLECT_EMPTY(eosio::get_status_request_v0);
-FC_REFLECT(eosio::get_status_result_v0, (head)(last_irreversible)(trace_begin_block)(trace_end_block)(chain_state_begin_block)(chain_state_end_block));
-FC_REFLECT(eosio::get_blocks_request_v0, (start_block_num)(end_block_num)(max_messages_in_flight)(have_positions)(irreversible_only)(fetch_block)(fetch_traces)(fetch_deltas));
-FC_REFLECT(eosio::get_blocks_ack_request_v0, (num_messages));
+FC_REFLECT(hawknwk::table_delta, (struct_version)(name)(rows));
+FC_REFLECT(hawknwk::block_position, (block_num)(block_id));
+FC_REFLECT_EMPTY(hawknwk::get_status_request_v0);
+FC_REFLECT(hawknwk::get_status_result_v0, (head)(last_irreversible)(trace_begin_block)(trace_end_block)(chain_state_begin_block)(chain_state_end_block));
+FC_REFLECT(hawknwk::get_blocks_request_v0, (start_block_num)(end_block_num)(max_messages_in_flight)(have_positions)(irreversible_only)(fetch_block)(fetch_traces)(fetch_deltas));
+FC_REFLECT(hawknwk::get_blocks_ack_request_v0, (num_messages));
 // clang-format on

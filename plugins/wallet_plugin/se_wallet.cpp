@@ -2,9 +2,9 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/wallet_plugin/se_wallet.hpp>
-#include <eosio/wallet_plugin/macos_user_auth.h>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/wallet_plugin/se_wallet.hpp>
+#include <hawknwk/wallet_plugin/macos_user_auth.h>
+#include <hawknwk/chain/exceptions.hpp>
 
 #include <fc/crypto/openssl.hpp>
 
@@ -15,7 +15,7 @@
 
 #include <future>
 
-namespace eosio { namespace wallet {
+namespace hawknwk { namespace wallet {
 
 using namespace fc::crypto::r1;
 

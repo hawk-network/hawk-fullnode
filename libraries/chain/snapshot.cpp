@@ -1,8 +1,8 @@
-#include <eosio/chain/snapshot.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/snapshot.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 #include <fc/scoped_exit.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 variant_snapshot_writer::variant_snapshot_writer(fc::mutable_variant_object& snapshot)
 : snapshot(snapshot)

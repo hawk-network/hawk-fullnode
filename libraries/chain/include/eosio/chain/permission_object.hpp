@@ -3,12 +3,12 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/authority.hpp>
-#include <eosio/chain/database_utils.hpp>
+#include <hawknwk/chain/authority.hpp>
+#include <hawknwk/chain/database_utils.hpp>
 
 #include "multi_index_includes.hpp"
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    class permission_usage_object : public chainbase::object<permission_usage_object_type, permission_usage_object> {
       OBJECT_CTOR(permission_usage_object)
@@ -119,12 +119,12 @@ namespace eosio { namespace chain {
          static const uint64_t  value = (config::billable_size_v<shared_authority> + 64) + overhead;  ///< fixed field size + overhead
       };
    }
-} } // eosio::chain
+} } // hawknwk::chain
 
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::permission_object, eosio::chain::permission_index)
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::permission_usage_object, eosio::chain::permission_usage_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::permission_object, hawknwk::chain::permission_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::permission_usage_object, hawknwk::chain::permission_usage_index)
 
-FC_REFLECT(eosio::chain::permission_object, (usage_id)(parent)(owner)(name)(last_updated)(auth))
-FC_REFLECT(eosio::chain::snapshot_permission_object, (parent)(owner)(name)(last_updated)(last_used)(auth))
+FC_REFLECT(hawknwk::chain::permission_object, (usage_id)(parent)(owner)(name)(last_updated)(auth))
+FC_REFLECT(hawknwk::chain::snapshot_permission_object, (parent)(owner)(name)(last_updated)(last_used)(auth))
 
-FC_REFLECT(eosio::chain::permission_usage_object, (last_used))
+FC_REFLECT(hawknwk::chain::permission_usage_object, (last_used))

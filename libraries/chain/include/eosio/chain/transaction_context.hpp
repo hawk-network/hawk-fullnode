@@ -1,9 +1,9 @@
 #pragma once
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/trace.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/trace.hpp>
 #include <signal.h>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    struct deadline_timer {
          deadline_timer();

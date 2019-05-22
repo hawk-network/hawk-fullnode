@@ -17,11 +17,11 @@
 #include <boost/iostreams/device/back_inserter.hpp>
 #include <boost/iostreams/filter/zlib.hpp>
 
-#include <eosio/chain/config.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/transaction.hpp>
+#include <hawknwk/chain/config.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/transaction.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 using namespace boost::multi_index;
 
@@ -400,4 +400,4 @@ void packed_transaction::local_pack_context_free_data()
 }
 
 
-} } // eosio::chain
+} } // hawknwk::chain

@@ -1,11 +1,11 @@
-#include <eosio/chain/apply_context.hpp>
-#include <eosio/chain/transaction_context.hpp>
-#include <eosio/chain/authorization_manager.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/resource_limits.hpp>
-#include <eosio/chain/generated_transaction_object.hpp>
-#include <eosio/chain/transaction_object.hpp>
-#include <eosio/chain/global_property_object.hpp>
+#include <hawknwk/chain/apply_context.hpp>
+#include <hawknwk/chain/transaction_context.hpp>
+#include <hawknwk/chain/authorization_manager.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/resource_limits.hpp>
+#include <hawknwk/chain/generated_transaction_object.hpp>
+#include <hawknwk/chain/transaction_object.hpp>
+#include <hawknwk/chain/global_property_object.hpp>
 
 #pragma push_macro("N")
 #undef N
@@ -19,7 +19,7 @@
 
 #include <chrono>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 namespace bacc = boost::accumulators;
 
@@ -653,4 +653,4 @@ namespace bacc = boost::accumulators;
    }
 
 
-} } /// eosio::chain
+} } /// hawknwk::chain

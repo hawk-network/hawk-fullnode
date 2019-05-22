@@ -2,12 +2,12 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/mongo_db_plugin/mongo_db_plugin.hpp>
-#include <eosio/chain/eosio_contract.hpp>
-#include <eosio/chain/config.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/transaction.hpp>
-#include <eosio/chain/types.hpp>
+#include <hawknwk/mongo_db_plugin/mongo_db_plugin.hpp>
+#include <hawknwk/chain/hawknwk_contract.hpp>
+#include <hawknwk/chain/config.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/transaction.hpp>
+#include <hawknwk/chain/types.hpp>
 
 #include <fc/io/json.hpp>
 #include <fc/utf8.hpp>
@@ -34,7 +34,7 @@
 
 namespace fc { class variant; }
 
-namespace eosio {
+namespace hawknwk {
 
 using chain::account_name;
 using chain::action_name;
@@ -624,7 +624,7 @@ optional<abi_serializer> mongo_db_plugin_impl::get_abi_serializer( account_name 
                entry.last_accessed = fc::time_point::now();
                abi_serializer abis;
                if( n == chain::config::system_account_name ) {
-                  // redefine eosio setabi.abi from bytes to abi_def
+                  // redefine hawknwk setabi.abi from bytes to abi_def
                   // Done so that abi is stored as abi_def in mongo instead of as bytes
                   auto itr = std::find_if( abi.structs.begin(), abi.structs.end(),
                                            []( const auto& s ) { return s.name == "setabi"; } );
@@ -1517,7 +1517,7 @@ void mongo_db_plugin::set_program_options(options_description& cli, options_desc
          ("mongodb-store-action-traces", bpo::value<bool>()->default_value(true),
           "Enables storing action traces in mongodb.")
          ("mongodb-filter-on", bpo::value<vector<string>>()->composing(),
-          "Track actions which match receiver:action:actor. Receiver, Action, & Actor may be blank to include all. i.e. eosio:: or :transfer:  Use * or leave unspecified to include all.")
+          "Track actions which match receiver:action:actor. Receiver, Action, & Actor may be blank to include all. i.e. hawknwk:: or :transfer:  Use * or leave unspecified to include all.")
          ("mongodb-filter-out", bpo::value<vector<string>>()->composing(),
           "Do not track actions which match receiver:action:actor. Receiver, Action, & Actor may be blank to exclude all.")
          ;
@@ -1644,7 +1644,7 @@ void mongo_db_plugin::plugin_initialize(const variables_map& options)
          }
          my->init();
       } else {
-         wlog( "eosio::mongo_db_plugin configured, but no --mongodb-uri specified." );
+         wlog( "hawknwk::mongo_db_plugin configured, but no --mongodb-uri specified." );
          wlog( "mongo_db_plugin disabled." );
       }
    } FC_LOG_AND_RETHROW()
@@ -1664,4 +1664,4 @@ void mongo_db_plugin::plugin_shutdown()
    my.reset();
 }
 
-} // namespace eosio
+} // namespace hawknwk

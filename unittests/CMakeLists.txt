@@ -5,14 +5,14 @@ include(ExternalProject)
 
 if( HAWK-NETWORK_COMPILE_TEST_CONTRACTS )
    set(HAWK-NETWORK_WASM_OLD_BEHAVIOR "Off")
-   find_package(eosio.cdt REQUIRED)
+   find_package(hawknwk.cdt REQUIRED)
 
    message( STATUS "Building contracts in directory `eos/unittests/test-contracts/`" )
    ExternalProject_Add(
       test_contracts_project
       SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/test-contracts
       BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/test-contracts
-      CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${HAWK-NETWORK_CDT_ROOT}/lib/cmake/eosio.cdt/EosioWasmToolchain.cmake -DHAWK-NETWORK_COMPILE_TEST_CONTRACTS=${HAWK-NETWORK_COMPILE_TEST_CONTRACTS}
+      CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${HAWK-NETWORK_CDT_ROOT}/lib/cmake/hawknwk.cdt/EosioWasmToolchain.cmake -DHAWK-NETWORK_COMPILE_TEST_CONTRACTS=${HAWK-NETWORK_COMPILE_TEST_CONTRACTS}
       UPDATE_COMMAND ""
       PATCH_COMMAND ""
       TEST_COMMAND ""
@@ -42,7 +42,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/contracts.hpp.in ${CMAKE_CURRENT_BINA
 ### BUILD UNIT TEST EXECUTABLE ###
 file(GLOB UNIT_TESTS "*.cpp") # find all unit test suites
 add_executable( unit_test ${UNIT_TESTS}) # build unit tests as one executable
-target_link_libraries( unit_test eosio_chain chainbase eosio_testing fc ${PLATFORM_SPECIFIC_LIBS} )
+target_link_libraries( unit_test hawknwk_chain chainbase hawknwk_testing fc ${PLATFORM_SPECIFIC_LIBS} )
 target_compile_options(unit_test PUBLIC -DDISABLE_EOSLIB_SERIALIZE)
 target_include_directories( unit_test PUBLIC
                             ${CMAKE_SOURCE_DIR}/libraries/testing/include

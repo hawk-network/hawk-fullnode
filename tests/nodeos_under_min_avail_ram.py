@@ -51,7 +51,7 @@ class NamedAccounts:
 
 ###############################################################
 # nodeos_voting_test
-# --dump-error-details <Upon error print etc/eosio/node_*/config.ini and var/lib/node_*/stderr.log to stdout>
+# --dump-error-details <Upon error print etc/hawknwk/node_*/config.ini and var/lib/node_*/stderr.log to stdout>
 # --keep-logs <Don't delete var/lib/node_* folders upon test completion>
 ###############################################################
 
@@ -99,7 +99,7 @@ try:
     testWalletName="test"
 
     Print("Creating wallet \"%s\"." % (testWalletName))
-    testWallet=walletMgr.create(testWalletName, [cluster.eosioAccount])
+    testWallet=walletMgr.create(testWalletName, [cluster.hawknwkAccount])
 
     for _, account in cluster.defProducerAccounts.items():
         walletMgr.importKey(account, testWallet, ignoreDupKeyWarning=True)
@@ -116,23 +116,23 @@ try:
     for account in accounts:
         walletMgr.importKey(account, testWallet)
 
-    # create accounts via eosio as otherwise a bid is needed
+    # create accounts via hawknwk as otherwise a bid is needed
     for account in accounts:
-        Print("Create new account %s via %s" % (account.name, cluster.eosioAccount.name))
-        trans=nodes[0].createInitializeAccount(account, cluster.eosioAccount, stakedDeposit=500000, waitForTransBlock=False, stakeNet=50000, stakeCPU=50000, buyRAM=50000, exitOnError=True)
+        Print("Create new account %s via %s" % (account.name, cluster.hawknwkAccount.name))
+        trans=nodes[0].createInitializeAccount(account, cluster.hawknwkAccount, stakedDeposit=500000, waitForTransBlock=False, stakeNet=50000, stakeCPU=50000, buyRAM=50000, exitOnError=True)
         transferAmount="70000000.0000 {0}".format(CORE_SYMBOL)
-        Print("Transfer funds %s from account %s to %s" % (transferAmount, cluster.eosioAccount.name, account.name))
-        nodes[0].transferFunds(cluster.eosioAccount, account, transferAmount, "test transfer")
+        Print("Transfer funds %s from account %s to %s" % (transferAmount, cluster.hawknwkAccount.name, account.name))
+        nodes[0].transferFunds(cluster.hawknwkAccount, account, transferAmount, "test transfer")
         trans=nodes[0].delegatebw(account, 1000000.0000, 68000000.0000, waitForTransBlock=True, exitOnError=True)
 
     contractAccount=cluster.createAccountKeys(1)[0]
     contractAccount.name="contracttest"
     walletMgr.importKey(contractAccount, testWallet)
-    Print("Create new account %s via %s" % (contractAccount.name, cluster.eosioAccount.name))
-    trans=nodes[0].createInitializeAccount(contractAccount, cluster.eosioAccount, stakedDeposit=500000, waitForTransBlock=False, stakeNet=50000, stakeCPU=50000, buyRAM=50000, exitOnError=True)
+    Print("Create new account %s via %s" % (contractAccount.name, cluster.hawknwkAccount.name))
+    trans=nodes[0].createInitializeAccount(contractAccount, cluster.hawknwkAccount, stakedDeposit=500000, waitForTransBlock=False, stakeNet=50000, stakeCPU=50000, buyRAM=50000, exitOnError=True)
     transferAmount="90000000.0000 {0}".format(CORE_SYMBOL)
-    Print("Transfer funds %s from account %s to %s" % (transferAmount, cluster.eosioAccount.name, contractAccount.name))
-    nodes[0].transferFunds(cluster.eosioAccount, contractAccount, transferAmount, "test transfer")
+    Print("Transfer funds %s from account %s to %s" % (transferAmount, cluster.hawknwkAccount.name, contractAccount.name))
+    nodes[0].transferFunds(cluster.hawknwkAccount, contractAccount, transferAmount, "test transfer")
     trans=nodes[0].delegatebw(contractAccount, 1000000.0000, 88000000.0000, waitForTransBlock=True, exitOnError=True)
 
     contractDir="unittests/test-contracts/integration_test"
@@ -167,10 +167,10 @@ try:
                 if trans is None or not trans[0]:
                     timeOutCount+=1
                     if timeOutCount>=3:
-                       Print("Failed to push create action to eosio contract for %d consecutive times, looks like nodeos already exited." % (timeOutCount))
+                       Print("Failed to push create action to hawknwk contract for %d consecutive times, looks like nodeos already exited." % (timeOutCount))
                        keepProcessing=False
                        break
-                    Print("Failed to push create action to eosio contract. sleep for 60 seconds")
+                    Print("Failed to push create action to hawknwk contract. sleep for 60 seconds")
                     time.sleep(60)
                 else:
                     timeOutCount=0
@@ -250,7 +250,7 @@ try:
             try:
                 trans=nodes[0].pushMessage(contract, action, data, opts)
                 if trans is None or not trans[0]:
-                    Print("Failed to push create action to eosio contract. sleep for 60 seconds")
+                    Print("Failed to push create action to hawknwk contract. sleep for 60 seconds")
                     time.sleep(60)
                 time.sleep(1)
             except TypeError as ex:
@@ -310,7 +310,7 @@ try:
         try:
             trans=nodes[0].pushMessage(contract, action, data, opts)
             if trans is None or not trans[0]:
-                Print("Failed to push create action to eosio contract. sleep for 60 seconds")
+                Print("Failed to push create action to hawknwk contract. sleep for 60 seconds")
                 time.sleep(60)
                 continue
             time.sleep(1)

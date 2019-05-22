@@ -45,10 +45,10 @@
  *
  */
 
-#include <eosio/bnet_plugin/bnet_plugin.hpp>
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/trace.hpp>
-#include <eosio/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/bnet_plugin/bnet_plugin.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/trace.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
 
 #include <fc/io/json.hpp>
 
@@ -61,17 +61,17 @@
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 
-#include <eosio/chain/plugin_interface.hpp>
+#include <hawknwk/chain/plugin_interface.hpp>
 
 using tcp = boost::asio::ip::tcp;
 namespace ws  = boost::beast::websocket;
 
-namespace eosio {
+namespace hawknwk {
    using namespace chain;
 
    static appbase::abstract_plugin& _bnet_plugin = app().register_plugin<bnet_plugin>();
 
-} /// namespace eosio
+} /// namespace hawknwk
 
 namespace fc {
    extern std::unordered_map<std::string,logger>& get_logger_map();
@@ -106,14 +106,14 @@ std::string peer_log_format;
   FC_MULTILINE_MACRO_END
 
 
-using eosio::public_key_type;
-using eosio::chain_id_type;
-using eosio::block_id_type;
-using eosio::block_timestamp_type;
+using hawknwk::public_key_type;
+using hawknwk::chain_id_type;
+using hawknwk::block_id_type;
+using hawknwk::block_timestamp_type;
 using std::string;
-using eosio::sha256;
-using eosio::signed_block_ptr;
-using eosio::packed_transaction_ptr;
+using hawknwk::sha256;
+using hawknwk::signed_block_ptr;
+using hawknwk::packed_transaction_ptr;
 using std::vector;
 
 struct hello {
@@ -184,7 +184,7 @@ struct by_num;
 struct by_received;
 struct by_expired;
 
-namespace eosio {
+namespace hawknwk {
   using namespace chain::plugin_interface;
 
   class bnet_plugin_impl;
@@ -1559,4 +1559,4 @@ namespace eosio {
 
       app().get_channel<incoming::channels::transaction>().publish(priority::low, ptr);
    }
-} /// namespace eosio
+} /// namespace hawknwk

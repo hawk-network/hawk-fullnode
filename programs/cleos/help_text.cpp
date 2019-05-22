@@ -6,10 +6,10 @@
 #include "localize.hpp"
 #include <regex>
 #include <fc/io/json.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 
-using namespace eosio::client::localize;
-using namespace eosio::chain;
+using namespace hawknwk::client::localize;
+using namespace hawknwk::chain;
 
 const char* transaction_help_text_header = _("An error occurred while submitting the transaction for this command!");
 
@@ -72,7 +72,7 @@ const char* failed_to_find_transaction_text = _("Failed to fetch information for
 
 const char* failed_to_find_transaction_with_block_text = _("Failed to fetch information for transaction: \033[1m${1}\033[0m from the history plugin and the transaction was not present in block \033[1m${2}\033[0m\n");
 
-const char* history_plugin_advice_text = _("\033[32mPlease ensure that the \033[2meosio::history_plugin\033[22m is enabled on the RPC node you are connecting to and that an account involved in this transaction was configured in the \033[2mfilter-on\033[22m setting.\033[0m\n");
+const char* history_plugin_advice_text = _("\033[32mPlease ensure that the \033[2mhawknwk::history_plugin\033[22m is enabled on the RPC node you are connecting to and that an account involved in this transaction was configured in the \033[2mfilter-on\033[22m setting.\033[0m\n");
 
 const char* help_regex_error = _("Error locating help text: ${code} ${what}");
 
@@ -145,7 +145,7 @@ const char* error_advice_authority_type_exception = R"=====(Ensure that your aut
 )=====";
 const char* error_advice_action_type_exception = R"=====(Ensure that your action JSON follows the contract's abi!)=====";
 const char* error_advice_transaction_type_exception = R"=====(Ensure that your transaction JSON follows the right transaction format!
-You can refer to contracts/eosiolib/transaction.hpp for reference)=====";
+You can refer to contracts/hawknwklib/transaction.hpp for reference)=====";
 const char* error_advice_abi_type_exception =  R"=====(Ensure that your abi JSON follows the following format!
 {
   "types" : [{ "new_type_name":"type_name", "type":"type_name" }],
@@ -198,7 +198,7 @@ const char* error_advice_transaction_exception =  "Ensure that your transaction 
 const char* error_advice_expired_tx_exception =  "Please increase the expiration time of your transaction!";
 const char* error_advice_tx_exp_too_far_exception =  "Please decrease the expiration time of your transaction!";
 const char* error_advice_invalid_ref_block_exception =  "Ensure that the reference block exist in the blockchain!";
-const char* error_advice_tx_duplicate =  "You can try embedding eosio nonce action inside your transaction to ensure uniqueness.";
+const char* error_advice_tx_duplicate =  "You can try embedding hawknwk nonce action inside your transaction to ensure uniqueness.";
 
 const char* error_advice_invalid_action_args_exception = R"=====(Ensure that your arguments follow the contract abi!
 You can check the contract's abi by using 'cleos get code' command.)=====";
@@ -214,11 +214,11 @@ const char* error_advice_missing_auth_exception =  R"=====(Ensure that you have 
 If you are currently using 'cleos push action' command, try to add the relevant authority using -p option.)=====";
 const char* error_advice_irrelevant_auth_exception =  "Please remove the unnecessary authority from your action!";
 
-const char* error_advice_missing_chain_api_plugin_exception =  "Ensure that you have \033[2meosio::chain_api_plugin\033[0m\033[32m added to your node's configuration!";
-const char* error_advice_missing_wallet_api_plugin_exception =  "Ensure that you have \033[2meosio::wallet_api_plugin\033[0m\033[32m added to your node's configuration!\n"\
+const char* error_advice_missing_chain_api_plugin_exception =  "Ensure that you have \033[2mhawknwk::chain_api_plugin\033[0m\033[32m added to your node's configuration!";
+const char* error_advice_missing_wallet_api_plugin_exception =  "Ensure that you have \033[2mhawknwk::wallet_api_plugin\033[0m\033[32m added to your node's configuration!\n"\
                                     "Otherwise specify your wallet location with \033[2m--wallet-url\033[0m\033[32m argument!";
-const char* error_advice_missing_history_api_plugin_exception =  "Ensure that you have \033[2meosio::history_api_plugin\033[0m\033[32m added to your node's configuration!";
-const char* error_advice_missing_net_api_plugin_exception =  "Ensure that you have \033[2meosio::net_api_plugin\033[0m\033[32m added to your node's configuration!";
+const char* error_advice_missing_history_api_plugin_exception =  "Ensure that you have \033[2mhawknwk::history_api_plugin\033[0m\033[32m added to your node's configuration!";
+const char* error_advice_missing_net_api_plugin_exception =  "Ensure that you have \033[2mhawknwk::net_api_plugin\033[0m\033[32m added to your node's configuration!";
 
 const char* error_advice_wallet_exist_exception =  "Try to use different wallet name.";
 const char* error_advice_wallet_nonexistent_exception =  "Are you sure you typed the wallet name correctly?";
@@ -270,11 +270,11 @@ const std::map<int64_t, std::string> error_advice = {
    { wallet_not_available_exception::code_value, error_advice_wallet_not_available_exception }
 };
 
-namespace eosio { namespace client { namespace help {
+namespace hawknwk { namespace client { namespace help {
 
 bool print_recognized_errors(const fc::exception& e, const bool verbose_errors) {
    // eos recognized error code is from 3000000
-   // refer to libraries/chain/include/eosio/chain/exceptions.hpp
+   // refer to libraries/chain/include/hawknwk/chain/exceptions.hpp
    if (e.code() >= chain_exception::code_value) {
       std::string advice, explanation, stack_trace;
 

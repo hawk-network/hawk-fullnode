@@ -5,7 +5,7 @@
 
 #include "payloadless.hpp"
 
-using namespace eosio;
+using namespace hawknwk;
 
 void payloadless::doit() {
    print("Im a payloadless action");

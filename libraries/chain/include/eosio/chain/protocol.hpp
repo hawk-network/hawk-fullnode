@@ -3,4 +3,4 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/block.hpp>
+#include <hawknwk/chain/block.hpp>

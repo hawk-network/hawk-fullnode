@@ -4,13 +4,13 @@
  */
 #pragma once
 
-#include <eosio/chain/types.hpp>
-#include <eosio/chain/transaction.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/chain/transaction.hpp>
 
 using namespace std;
-using namespace eosio::chain;
+using namespace hawknwk::chain;
 
-namespace eosio { namespace wallet {
+namespace hawknwk { namespace wallet {
 
 class wallet_api
 {

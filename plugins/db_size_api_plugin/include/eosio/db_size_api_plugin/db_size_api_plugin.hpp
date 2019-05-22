@@ -4,12 +4,12 @@
  */
 #pragma once
 
-#include <eosio/http_plugin/http_plugin.hpp>
-#include <eosio/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/http_plugin/http_plugin.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
 
 #include <appbase/application.hpp>
 
-namespace eosio {
+namespace hawknwk {
 
 using namespace appbase;
 
@@ -48,5 +48,5 @@ private:
 
 }
 
-FC_REFLECT( eosio::db_size_index_count, (index)(row_count) )
-FC_REFLECT( eosio::db_size_stats, (free_bytes)(used_bytes)(size)(indices) )
+FC_REFLECT( hawknwk::db_size_index_count, (index)(row_count) )
+FC_REFLECT( hawknwk::db_size_stats, (free_bytes)(used_bytes)(size)(indices) )

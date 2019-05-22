@@ -109,7 +109,7 @@ while read -r name tester testee brewname uri; do
 	DISPLAY="${DISPLAY}${COUNT}. ${name}\\n"
 	printf " - %s ${bldred}NOT${txtrst} found.\\n" "${name}"
 	(( COUNT++ ))
-done < "${REPO_ROOT}/scripts/eosio_build_darwin_deps"
+done < "${REPO_ROOT}/scripts/hawknwk_build_darwin_deps"
 IFS="${var_ifs}"
 
 if [ ! -d /usr/local/Frameworks ]; then
@@ -138,10 +138,10 @@ if [ $COUNT -gt 1 ]; then
 				[Nn]* ) echo "Proceeding without update!";;
 				* ) echo "Please type 'y' for yes or 'n' for no."; exit;;
 			esac
-			brew tap eosio/eosio # Required to install mongo-cxx-driver with static library
+			brew tap hawknwk/hawknwk # Required to install mongo-cxx-driver with static library
 			printf "\\nInstalling Dependencies...\\n"
 			# Ignore cmake so we don't install a newer version.
-			# Build from source to use local cmake; see homebrew-eosio repo for examples
+			# Build from source to use local cmake; see homebrew-hawknwk repo for examples
 			# DON'T INSTALL llvm@4 WITH --force!
 			OIFS="$IFS"
 			IFS=$','

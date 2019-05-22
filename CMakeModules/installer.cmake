@@ -1,6 +1,6 @@
 include(InstallRequiredSystemLibraries)
 
-#install_directory_permissions( DIRECTORY usr/${CMAKE_INSTALL_INCLUDEDIR}/eosio )
+#install_directory_permissions( DIRECTORY usr/${CMAKE_INSTALL_INCLUDEDIR}/hawknwk )
 
 set(CPACK_PACKAGE_CONTACT "support@block.one")
 set(CPACK_OUTPUT_FILE_PREFIX ${CMAKE_BINARY_DIR}/packages)

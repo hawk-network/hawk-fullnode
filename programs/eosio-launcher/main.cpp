@@ -34,7 +34,7 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <net/if.h>
-#include <eosio/chain/genesis_state.hpp>
+#include <hawknwk/chain/genesis_state.hpp>
 
 #include "config.hpp"
 
@@ -123,7 +123,7 @@ public:
     : genesis("genesis.json"),
       ssh_identity (""),
       ssh_args (""),
-      eosio_home(),
+      hawknwk_home(),
       host_name("127.0.0.1"),
       public_name("localhost"),
       listen_addr("0.0.0.0"),
@@ -139,7 +139,7 @@ public:
   string           genesis;
   string           ssh_identity;
   string           ssh_args;
-  string           eosio_home;
+  string           hawknwk_home;
   string           host_name;
   string           public_name;
   string           listen_addr;
@@ -303,16 +303,16 @@ struct server_name_def {
   string ipaddr;
   string name;
   bool has_bios;
-  string eosio_home;
+  string hawknwk_home;
   uint16_t instances;
-  server_name_def () : ipaddr(), name(), has_bios(false), eosio_home(), instances(1) {}
+  server_name_def () : ipaddr(), name(), has_bios(false), hawknwk_home(), instances(1) {}
 };
 
 struct server_identities {
   vector<server_name_def> producer;
   vector<server_name_def> nonprod;
   vector<string> db;
-  string default_eosio_home;
+  string default_hawknwk_home;
   remote_deploy ssh;
 };
 
@@ -427,7 +427,7 @@ struct launcher_def {
    string start_script;
    fc::optional<uint32_t> max_block_cpu_usage;
    fc::optional<uint32_t> max_transaction_cpu_usage;
-   eosio::chain::genesis_state genesis_from_file;
+   hawknwk::chain::genesis_state genesis_from_file;
 
    void assign_name (eosd_def &node, bool is_bios);
 
@@ -614,7 +614,7 @@ launcher_def::initialize (const variables_map &vmap) {
     }
   }
 
-  config_dir_base = "etc/eosio";
+  config_dir_base = "etc/hawknwk";
   data_dir_base = "var/lib";
   next_node = 0;
   ++prod_nodes; // add one for the bios node
@@ -768,7 +768,7 @@ launcher_def::define_network () {
 
   if (per_host == 0) {
     host_def local_host;
-    local_host.eosio_home = erd;
+    local_host.hawknwk_home = erd;
     local_host.genesis = genesis.string();
     for (size_t i = 0; i < (total_nodes); i++) {
       eosd_def eosd;
@@ -814,9 +814,9 @@ launcher_def::define_network () {
           lhost->public_name = lhost->host_name;
           ph_count = 1;
         }
-        lhost->eosio_home =
-          (local_id.contains (lhost->host_name) || servers.default_eosio_home.empty()) ?
-          erd : servers.default_eosio_home;
+        lhost->hawknwk_home =
+          (local_id.contains (lhost->host_name) || servers.default_hawknwk_home.empty()) ?
+          erd : servers.default_hawknwk_home;
         host_ndx++;
       } // ph_count == 0
 
@@ -867,7 +867,7 @@ launcher_def::bind_nodes () {
          auto pubkey = kp.get_public_key();
          node.keys.emplace_back (move(kp));
          if (is_bios) {
-            string prodname = "eosio";
+            string prodname = "hawknwk";
             node.producers.push_back(prodname);
             producer_set.schedule.push_back({prodname,pubkey});
          }
@@ -939,8 +939,8 @@ launcher_def::deploy_config_files (tn_node_def &node) {
   bfs::path genesis_source = stage / instance.config_dir_name / "genesis.json";
 
   if (host->is_local()) {
-    bfs::path cfgdir = bfs::path(host->eosio_home) / instance.config_dir_name;
-    bfs::path dd = bfs::path(host->eosio_home) / instance.data_dir_name;
+    bfs::path cfgdir = bfs::path(host->hawknwk_home) / instance.config_dir_name;
+    bfs::path dd = bfs::path(host->hawknwk_home) / instance.data_dir_name;
 
     if (!bfs::exists (cfgdir)) {
        if (!bfs::create_directories (cfgdir, ec) && ec.value()) {
@@ -988,7 +988,7 @@ launcher_def::deploy_config_files (tn_node_def &node) {
   else {
     prep_remote_config_dir (instance, host);
 
-    bfs::path rfile = bfs::path (host->eosio_home) / instance.config_dir_name / "config.ini";
+    bfs::path rfile = bfs::path (host->hawknwk_home) / instance.config_dir_name / "config.ini";
     auto scp_cmd_line = compose_scp_command(*host, source, rfile);
 
     cerr << "cmdline = " << scp_cmd_line << endl;
@@ -998,7 +998,7 @@ launcher_def::deploy_config_files (tn_node_def &node) {
       exit(-1);
     }
 
-    rfile = bfs::path (host->eosio_home) / instance.config_dir_name / "logging.json";
+    rfile = bfs::path (host->hawknwk_home) / instance.config_dir_name / "logging.json";
 
     scp_cmd_line = compose_scp_command(*host, logging_source, rfile);
 
@@ -1008,7 +1008,7 @@ launcher_def::deploy_config_files (tn_node_def &node) {
       exit(-1);
     }
 
-    rfile = bfs::path (host->eosio_home) / instance.config_dir_name / "genesis.json";
+    rfile = bfs::path (host->hawknwk_home) / instance.config_dir_name / "genesis.json";
 
     scp_cmd_line = compose_scp_command(*host, genesis_source, rfile);
 
@@ -1122,18 +1122,18 @@ launcher_def::write_config_file (tn_node_def &node) {
     for (auto &p : node.producers) {
       cfg << "producer-name = " << p << "\n";
     }
-    cfg << "plugin = eosio::producer_plugin\n";
+    cfg << "plugin = hawknwk::producer_plugin\n";
   }
   if( instance.has_db ) {
-    cfg << "plugin = eosio::mongo_db_plugin\n";
+    cfg << "plugin = hawknwk::mongo_db_plugin\n";
   }
   if ( p2p == p2p_plugin::NET ) {
-    cfg << "plugin = eosio::net_plugin\n";
+    cfg << "plugin = hawknwk::net_plugin\n";
   } else {
-    cfg << "plugin = eosio::bnet_plugin\n";
+    cfg << "plugin = hawknwk::bnet_plugin\n";
   }
-  cfg << "plugin = eosio::chain_api_plugin\n"
-      << "plugin = eosio::history_api_plugin\n";
+  cfg << "plugin = hawknwk::chain_api_plugin\n"
+      << "plugin = hawknwk::history_api_plugin\n";
   cfg.close();
 }
 
@@ -1181,12 +1181,12 @@ launcher_def::init_genesis () {
    const bfs::path genesis_path = genesis.is_complete() ? genesis : bfs::current_path() / genesis;
    if (!bfs::exists(genesis_path)) {
       cout << "generating default genesis file " << genesis_path << endl;
-      eosio::chain::genesis_state default_genesis;
+      hawknwk::chain::genesis_state default_genesis;
       fc::json::save_to_file( default_genesis, genesis_path, true );
    }
    string bioskey = string(network.nodes["bios"].keys[0].get_public_key());
 
-   fc::json::from_file(genesis_path).as<eosio::chain::genesis_state>(genesis_from_file);
+   fc::json::from_file(genesis_path).as<hawknwk::chain::genesis_state>(genesis_from_file);
    genesis_from_file.initial_key = public_key_type(bioskey);
    if (max_block_cpu_usage)
       genesis_from_file.initial_configuration.max_block_cpu_usage = *max_block_cpu_usage;
@@ -1218,7 +1218,7 @@ launcher_def::write_setprods_file() {
   }
    producer_set_def no_bios;
    for (auto &p : producer_set.schedule) {
-      if (p.producer_name != "eosio")
+      if (p.producer_name != "hawknwk")
          no_bios.schedule.push_back(p);
    }
   auto str = fc::json::to_pretty_string( no_bios, fc::json::stringify_large_ints_and_doubles );
@@ -1259,7 +1259,7 @@ launcher_def::write_bios_boot () {
          }
          else if (key == "cacmd") {
             for (auto &p : producer_set.schedule) {
-               if (p.producer_name == "eosio") {
+               if (p.producer_name == "hawknwk") {
                   continue;
                }
                brb << "cacmd " << p.producer_name
@@ -1444,16 +1444,16 @@ launcher_def::do_ssh (const string &cmd, const string &host_name) {
 
 void
 launcher_def::prep_remote_config_dir (eosd_def &node, host_def *host) {
-  bfs::path abs_config_dir = bfs::path(host->eosio_home) / node.config_dir_name;
-  bfs::path abs_data_dir = bfs::path(host->eosio_home) / node.data_dir_name;
+  bfs::path abs_config_dir = bfs::path(host->hawknwk_home) / node.config_dir_name;
+  bfs::path abs_data_dir = bfs::path(host->hawknwk_home) / node.data_dir_name;
 
   string acd = abs_config_dir.string();
   string add = abs_data_dir.string();
-  string cmd = "cd " + host->eosio_home;
+  string cmd = "cd " + host->hawknwk_home;
 
-  cmd = "cd " + host->eosio_home;
+  cmd = "cd " + host->hawknwk_home;
   if (!do_ssh(cmd, host->host_name)) {
-    cerr << "Unable to switch to path " << host->eosio_home
+    cerr << "Unable to switch to path " << host->hawknwk_home
          << " on host " <<  host->host_name << endl;
     exit (-1);
   }
@@ -1519,7 +1519,7 @@ launcher_def::launch (eosd_def &instance, string &gts) {
     if (instance.name == "bios") {
        // Strip the mongo-related options out of the bios node so
        // the plugins don't conflict between 00 and bios.
-       regex r("--plugin +eosio::mongo_db_plugin");
+       regex r("--plugin +hawknwk::mongo_db_plugin");
        string args = std::regex_replace (eosd_extra_args,r,"");
        regex r2("--mongodb-uri +[^ ]+");
        args = std::regex_replace (args,r2,"");
@@ -1549,7 +1549,7 @@ launcher_def::launch (eosd_def &instance, string &gts) {
 
   if (!host->is_local()) {
     string cmdl ("cd ");
-    cmdl += host->eosio_home + "; nohup " + eosdcmd + " > "
+    cmdl += host->hawknwk_home + "; nohup " + eosdcmd + " > "
       + reout.string() + " 2> " + reerr.string() + "& echo $! > " + pidf.string()
       + "; rm -f " + reerr_sl.string()
       + "; ln -s " + reerr_base.string() + " " + reerr_sl.string();
@@ -1559,7 +1559,7 @@ launcher_def::launch (eosd_def &instance, string &gts) {
       exit (-1);
     }
 
-    string cmd = "cd " + host->eosio_home + "; kill -15 $(cat " + pidf.string() + ")";
+    string cmd = "cd " + host->hawknwk_home + "; kill -15 $(cat " + pidf.string() + ")";
     format_ssh (cmd, host->host_name, info.kill_cmd);
   }
   else {
@@ -1689,7 +1689,7 @@ void
 launcher_def::do_command(const host_def& host, const string& name,
                          vector<pair<string, string>> env_pairs, const string& cmd) {
    if (!host.is_local()) {
-      string rcmd = "cd " + host.eosio_home + "; ";
+      string rcmd = "cd " + host.hawknwk_home + "; ";
       for (auto& env_pair : env_pairs) {
          rcmd += "export " + env_pair.first + "=" + env_pair.second + "; ";
       }
@@ -1717,7 +1717,7 @@ launcher_def::bounce (const string& node_numbers) {
       const eosd_def& node = node_pair.second;
       const string node_num = node.get_node_num();
       cout << "Bouncing " << node.name << endl;
-      string cmd = "./scripts/eosio-tn_bounce.sh " + eosd_extra_args;
+      string cmd = "./scripts/hawknwk-tn_bounce.sh " + eosd_extra_args;
       if (node_num != "bios" && !specific_nodeos_args.empty()) {
          const auto node_num_i = boost::lexical_cast<uint16_t,string>(node_num);
          if (specific_nodeos_args.count(node_num_i)) {
@@ -1725,7 +1725,7 @@ launcher_def::bounce (const string& node_numbers) {
          }
       }
 
-      do_command(host, node.name, { { "HAWK-NETWORK_HOME", host.eosio_home }, { "HAWK-NETWORK_NODE", node_num } }, cmd);
+      do_command(host, node.name, { { "HAWK-NETWORK_HOME", host.hawknwk_home }, { "HAWK-NETWORK_NODE", node_num } }, cmd);
    }
 }
 
@@ -1737,9 +1737,9 @@ launcher_def::down (const string& node_numbers) {
       const eosd_def& node = node_pair.second;
       const string node_num = node.get_node_num();
       cout << "Taking down " << node.name << endl;
-      string cmd = "./scripts/eosio-tn_down.sh ";
+      string cmd = "./scripts/hawknwk-tn_down.sh ";
       do_command(host, node.name,
-                 { { "HAWK-NETWORK_HOME", host.eosio_home }, { "HAWK-NETWORK_NODE", node_num }, { "HAWK-NETWORK_TN_RESTART_CONFIG_DIR", node.config_dir_name } },
+                 { { "HAWK-NETWORK_HOME", host.hawknwk_home }, { "HAWK-NETWORK_NODE", node_num }, { "HAWK-NETWORK_TN_RESTART_CONFIG_DIR", node.config_dir_name } },
                  cmd);
    }
 }
@@ -1751,8 +1751,8 @@ launcher_def::roll (const string& host_names) {
    for (string host_name: hosts) {
       cout << "Rolling " << host_name << endl;
       auto host = find_host_by_name_or_address(host_name);
-      string cmd = "./scripts/eosio-tn_roll.sh ";
-      do_command(*host, host_name, { { "HAWK-NETWORK_HOME", host->eosio_home } }, cmd);
+      string cmd = "./scripts/hawknwk-tn_roll.sh ";
+      do_command(*host, host_name, { { "HAWK-NETWORK_HOME", host->hawknwk_home } }, cmd);
    }
 }
 
@@ -1902,9 +1902,9 @@ int main (int argc, char *argv[]) {
     ("launch,l",bpo::value<string>(), "select a subset of nodes to launch. Currently may be \"all\", \"none\", or \"local\". If not set, the default is to launch all unless an output file is named, in which case it starts none.")
     ("output,o",bpo::value<bfs::path>(&top.output),"save a copy of the generated topology in this file")
     ("kill,k", bpo::value<string>(&kill_arg),"The launcher retrieves the previously started process ids and issues a kill to each.")
-    ("down", bpo::value<string>(&down_nodes),"comma-separated list of node numbers that will be taken down using the eosio-tn_down.sh script")
-    ("bounce", bpo::value<string>(&bounce_nodes),"comma-separated list of node numbers that will be restarted using the eosio-tn_bounce.sh script")
-    ("roll", bpo::value<string>(&roll_nodes),"comma-separated list of host names where the nodes should be rolled to a new version using the eosio-tn_roll.sh script")
+    ("down", bpo::value<string>(&down_nodes),"comma-separated list of node numbers that will be taken down using the hawknwk-tn_down.sh script")
+    ("bounce", bpo::value<string>(&bounce_nodes),"comma-separated list of node numbers that will be restarted using the hawknwk-tn_bounce.sh script")
+    ("roll", bpo::value<string>(&roll_nodes),"comma-separated list of host names where the nodes should be rolled to a new version using the hawknwk-tn_roll.sh script")
     ("version,v", "print version information")
     ("help,h","print this list")
     ("config-dir", bpo::value<bfs::path>(), "Directory containing configuration files such as config.ini")
@@ -1923,7 +1923,7 @@ int main (int argc, char *argv[]) {
       return 0;
     }
     if (vmap.count("version") > 0) {
-      cout << eosio::launcher::config::version_str << endl;
+      cout << hawknwk::launcher::config::version_str << endl;
       return 0;
     }
 
@@ -2018,7 +2018,7 @@ FC_REFLECT( producer_set_def,
 
 // @ignore listen_addr, p2p_count, http_count, dot_label_str
 FC_REFLECT( host_def,
-            (genesis)(ssh_identity)(ssh_args)(eosio_home)
+            (genesis)(ssh_identity)(ssh_args)(hawknwk_home)
             (host_name)(public_name)
             (base_p2p_port)(base_http_port)(def_file_size)
             (instances) )
@@ -2034,9 +2034,9 @@ FC_REFLECT( tn_node_def, (name)(keys)(peers)(producers) )
 
 FC_REFLECT( testnet_def, (name)(ssh_helper)(nodes) )
 
-FC_REFLECT( server_name_def, (ipaddr) (name) (has_bios) (eosio_home) (instances) )
+FC_REFLECT( server_name_def, (ipaddr) (name) (has_bios) (hawknwk_home) (instances) )
 
-FC_REFLECT( server_identities, (producer) (nonprod) (db) (default_eosio_home) (ssh) )
+FC_REFLECT( server_identities, (producer) (nonprod) (db) (default_hawknwk_home) (ssh) )
 
 FC_REFLECT( node_rt_info, (remote)(pid_file)(kill_cmd) )
 

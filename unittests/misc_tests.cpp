@@ -2,12 +2,12 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/chain/asset.hpp>
-#include <eosio/chain/authority.hpp>
-#include <eosio/chain/authority_checker.hpp>
-#include <eosio/chain/chain_config.hpp>
-#include <eosio/chain/types.hpp>
-#include <eosio/testing/tester.hpp>
+#include <hawknwk/chain/asset.hpp>
+#include <hawknwk/chain/authority.hpp>
+#include <hawknwk/chain/authority_checker.hpp>
+#include <hawknwk/chain/chain_config.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/testing/tester.hpp>
 
 #include <fc/io/json.hpp>
 
@@ -20,8 +20,8 @@
 #define TESTER validating_tester
 #endif
 
-using namespace eosio::chain;
-using namespace eosio::testing;
+using namespace hawknwk::chain;
+using namespace hawknwk::testing;
 
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
@@ -80,7 +80,7 @@ FC_REFLECT( base_reflect, (bv) )
 FC_REFLECT_DERIVED( derived_reflect, (base_reflect), (dv) )
 FC_REFLECT_DERIVED( final_reflect, (derived_reflect), (fv) )
 
-namespace eosio
+namespace hawknwk
 {
 using namespace chain;
 using namespace std;
@@ -638,22 +638,22 @@ BOOST_AUTO_TEST_CASE(transaction_test) { try {
    variant pretty_trx = fc::mutable_variant_object()
       ("actions", fc::variants({
          fc::mutable_variant_object()
-            ("account", "eosio")
+            ("account", "hawknwk")
             ("name", "reqauth")
             ("authorization", fc::variants({
                fc::mutable_variant_object()
-                  ("actor", "eosio")
+                  ("actor", "hawknwk")
                   ("permission", "active")
             }))
             ("data", fc::mutable_variant_object()
-               ("from", "eosio")
+               ("from", "hawknwk")
             )
          })
       )
       // lets also push a context free action, the multi chain test will then also include a context free action
       ("context_free_actions", fc::variants({
          fc::mutable_variant_object()
-            ("account", "eosio")
+            ("account", "hawknwk")
             ("name", "nonce")
             ("data", fc::raw::pack(std::string("dummy")))
          })
@@ -787,21 +787,21 @@ BOOST_AUTO_TEST_CASE(transaction_metadata_test) { try {
    variant pretty_trx = fc::mutable_variant_object()
       ("actions", fc::variants({
          fc::mutable_variant_object()
-            ("account", "eosio")
+            ("account", "hawknwk")
             ("name", "reqauth")
             ("authorization", fc::variants({
                fc::mutable_variant_object()
-                  ("actor", "eosio")
+                  ("actor", "hawknwk")
                   ("permission", "active")
             }))
             ("data", fc::mutable_variant_object()
-               ("from", "eosio")
+               ("from", "hawknwk")
             )
          })
       )
       ("context_free_actions", fc::variants({
          fc::mutable_variant_object()
-            ("account", "eosio")
+            ("account", "hawknwk")
             ("name", "nonce")
             ("data", fc::raw::pack(std::string("dummy data")))
          })
@@ -1070,4 +1070,4 @@ BOOST_AUTO_TEST_CASE(reflector_init_test) {
 
 BOOST_AUTO_TEST_SUITE_END()
 
-} // namespace eosio
+} // namespace hawknwk

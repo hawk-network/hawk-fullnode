@@ -3,9 +3,9 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/transaction.hpp>
-#include <eosio/chain/contract_table_objects.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/transaction.hpp>
+#include <hawknwk/chain/contract_table_objects.hpp>
 #include <fc/utility.hpp>
 #include <sstream>
 #include <algorithm>
@@ -13,7 +13,7 @@
 
 namespace chainbase { class database; }
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 class controller;
 class transaction_context;
@@ -610,6 +610,6 @@ class apply_context {
 
 using apply_handler = std::function<void(apply_context&)>;
 
-} } // namespace eosio::chain
+} } // namespace hawknwk::chain
 
-//FC_REFLECT(eosio::chain::apply_context::apply_results, (applied_actions)(deferred_transaction_requests)(deferred_transactions_count))
+//FC_REFLECT(hawknwk::chain::apply_context::apply_results, (applied_actions)(deferred_transaction_requests)(deferred_transactions_count))

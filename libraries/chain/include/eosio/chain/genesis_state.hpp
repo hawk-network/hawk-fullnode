@@ -5,20 +5,20 @@
  */
 #pragma once
 
-#include <eosio/chain/chain_config.hpp>
-#include <eosio/chain/types.hpp>
+#include <hawknwk/chain/chain_config.hpp>
+#include <hawknwk/chain/types.hpp>
 
 #include <fc/crypto/sha256.hpp>
 
 #include <string>
 #include <vector>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 struct genesis_state {
    genesis_state();
 
-   static const string eosio_root_key;
+   static const string hawknwk_root_key;
 
    chain_config   initial_configuration = {
       .max_block_net_usage                  = config::default_max_block_net_usage,
@@ -61,8 +61,8 @@ struct genesis_state {
 
 };
 
-} } // namespace eosio::chain
+} } // namespace hawknwk::chain
 
 
-FC_REFLECT(eosio::chain::genesis_state,
+FC_REFLECT(hawknwk::chain::genesis_state,
            (initial_timestamp)(initial_key)(initial_configuration))

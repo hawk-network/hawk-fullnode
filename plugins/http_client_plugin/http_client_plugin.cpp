@@ -2,12 +2,12 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/http_client_plugin/http_client_plugin.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/http_client_plugin/http_client_plugin.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <fstream>
 
-namespace eosio {
+namespace hawknwk {
 
 http_client_plugin::http_client_plugin():my(new http_client()){}
 http_client_plugin::~http_client_plugin(){}

@@ -3,9 +3,9 @@
  *  @copyright defined in eos/LICENSE
  */
 
-#include <eosio/chain/config.hpp>
-#include <eosio/state_history_plugin/state_history_log.hpp>
-#include <eosio/state_history_plugin/state_history_serialization.hpp>
+#include <hawknwk/chain/config.hpp>
+#include <hawknwk/state_history_plugin/state_history_log.hpp>
+#include <hawknwk/state_history_plugin/state_history_serialization.hpp>
 
 #include <boost/asio/bind_executor.hpp>
 #include <boost/asio/ip/host_name.hpp>
@@ -23,7 +23,7 @@ namespace ws = boost::beast::websocket;
 
 extern const char* const state_history_plugin_abi;
 
-namespace eosio {
+namespace hawknwk {
 using namespace chain;
 using boost::signals2::scoped_connection;
 
@@ -336,12 +336,12 @@ struct state_history_plugin_impl : std::enable_shared_from_this<state_history_pl
       if (p->action_traces.size() != 1)
          return false;
       auto& act = p->action_traces[0].act;
-      if (act.account != eosio::chain::config::system_account_name || act.name != N(onblock) ||
+      if (act.account != hawknwk::chain::config::system_account_name || act.name != N(onblock) ||
           act.authorization.size() != 1)
          return false;
       auto& auth = act.authorization[0];
-      return auth.actor == eosio::chain::config::system_account_name &&
-             auth.permission == eosio::chain::config::active_name;
+      return auth.actor == hawknwk::chain::config::system_account_name &&
+             auth.permission == hawknwk::chain::config::active_name;
    }
 
    void on_applied_transaction(const transaction_trace_ptr& p) {
@@ -569,4 +569,4 @@ void state_history_plugin::plugin_shutdown() {
    my->stopping = true;
 }
 
-} // namespace eosio
+} // namespace hawknwk

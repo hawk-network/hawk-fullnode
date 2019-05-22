@@ -1,8 +1,8 @@
-#include <eosio/chain/transaction_metadata.hpp>
-#include <eosio/chain/thread_utils.hpp>
+#include <hawknwk/chain/transaction_metadata.hpp>
+#include <hawknwk/chain/thread_utils.hpp>
 #include <boost/asio/thread_pool.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 recovery_keys_type transaction_metadata::recover_keys( const chain_id_type& chain_id ) {
    // Unlikely for more than one chain_id to be used in one nodeos instance
@@ -51,4 +51,4 @@ signing_keys_future_type transaction_metadata::start_recover_keys( const transac
 }
 
 
-} } // eosio::chain
+} } // hawknwk::chain

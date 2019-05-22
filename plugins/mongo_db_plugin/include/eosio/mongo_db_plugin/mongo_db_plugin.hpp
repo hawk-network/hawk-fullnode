@@ -4,11 +4,11 @@
  */
 #pragma once
 
-#include <eosio/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
 #include <appbase/application.hpp>
 #include <memory>
 
-namespace eosio {
+namespace hawknwk {
 
 using mongo_db_plugin_impl_ptr = std::shared_ptr<class mongo_db_plugin_impl>;
 

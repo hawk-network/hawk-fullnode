@@ -1,20 +1,20 @@
-#include <eosio/chain/webassembly/wabt.hpp>
-#include <eosio/chain/apply_context.hpp>
-#include <eosio/chain/wasm_eosio_constraints.hpp>
+#include <hawknwk/chain/webassembly/wabt.hpp>
+#include <hawknwk/chain/apply_context.hpp>
+#include <hawknwk/chain/wasm_hawknwk_constraints.hpp>
 
 //wabt includes
 #include <src/interp.h>
 #include <src/binary-reader-interp.h>
 #include <src/error-formatter.h>
 
-namespace eosio { namespace chain { namespace webassembly { namespace wabt_runtime {
+namespace hawknwk { namespace chain { namespace webassembly { namespace wabt_runtime {
 
 //yep 🤮
 static wabt_apply_instance_vars* static_wabt_vars;
 
 using namespace wabt;
 using namespace wabt::interp;
-namespace wasm_constraints = eosio::chain::wasm_constraints;
+namespace wasm_constraints = hawknwk::chain::wasm_constraints;
 
 class wabt_instantiated_module : public wasm_instantiated_module_interface {
    public:

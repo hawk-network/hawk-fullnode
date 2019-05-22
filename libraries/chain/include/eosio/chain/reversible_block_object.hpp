@@ -4,14 +4,14 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/types.hpp>
-#include <eosio/chain/authority.hpp>
-#include <eosio/chain/block_timestamp.hpp>
-#include <eosio/chain/contract_types.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/chain/authority.hpp>
+#include <hawknwk/chain/block_timestamp.hpp>
+#include <hawknwk/chain/contract_types.hpp>
 
 #include "multi_index_includes.hpp"
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    class reversible_block_object : public chainbase::object<reversible_block_object_type, reversible_block_object> {
       OBJECT_CTOR(reversible_block_object,(packedblock) )
@@ -43,6 +43,6 @@ namespace eosio { namespace chain {
       >
    >;
 
-} } // eosio::chain
+} } // hawknwk::chain
 
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::reversible_block_object, eosio::chain::reversible_block_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::reversible_block_object, hawknwk::chain::reversible_block_index)

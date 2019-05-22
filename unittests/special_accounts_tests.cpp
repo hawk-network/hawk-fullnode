@@ -6,11 +6,11 @@
 #include <iterator>
 #include <vector>
 
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/permission_object.hpp>
-#include <eosio/chain/global_property_object.hpp>
-#include <eosio/testing/tester.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/permission_object.hpp>
+#include <hawknwk/chain/global_property_object.hpp>
+#include <hawknwk/testing/tester.hpp>
 
 #include <fc/crypto/digest.hpp>
 
@@ -19,9 +19,9 @@
 #include <boost/range/algorithm/permutation.hpp>
 #include <boost/test/unit_test.hpp>
 
-using namespace eosio;
+using namespace hawknwk;
 using namespace chain;
-using tester = eosio::testing::tester;
+using tester = hawknwk::testing::tester;
 
 BOOST_AUTO_TEST_SUITE(special_account_tests)
 

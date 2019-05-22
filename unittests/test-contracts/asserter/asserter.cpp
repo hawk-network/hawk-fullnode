@@ -4,7 +4,7 @@
  */
 #include "asserter.hpp"
 
-using namespace eosio;
+using namespace hawknwk;
 
 static int global_variable = 45;
 

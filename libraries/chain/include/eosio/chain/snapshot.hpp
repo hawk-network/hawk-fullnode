@@ -4,13 +4,13 @@
  */
 #pragma once
 
-#include <eosio/chain/database_utils.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/database_utils.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 #include <fc/variant_object.hpp>
 #include <boost/core/demangle.hpp>
 #include <ostream>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
    /**
     * History:
     * Version 1: initial version with string identified sections and rows

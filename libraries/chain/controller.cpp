@@ -1,30 +1,30 @@
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/transaction_context.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/transaction_context.hpp>
 
-#include <eosio/chain/block_log.hpp>
-#include <eosio/chain/fork_database.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/block_log.hpp>
+#include <hawknwk/chain/fork_database.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 
-#include <eosio/chain/account_object.hpp>
-#include <eosio/chain/block_summary_object.hpp>
-#include <eosio/chain/eosio_contract.hpp>
-#include <eosio/chain/global_property_object.hpp>
-#include <eosio/chain/contract_table_objects.hpp>
-#include <eosio/chain/generated_transaction_object.hpp>
-#include <eosio/chain/transaction_object.hpp>
-#include <eosio/chain/reversible_block_object.hpp>
+#include <hawknwk/chain/account_object.hpp>
+#include <hawknwk/chain/block_summary_object.hpp>
+#include <hawknwk/chain/hawknwk_contract.hpp>
+#include <hawknwk/chain/global_property_object.hpp>
+#include <hawknwk/chain/contract_table_objects.hpp>
+#include <hawknwk/chain/generated_transaction_object.hpp>
+#include <hawknwk/chain/transaction_object.hpp>
+#include <hawknwk/chain/reversible_block_object.hpp>
 
-#include <eosio/chain/authorization_manager.hpp>
-#include <eosio/chain/resource_limits.hpp>
-#include <eosio/chain/chain_snapshot.hpp>
-#include <eosio/chain/thread_utils.hpp>
+#include <hawknwk/chain/authorization_manager.hpp>
+#include <hawknwk/chain/resource_limits.hpp>
+#include <hawknwk/chain/chain_snapshot.hpp>
+#include <hawknwk/chain/thread_utils.hpp>
 
 #include <chainbase/chainbase.hpp>
 #include <fc/io/json.hpp>
 #include <fc/scoped_exit.hpp>
 #include <fc/variant_object.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 using resource_limits::resource_limits_manager;
 
@@ -190,20 +190,20 @@ struct controller_impl {
 #define SET_APP_HANDLER( receiver, contract, action) \
    set_apply_handler( #receiver, #contract, #action, &BOOST_PP_CAT(apply_, BOOST_PP_CAT(contract, BOOST_PP_CAT(_,action) ) ) )
 
-   SET_APP_HANDLER( eosio, eosio, newaccount );
-   SET_APP_HANDLER( eosio, eosio, setcode );
-   SET_APP_HANDLER( eosio, eosio, setabi );
-   SET_APP_HANDLER( eosio, eosio, updateauth );
-   SET_APP_HANDLER( eosio, eosio, deleteauth );
-   SET_APP_HANDLER( eosio, eosio, linkauth );
-   SET_APP_HANDLER( eosio, eosio, unlinkauth );
+   SET_APP_HANDLER( hawknwk, hawknwk, newaccount );
+   SET_APP_HANDLER( hawknwk, hawknwk, setcode );
+   SET_APP_HANDLER( hawknwk, hawknwk, setabi );
+   SET_APP_HANDLER( hawknwk, hawknwk, updateauth );
+   SET_APP_HANDLER( hawknwk, hawknwk, deleteauth );
+   SET_APP_HANDLER( hawknwk, hawknwk, linkauth );
+   SET_APP_HANDLER( hawknwk, hawknwk, unlinkauth );
 /*
-   SET_APP_HANDLER( eosio, eosio, postrecovery );
-   SET_APP_HANDLER( eosio, eosio, passrecovery );
-   SET_APP_HANDLER( eosio, eosio, vetorecovery );
+   SET_APP_HANDLER( hawknwk, hawknwk, postrecovery );
+   SET_APP_HANDLER( hawknwk, hawknwk, passrecovery );
+   SET_APP_HANDLER( hawknwk, hawknwk, vetorecovery );
 */
 
-   SET_APP_HANDLER( eosio, eosio, canceldelay );
+   SET_APP_HANDLER( hawknwk, hawknwk, canceldelay );
 
    fork_db.irreversible.connect( [&]( auto b ) {
                                  on_irreversible(b);
@@ -600,7 +600,7 @@ struct controller_impl {
          a.privileged = is_privileged;
 
          if( name == config::system_account_name ) {
-            a.set_abi(eosio_contract_abi(abi_def()));
+            a.set_abi(hawknwk_contract_abi(abi_def()));
          }
       });
       db.create<account_sequence_object>([&](auto & a) {
@@ -2211,4 +2211,4 @@ const flat_set<account_name> &controller::get_resource_greylist() const {
    return  my->conf.resource_greylist;
 }
 
-} } /// eosio::chain
+} } /// hawknwk::chain

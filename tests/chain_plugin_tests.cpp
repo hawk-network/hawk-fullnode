@@ -5,13 +5,13 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
-#include <eosio/testing/tester.hpp>
-#include <eosio/chain/abi_serializer.hpp>
-#include <eosio/chain/wasm_eosio_constraints.hpp>
-#include <eosio/chain/resource_limits.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/wast_to_wasm.hpp>
-#include <eosio/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/testing/tester.hpp>
+#include <hawknwk/chain/abi_serializer.hpp>
+#include <hawknwk/chain/wasm_hawknwk_constraints.hpp>
+#include <hawknwk/chain/resource_limits.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/wast_to_wasm.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
 
 #include <contracts.hpp>
 
@@ -31,9 +31,9 @@
 #define TESTER validating_tester
 #endif
 
-using namespace eosio;
-using namespace eosio::chain;
-using namespace eosio::testing;
+using namespace hawknwk;
+using namespace hawknwk::chain;
+using namespace hawknwk::testing;
 using namespace fc;
 
 BOOST_AUTO_TEST_SUITE(chain_plugin_tests)

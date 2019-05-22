@@ -1,13 +1,13 @@
 #pragma once
 
-#include <eosio/chain/wasm_interface.hpp>
-#include <eosio/chain/wasm_eosio_constraints.hpp>
+#include <hawknwk/chain/wasm_interface.hpp>
+#include <hawknwk/chain/wasm_hawknwk_constraints.hpp>
 
-#define HAWK-NETWORK_INJECTED_MODULE_NAME "eosio_injection"
+#define HAWK-NETWORK_INJECTED_MODULE_NAME "hawknwk_injection"
 
 using namespace fc;
 
-namespace eosio { namespace chain { 
+namespace hawknwk { namespace chain { 
 
    class apply_context;
    class transaction_context;
@@ -98,4 +98,4 @@ namespace eosio { namespace chain {
       char *value;
    };
 
- } } // eosio::chain
+ } } // hawknwk::chain

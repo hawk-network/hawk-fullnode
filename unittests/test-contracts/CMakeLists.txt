@@ -1,6 +1,6 @@
 if( HAWK-NETWORK_COMPILE_TEST_CONTRACTS )
    set(HAWK-NETWORK_WASM_OLD_BEHAVIOR "Off")
-   find_package( eosio.cdt REQUIRED )
+   find_package( hawknwk.cdt REQUIRED )
 endif()
 
 if ("${CMAKE_GENERATOR}" STREQUAL "Ninja")

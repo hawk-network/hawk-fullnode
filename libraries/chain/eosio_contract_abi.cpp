@@ -1,7 +1,7 @@
-#include <eosio/chain/abi_def.hpp>
+#include <hawknwk/chain/abi_def.hpp>
 #include <fc/utility.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 vector<type_def> common_type_defs() {
    vector<type_def> types;
@@ -17,12 +17,12 @@ vector<type_def> common_type_defs() {
    return types;
 }
 
-abi_def eosio_contract_abi(const abi_def& eosio_system_abi)
+abi_def hawknwk_contract_abi(const abi_def& hawknwk_system_abi)
 {
-   abi_def eos_abi(eosio_system_abi);
+   abi_def eos_abi(hawknwk_system_abi);
 
    if( eos_abi.version.size() == 0 ) {
-      eos_abi.version = "eosio::abi/1.0";
+      eos_abi.version = "hawknwk::abi/1.0";
    }
 
    fc::move_append(eos_abi.types, common_type_defs());
@@ -228,4 +228,4 @@ abi_def eosio_contract_abi(const abi_def& eosio_system_abi)
    return eos_abi;
 }
 
-} } /// eosio::chain
+} } /// hawknwk::chain

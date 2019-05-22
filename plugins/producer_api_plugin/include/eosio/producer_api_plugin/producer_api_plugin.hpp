@@ -4,12 +4,12 @@
  */
 #pragma once
 
-#include <eosio/producer_plugin/producer_plugin.hpp>
-#include <eosio/http_plugin/http_plugin.hpp>
+#include <hawknwk/producer_plugin/producer_plugin.hpp>
+#include <hawknwk/http_plugin/http_plugin.hpp>
 
 #include <appbase/application.hpp>
 
-namespace eosio {
+namespace hawknwk {
 
 using namespace appbase;
 

@@ -15,17 +15,17 @@
 #include <fc/log/logger.hpp>
 #include <fc/scoped_exit.hpp>
 
-#include <eosio/chain/contract_types.hpp>
-#include <eosio/chain/abi_serializer.hpp>
-#include <eosio/chain/eosio_contract.hpp>
-#include <eosio/testing/tester.hpp>
+#include <hawknwk/chain/contract_types.hpp>
+#include <hawknwk/chain/abi_serializer.hpp>
+#include <hawknwk/chain/hawknwk_contract.hpp>
+#include <hawknwk/testing/tester.hpp>
 
 #include <boost/test/framework.hpp>
 
 #include <deep_nested.abi.hpp>
 #include <large_nested.abi.hpp>
 
-using namespace eosio;
+using namespace hawknwk;
 using namespace chain;
 
 BOOST_AUTO_TEST_SUITE(abi_tests)
@@ -67,7 +67,7 @@ void verify_round_trip_conversion( const abi_serializer& abis, const type_name& 
 auto get_resolver(const abi_def& abi = abi_def())
 {
    return [&abi](const account_name &name) -> optional<abi_serializer> {
-      return abi_serializer(eosio_contract_abi(abi), max_serialization_time);
+      return abi_serializer(hawknwk_contract_abi(abi), max_serialization_time);
    };
 }
 
@@ -97,7 +97,7 @@ fc::variant verify_type_round_trip_conversion( const abi_serializer& abis, const
 
     const char* my_abi = R"=====(
 {
-   "version": "eosio::abi/1.0",
+   "version": "hawknwk::abi/1.0",
    "types": [{
       "new_type_name": "type_name",
       "type": "string"
@@ -492,7 +492,7 @@ BOOST_AUTO_TEST_CASE(uint_types)
 
    const char* currency_abi = R"=====(
    {
-       "version": "eosio::abi/1.0",
+       "version": "hawknwk::abi/1.0",
        "types": [],
        "structs": [{
            "name": "transfer",
@@ -519,7 +519,7 @@ BOOST_AUTO_TEST_CASE(uint_types)
 
    auto abi = fc::json::from_string(currency_abi).as<abi_def>();
 
-   abi_serializer abis(eosio_contract_abi(abi), max_serialization_time);
+   abi_serializer abis(hawknwk_contract_abi(abi), max_serialization_time);
 
    const char* test_data = R"=====(
    {
@@ -540,7 +540,7 @@ BOOST_AUTO_TEST_CASE(uint_types)
 BOOST_AUTO_TEST_CASE(general)
 { try {
 
-   auto abi = eosio_contract_abi(fc::json::from_string(my_abi).as<abi_def>());
+   auto abi = hawknwk_contract_abi(fc::json::from_string(my_abi).as<abi_def>());
 
    abi_serializer abis(abi, max_serialization_time);
 
@@ -712,7 +712,7 @@ BOOST_AUTO_TEST_CASE(general)
          {"name":"table2","index_type":"indextype2","key_names":["keyname2"],"key_types":["typename2"],"type":"type2"}
       ],
       "abidef":{
-        "version": "eosio::abi/1.0",
+        "version": "hawknwk::abi/1.0",
         "types" : [{"new_type_name":"new", "type":"old"}],
         "structs" : [{"name":"struct1", "base":"base1", "fields": [{"name":"name1", "type": "type1"}, {"name":"name2", "type": "type2"}] }],
         "actions" : [{"name":"action1","type":"type1", "ricardian_contract":""}],
@@ -721,7 +721,7 @@ BOOST_AUTO_TEST_CASE(general)
         "abi_extensions": []
       },
       "abidef_arr": [{
-        "version": "eosio::abi/1.0",
+        "version": "hawknwk::abi/1.0",
         "types" : [{"new_type_name":"new", "type":"old"}],
         "structs" : [{"name":"struct1", "base":"base1", "fields": [{"name":"name1", "type": "type1"}, {"name":"name2", "type": "type2"}] }],
         "actions" : [{"name":"action1","type":"type1", "ricardian_contract":""}],
@@ -729,7 +729,7 @@ BOOST_AUTO_TEST_CASE(general)
         "ricardian_clauses": [],
         "abi_extensions": []
       },{
-        "version": "eosio::abi/1.0",
+        "version": "hawknwk::abi/1.0",
         "types" : [{"new_type_name":"new", "type":"old"}],
         "structs" : [{"name":"struct1", "base":"base1", "fields": [{"name":"name1", "type": "type1"}, {"name":"name2", "type": "type2"}] }],
         "actions" : [{"name":"action1","type":"type1", "ricardian_contract": ""}],
@@ -766,7 +766,7 @@ BOOST_AUTO_TEST_CASE(abi_cycle)
 
    const char* struct_cycle_abi = R"=====(
    {
-       "version": "eosio::abi/1.0",
+       "version": "hawknwk::abi/1.0",
        "types": [],
        "structs": [{
          "name": "A",
@@ -787,7 +787,7 @@ BOOST_AUTO_TEST_CASE(abi_cycle)
    }
    )=====";
 
-   auto abi = eosio_contract_abi(fc::json::from_string(typedef_cycle_abi).as<abi_def>());
+   auto abi = hawknwk_contract_abi(fc::json::from_string(typedef_cycle_abi).as<abi_def>());
 
    auto is_assert_exception = [](const auto& e) -> bool {
       wlog(e.to_string()); return true;
@@ -803,7 +803,7 @@ BOOST_AUTO_TEST_CASE(abi_cycle)
 BOOST_AUTO_TEST_CASE(linkauth_test)
 { try {
 
-   abi_serializer abis(eosio_contract_abi(abi_def()), max_serialization_time);
+   abi_serializer abis(hawknwk_contract_abi(abi_def()), max_serialization_time);
 
    BOOST_CHECK(true);
    const char* test_data = R"=====(
@@ -837,7 +837,7 @@ BOOST_AUTO_TEST_CASE(linkauth_test)
 BOOST_AUTO_TEST_CASE(unlinkauth_test)
 { try {
 
-   abi_serializer abis(eosio_contract_abi(abi_def()), max_serialization_time);
+   abi_serializer abis(hawknwk_contract_abi(abi_def()), max_serialization_time);
 
    BOOST_CHECK(true);
    const char* test_data = R"=====(
@@ -868,7 +868,7 @@ BOOST_AUTO_TEST_CASE(unlinkauth_test)
 BOOST_AUTO_TEST_CASE(updateauth_test)
 { try {
 
-   abi_serializer abis(eosio_contract_abi(abi_def()), max_serialization_time);
+   abi_serializer abis(hawknwk_contract_abi(abi_def()), max_serialization_time);
 
    BOOST_CHECK(true);
    const char* test_data = R"=====(
@@ -938,7 +938,7 @@ BOOST_AUTO_TEST_CASE(updateauth_test)
 BOOST_AUTO_TEST_CASE(deleteauth_test)
 { try {
 
-   abi_serializer abis(eosio_contract_abi(abi_def()), max_serialization_time);
+   abi_serializer abis(hawknwk_contract_abi(abi_def()), max_serialization_time);
 
    BOOST_CHECK(true);
    const char* test_data = R"=====(
@@ -966,7 +966,7 @@ BOOST_AUTO_TEST_CASE(deleteauth_test)
 BOOST_AUTO_TEST_CASE(newaccount_test)
 { try {
 
-   abi_serializer abis(eosio_contract_abi(abi_def()), max_serialization_time);
+   abi_serializer abis(hawknwk_contract_abi(abi_def()), max_serialization_time);
 
    BOOST_CHECK(true);
    const char* test_data = R"=====(
@@ -1076,7 +1076,7 @@ BOOST_AUTO_TEST_CASE(newaccount_test)
 BOOST_AUTO_TEST_CASE(setcode_test)
 { try {
 
-   abi_serializer abis(eosio_contract_abi(abi_def()), max_serialization_time);
+   abi_serializer abis(hawknwk_contract_abi(abi_def()), max_serialization_time);
 
    const char* test_data = R"=====(
    {
@@ -1111,7 +1111,7 @@ BOOST_AUTO_TEST_CASE(setabi_test)
 
    const char* abi_def_abi = R"=====(
       {
-         "version": "eosio::abi/1.0",
+         "version": "hawknwk::abi/1.0",
          "types": [{
             "new_type_name": "type_name",
             "type": "string"
@@ -1239,11 +1239,11 @@ BOOST_AUTO_TEST_CASE(setabi_test)
 
    auto v = fc::json::from_string(abi_def_abi);
 
-   abi_serializer abis(eosio_contract_abi(v.as<abi_def>()), max_serialization_time);
+   abi_serializer abis(hawknwk_contract_abi(v.as<abi_def>()), max_serialization_time);
 
    const char* abi_string = R"=====(
       {
-        "version": "eosio::abi/1.0",
+        "version": "hawknwk::abi/1.0",
         "types": [{
             "new_type_name": "account_name",
             "type": "name"
@@ -1503,7 +1503,7 @@ BOOST_AUTO_TEST_CASE(packed_transaction)
 
    const char* packed_transaction_abi = R"=====(
    {
-       "version": "eosio::abi/1.0",
+       "version": "hawknwk::abi/1.0",
        "types": [{
           "new_type_name": "compression_type",
           "type": "int64"
@@ -1586,7 +1586,7 @@ BOOST_AUTO_TEST_CASE(abi_type_repeat)
 
    const char* repeat_abi = R"=====(
    {
-     "version": "eosio::abi/1.0",
+     "version": "hawknwk::abi/1.0",
      "types": [{
          "new_type_name": "actor_name",
          "type": "name"
@@ -1637,7 +1637,7 @@ BOOST_AUTO_TEST_CASE(abi_type_repeat)
    }
    )=====";
 
-   auto abi = eosio_contract_abi(fc::json::from_string(repeat_abi).as<abi_def>());
+   auto abi = hawknwk_contract_abi(fc::json::from_string(repeat_abi).as<abi_def>());
    auto is_table_exception = [](fc::exception const & e) -> bool { return e.to_detail_string().find("type already exists") != std::string::npos; };
    BOOST_CHECK_EXCEPTION( abi_serializer abis(abi, max_serialization_time), duplicate_abi_type_def_exception, is_table_exception );
 } FC_LOG_AND_RETHROW() }
@@ -1647,7 +1647,7 @@ BOOST_AUTO_TEST_CASE(abi_struct_repeat)
 
    const char* repeat_abi = R"=====(
    {
-     "version": "eosio::abi/1.0",
+     "version": "hawknwk::abi/1.0",
      "types": [{
          "new_type_name": "actor_name",
          "type": "name"
@@ -1695,7 +1695,7 @@ BOOST_AUTO_TEST_CASE(abi_struct_repeat)
    }
    )=====";
 
-   auto abi = eosio_contract_abi(fc::json::from_string(repeat_abi).as<abi_def>());
+   auto abi = hawknwk_contract_abi(fc::json::from_string(repeat_abi).as<abi_def>());
    BOOST_CHECK_THROW( abi_serializer abis(abi, max_serialization_time), duplicate_abi_struct_def_exception );
 } FC_LOG_AND_RETHROW() }
 
@@ -1704,7 +1704,7 @@ BOOST_AUTO_TEST_CASE(abi_action_repeat)
 
    const char* repeat_abi = R"=====(
    {
-     "version": "eosio::abi/1.0",
+     "version": "hawknwk::abi/1.0",
      "types": [{
          "new_type_name": "actor_name",
          "type": "name"
@@ -1755,7 +1755,7 @@ BOOST_AUTO_TEST_CASE(abi_action_repeat)
    }
    )=====";
 
-   auto abi = eosio_contract_abi(fc::json::from_string(repeat_abi).as<abi_def>());
+   auto abi = hawknwk_contract_abi(fc::json::from_string(repeat_abi).as<abi_def>());
    BOOST_CHECK_THROW( abi_serializer abis(abi, max_serialization_time), duplicate_abi_action_def_exception );
 } FC_LOG_AND_RETHROW() }
 
@@ -1764,7 +1764,7 @@ BOOST_AUTO_TEST_CASE(abi_table_repeat)
 
    const char* repeat_abi = R"=====(
    {
-     "version": "eosio::abi/1.0",
+     "version": "hawknwk::abi/1.0",
      "types": [{
          "new_type_name": "actor_name",
          "type": "name"
@@ -1818,7 +1818,7 @@ BOOST_AUTO_TEST_CASE(abi_table_repeat)
    }
    )=====";
 
-   auto abi = eosio_contract_abi(fc::json::from_string(repeat_abi).as<abi_def>());
+   auto abi = hawknwk_contract_abi(fc::json::from_string(repeat_abi).as<abi_def>());
    BOOST_CHECK_THROW( abi_serializer abis(abi, max_serialization_time), duplicate_abi_table_def_exception );
 } FC_LOG_AND_RETHROW() }
 
@@ -1827,7 +1827,7 @@ BOOST_AUTO_TEST_CASE(abi_type_def)
    // inifinite loop in types
    const char* repeat_abi = R"=====(
    {
-     "version": "eosio::abi/1.0",
+     "version": "hawknwk::abi/1.0",
      "types": [{
          "new_type_name": "account_name",
          "type": "name"
@@ -1880,7 +1880,7 @@ BOOST_AUTO_TEST_CASE(abi_type_loop)
    // inifinite loop in types
    const char* repeat_abi = R"=====(
    {
-     "version": "eosio::abi/1.0",
+     "version": "hawknwk::abi/1.0",
      "types": [{
          "new_type_name": "account_name",
          "type": "name"
@@ -1924,7 +1924,7 @@ BOOST_AUTO_TEST_CASE(abi_type_redefine)
    // inifinite loop in types
    const char* repeat_abi = R"=====(
    {
-     "version": "eosio::abi/1.0",
+     "version": "hawknwk::abi/1.0",
      "types": [{
          "new_type_name": "account_name",
          "type": "account_name"
@@ -1965,7 +1965,7 @@ BOOST_AUTO_TEST_CASE(abi_type_redefine_to_name)
       // inifinite loop in types
       const char* repeat_abi = R"=====(
    {
-     "version": "eosio::abi/1.0",
+     "version": "hawknwk::abi/1.0",
      "types": [{
          "new_type_name": "name",
          "type": "name"
@@ -1987,7 +1987,7 @@ BOOST_AUTO_TEST_CASE(abi_type_nested_in_vector)
       // inifinite loop in types
       const char* repeat_abi = R"=====(
    {
-     "version": "eosio::abi/1.0",
+     "version": "hawknwk::abi/1.0",
      "types": [],
      "structs": [{
          "name": "store_t",
@@ -2008,12 +2008,12 @@ BOOST_AUTO_TEST_CASE(abi_type_nested_in_vector)
 
 } FC_LOG_AND_RETHROW() }
 
-BOOST_AUTO_TEST_CASE(abi_account_name_in_eosio_abi)
+BOOST_AUTO_TEST_CASE(abi_account_name_in_hawknwk_abi)
 { try {
    // inifinite loop in types
    const char* repeat_abi = R"=====(
    {
-     "version": "eosio::abi/1.0",
+     "version": "hawknwk::abi/1.0",
      "types": [{
          "new_type_name": "account_name",
          "type": "name"
@@ -2044,7 +2044,7 @@ BOOST_AUTO_TEST_CASE(abi_account_name_in_eosio_abi)
    }
    )=====";
 
-   auto abi = eosio_contract_abi(fc::json::from_string(repeat_abi).as<abi_def>());
+   auto abi = hawknwk_contract_abi(fc::json::from_string(repeat_abi).as<abi_def>());
    auto is_type_exception = [](fc::assert_exception const & e) -> bool { return e.to_detail_string().find("abi.types.size") != std::string::npos; };
 
 } FC_LOG_AND_RETHROW() }
@@ -2056,7 +2056,7 @@ BOOST_AUTO_TEST_CASE(abi_large_array)
    try {
       const char* abi_str = R"=====(
       {
-        "version": "eosio::abi/1.0",
+        "version": "hawknwk::abi/1.0",
         "types": [],
         "structs": [{
            "name": "hi",
@@ -2077,7 +2077,7 @@ BOOST_AUTO_TEST_CASE(abi_large_array)
 
       abi_serializer abis( fc::json::from_string( abi_str ).as<abi_def>(), max_serialization_time );
       // indicate a very large array, but don't actually provide a large array
-      // curl http://127.0.0.1:8888/v1/chain/abi_bin_to_json -X POST -d '{"code":"eosio", "action":"hi", "binargs":"ffffffff08"}'
+      // curl http://127.0.0.1:8888/v1/chain/abi_bin_to_json -X POST -d '{"code":"hawknwk", "action":"hi", "binargs":"ffffffff08"}'
       bytes bin = {static_cast<char>(0xff),
                    static_cast<char>(0xff),
                    static_cast<char>(0xff),
@@ -2094,7 +2094,7 @@ BOOST_AUTO_TEST_CASE(abi_is_type_recursion)
    try {
       const char* abi_str = R"=====(
       {
-       "version": "eosio::abi/1.0",
+       "version": "hawknwk::abi/1.0",
        "types": [
         {
             "new_type_name": "a[]",
@@ -2138,7 +2138,7 @@ BOOST_AUTO_TEST_CASE(abi_recursive_structs)
    try {
       const char* abi_str = R"=====(
       {
-        "version": "eosio::abi/1.0",
+        "version": "hawknwk::abi/1.0",
         "types": [],
         "structs": [
           {
@@ -2195,7 +2195,7 @@ BOOST_AUTO_TEST_CASE(abi_recursive_structs)
       )=====";
 
       abi_serializer abis(fc::json::from_string(abi_str).as<abi_def>(), max_serialization_time);
-      string hi_data = "{\"user\":\"eosio\"}";
+      string hi_data = "{\"user\":\"hawknwk\"}";
       auto bin = abis.variant_to_binary("hi2", fc::json::from_string(hi_data), max_serialization_time);
       BOOST_CHECK_THROW( abis.binary_to_variant("hi", bin, max_serialization_time);, fc::exception );
 
@@ -2233,10 +2233,10 @@ BOOST_AUTO_TEST_CASE(abi_deep_structs_validate)
 
 BOOST_AUTO_TEST_CASE(variants)
 {
-   using eosio::testing::fc_exception_message_starts_with;
+   using hawknwk::testing::fc_exception_message_starts_with;
 
    auto duplicate_variant_abi = R"({
-      "version": "eosio::abi/1.1",
+      "version": "hawknwk::abi/1.1",
       "variants": [
          {"name": "v1", "types": ["int8", "string", "bool"]},
          {"name": "v1", "types": ["int8", "string", "bool"]},
@@ -2244,14 +2244,14 @@ BOOST_AUTO_TEST_CASE(variants)
    })";
 
    auto variant_abi_invalid_type = R"({
-      "version": "eosio::abi/1.1",
+      "version": "hawknwk::abi/1.1",
       "variants": [
          {"name": "v1", "types": ["int91", "string", "bool"]},
       ],
    })";
 
    auto variant_abi = R"({
-      "version": "eosio::abi/1.1",
+      "version": "hawknwk::abi/1.1",
       "types": [
          {"new_type_name": "foo", "type": "s"},
          {"new_type_name": "bar", "type": "s"},
@@ -2306,10 +2306,10 @@ BOOST_AUTO_TEST_CASE(variants)
 
 BOOST_AUTO_TEST_CASE(extend)
 {
-   using eosio::testing::fc_exception_message_starts_with;
+   using hawknwk::testing::fc_exception_message_starts_with;
 
    auto abi = R"({
-      "version": "eosio::abi/1.1",
+      "version": "hawknwk::abi/1.1",
       "structs": [
          {"name": "s", "base": "", "fields": [
             {"name": "i0", "type": "int8"},
@@ -2363,18 +2363,18 @@ BOOST_AUTO_TEST_CASE(version)
    try {
       BOOST_CHECK_THROW( abi_serializer(fc::json::from_string(R"({})").as<abi_def>(), max_serialization_time), unsupported_abi_version_exception );
       BOOST_CHECK_THROW( abi_serializer(fc::json::from_string(R"({"version": ""})").as<abi_def>(), max_serialization_time), unsupported_abi_version_exception );
-      BOOST_CHECK_THROW( abi_serializer(fc::json::from_string(R"({"version": "eosio::abi/9.0"})").as<abi_def>(), max_serialization_time), unsupported_abi_version_exception );
-      abi_serializer(fc::json::from_string(R"({"version": "eosio::abi/1.0"})").as<abi_def>(), max_serialization_time);
-      abi_serializer(fc::json::from_string(R"({"version": "eosio::abi/1.1"})").as<abi_def>(), max_serialization_time);
+      BOOST_CHECK_THROW( abi_serializer(fc::json::from_string(R"({"version": "hawknwk::abi/9.0"})").as<abi_def>(), max_serialization_time), unsupported_abi_version_exception );
+      abi_serializer(fc::json::from_string(R"({"version": "hawknwk::abi/1.0"})").as<abi_def>(), max_serialization_time);
+      abi_serializer(fc::json::from_string(R"({"version": "hawknwk::abi/1.1"})").as<abi_def>(), max_serialization_time);
    } FC_LOG_AND_RETHROW()
 }
 
 BOOST_AUTO_TEST_CASE(abi_serialize_incomplete_json_array)
 {
-   using eosio::testing::fc_exception_message_starts_with;
+   using hawknwk::testing::fc_exception_message_starts_with;
 
    auto abi = R"({
-      "version": "eosio::abi/1.0",
+      "version": "hawknwk::abi/1.0",
       "structs": [
          {"name": "s", "base": "", "fields": [
             {"name": "i0", "type": "int8"},
@@ -2400,10 +2400,10 @@ BOOST_AUTO_TEST_CASE(abi_serialize_incomplete_json_array)
 
 BOOST_AUTO_TEST_CASE(abi_serialize_incomplete_json_object)
 {
-   using eosio::testing::fc_exception_message_starts_with;
+   using hawknwk::testing::fc_exception_message_starts_with;
 
    auto abi = R"({
-      "version": "eosio::abi/1.0",
+      "version": "hawknwk::abi/1.0",
       "structs": [
          {"name": "s1", "base": "", "fields": [
             {"name": "i0", "type": "int8"},
@@ -2432,10 +2432,10 @@ BOOST_AUTO_TEST_CASE(abi_serialize_incomplete_json_object)
 
 BOOST_AUTO_TEST_CASE(abi_serialize_json_mismatching_type)
 {
-   using eosio::testing::fc_exception_message_is;
+   using hawknwk::testing::fc_exception_message_is;
 
    auto abi = R"({
-      "version": "eosio::abi/1.0",
+      "version": "hawknwk::abi/1.0",
       "structs": [
          {"name": "s1", "base": "", "fields": [
             {"name": "i0", "type": "int8"},
@@ -2461,10 +2461,10 @@ BOOST_AUTO_TEST_CASE(abi_serialize_json_mismatching_type)
 // it is a bit odd to have an empty name for a field, but json seems to allow it
 BOOST_AUTO_TEST_CASE(abi_serialize_json_empty_name)
 {
-   using eosio::testing::fc_exception_message_is;
+   using hawknwk::testing::fc_exception_message_is;
 
    auto abi = R"({
-      "version": "eosio::abi/1.0",
+      "version": "hawknwk::abi/1.0",
       "structs": [
          {"name": "s1", "base": "", "fields": [
             {"name": "", "type": "int8"},
@@ -2484,10 +2484,10 @@ BOOST_AUTO_TEST_CASE(abi_serialize_json_empty_name)
 
 BOOST_AUTO_TEST_CASE(abi_serialize_detailed_error_messages)
 {
-   using eosio::testing::fc_exception_message_is;
+   using hawknwk::testing::fc_exception_message_is;
 
    auto abi = R"({
-      "version": "eosio::abi/1.1",
+      "version": "hawknwk::abi/1.1",
       "types": [
          {"new_type_name": "foo", "type": "s2"},
          {"new_type_name": "bar", "type": "foo"},
@@ -2561,10 +2561,10 @@ BOOST_AUTO_TEST_CASE(abi_serialize_detailed_error_messages)
 
 BOOST_AUTO_TEST_CASE(abi_serialize_short_error_messages)
 {
-   using eosio::testing::fc_exception_message_is;
+   using hawknwk::testing::fc_exception_message_is;
 
    auto abi = R"({
-      "version": "eosio::abi/1.1",
+      "version": "hawknwk::abi/1.1",
       "types": [
          {"new_type_name": "foo", "type": "s2"},
          {"new_type_name": "bar", "type": "foo"},
@@ -2641,10 +2641,10 @@ BOOST_AUTO_TEST_CASE(abi_serialize_short_error_messages)
 
 BOOST_AUTO_TEST_CASE(abi_deserialize_detailed_error_messages)
 {
-   using eosio::testing::fc_exception_message_is;
+   using hawknwk::testing::fc_exception_message_is;
 
    auto abi = R"({
-      "version": "eosio::abi/1.1",
+      "version": "hawknwk::abi/1.1",
       "types": [
          {"new_type_name": "oint", "type": "int8?"},
          {"new_type_name": "os1", "type": "s1?"}

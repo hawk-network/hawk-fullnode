@@ -4,15 +4,15 @@
  */
 #include <algorithm>
 
-#include <eosio/chain/config.hpp>
-#include <eosio/chain/resource_limits.hpp>
-#include <eosio/testing/chainbase_fixture.hpp>
+#include <hawknwk/chain/config.hpp>
+#include <hawknwk/chain/resource_limits.hpp>
+#include <hawknwk/testing/chainbase_fixture.hpp>
 
 #include <boost/test/unit_test.hpp>
 
-using namespace eosio::chain::resource_limits;
-using namespace eosio::testing;
-using namespace eosio::chain;
+using namespace hawknwk::chain::resource_limits;
+using namespace hawknwk::testing;
+using namespace hawknwk::chain;
 
 class resource_limits_fixture: private chainbase_fixture<512*1024>, public resource_limits_manager
 {

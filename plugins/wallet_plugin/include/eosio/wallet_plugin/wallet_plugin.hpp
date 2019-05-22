@@ -5,12 +5,12 @@
 #pragma once
 #include <appbase/application.hpp>
 #include <fc/variant.hpp>
-#include <eosio/chain/contract_types.hpp>
-#include <eosio/chain/transaction.hpp>
+#include <hawknwk/chain/contract_types.hpp>
+#include <hawknwk/chain/transaction.hpp>
 
 namespace fc { class variant; }
 
-namespace eosio {
+namespace hawknwk {
    using namespace appbase;
 
    namespace wallet {

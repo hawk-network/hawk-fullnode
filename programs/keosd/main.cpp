@@ -4,9 +4,9 @@
  */
 #include <appbase/application.hpp>
 
-#include <eosio/http_plugin/http_plugin.hpp>
-#include <eosio/wallet_plugin/wallet_plugin.hpp>
-#include <eosio/wallet_api_plugin/wallet_api_plugin.hpp>
+#include <hawknwk/http_plugin/http_plugin.hpp>
+#include <hawknwk/wallet_plugin/wallet_plugin.hpp>
+#include <hawknwk/wallet_api_plugin/wallet_api_plugin.hpp>
 
 #include <fc/log/logger_config.hpp>
 #include <fc/exception/exception.hpp>
@@ -17,7 +17,7 @@
 #include "config.hpp"
 
 using namespace appbase;
-using namespace eosio;
+using namespace hawknwk;
 
 bfs::path determine_home_directory()
 {
@@ -38,8 +38,8 @@ int main(int argc, char** argv)
 {
    try {
       bfs::path home = determine_home_directory();
-      app().set_default_data_dir(home / "eosio-wallet");
-      app().set_default_config_dir(home / "eosio-wallet");
+      app().set_default_data_dir(home / "hawknwk-wallet");
+      app().set_default_config_dir(home / "hawknwk-wallet");
       http_plugin::set_defaults({
          .default_unix_socket_path = keosd::config::key_store_executable_name + ".sock",
          .default_http_port = 0

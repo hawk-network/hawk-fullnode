@@ -3,8 +3,8 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/name.hpp>
-#include <eosio/chain/chain_id_type.hpp>
+#include <hawknwk/chain/name.hpp>
+#include <hawknwk/chain/chain_id_type.hpp>
 
 #include <chainbase/chainbase.hpp>
 
@@ -46,7 +46,7 @@
 
 #define _V(n, v)  fc::mutable_variant_object(n, v)
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
    using                               std::map;
    using                               std::vector;
    using                               std::unordered_map;
@@ -215,6 +215,6 @@ namespace eosio { namespace chain {
    typedef vector<std::pair<uint16_t,vector<char>>> extensions_type;
 
 
-} }  // eosio::chain
+} }  // hawknwk::chain
 
-FC_REFLECT( eosio::chain::void_t, )
+FC_REFLECT( hawknwk::chain::void_t, )

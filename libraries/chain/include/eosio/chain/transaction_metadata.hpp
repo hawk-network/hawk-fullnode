@@ -3,15 +3,15 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/transaction.hpp>
-#include <eosio/chain/types.hpp>
+#include <hawknwk/chain/transaction.hpp>
+#include <hawknwk/chain/types.hpp>
 #include <future>
 
 namespace boost { namespace asio {
    class thread_pool;
 }}
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 class transaction_metadata;
 using transaction_metadata_ptr = std::shared_ptr<transaction_metadata>;
@@ -62,4 +62,4 @@ class transaction_metadata {
 
 };
 
-} } // eosio::chain
+} } // hawknwk::chain

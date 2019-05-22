@@ -3,11 +3,11 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/authority.hpp>
+#include <hawknwk/chain/authority.hpp>
 
 #include "multi_index_includes.hpp"
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
    /**
     * @brief The permission_link_object class assigns permission_objects to message types
     *
@@ -75,8 +75,8 @@ namespace eosio { namespace chain {
          static const uint64_t value = 40 + overhead; ///< fixed field + overhead
       };
    }
-} } // eosio::chain
+} } // hawknwk::chain
 
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::permission_link_object, eosio::chain::permission_link_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::permission_link_object, hawknwk::chain::permission_link_index)
 
-FC_REFLECT(eosio::chain::permission_link_object, (account)(code)(message_type)(required_permission))
+FC_REFLECT(hawknwk::chain::permission_link_object, (account)(code)(message_type)(required_permission))

@@ -3,11 +3,11 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/types.hpp>
-#include <eosio/chain/symbol.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/chain/symbol.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 /**
 
@@ -105,14 +105,14 @@ struct extended_asset  {
 bool  operator <  (const asset& a, const asset& b);
 bool  operator <= (const asset& a, const asset& b);
 
-}} // namespace eosio::chain
+}} // namespace hawknwk::chain
 
 namespace fc {
-inline void to_variant(const eosio::chain::asset& var, fc::variant& vo) { vo = var.to_string(); }
-inline void from_variant(const fc::variant& var, eosio::chain::asset& vo) {
-   vo = eosio::chain::asset::from_string(var.get_string());
+inline void to_variant(const hawknwk::chain::asset& var, fc::variant& vo) { vo = var.to_string(); }
+inline void from_variant(const fc::variant& var, hawknwk::chain::asset& vo) {
+   vo = hawknwk::chain::asset::from_string(var.get_string());
 }
 }
 
-FC_REFLECT(eosio::chain::asset, (amount)(sym))
-FC_REFLECT(eosio::chain::extended_asset, (quantity)(contract) )
+FC_REFLECT(hawknwk::chain::asset, (amount)(sym))
+FC_REFLECT(hawknwk::chain::extended_asset, (quantity)(contract) )

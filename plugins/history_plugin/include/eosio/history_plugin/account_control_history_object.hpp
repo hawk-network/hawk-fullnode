@@ -5,9 +5,9 @@
 #pragma once
 
 #include <chainbase/chainbase.hpp>
-#include <eosio/chain/types.hpp>
+#include <hawknwk/chain/types.hpp>
 
-namespace eosio {
+namespace hawknwk {
 using chain::account_name;
 using chain::permission_name;
 using chain::shared_vector;
@@ -50,7 +50,7 @@ typedef chainbase::generic_index<account_control_history_multi_index> account_co
 
 }
 
-CHAINBASE_SET_INDEX_TYPE( eosio::account_control_history_object, eosio::account_control_history_multi_index )
+CHAINBASE_SET_INDEX_TYPE( hawknwk::account_control_history_object, hawknwk::account_control_history_multi_index )
 
-FC_REFLECT( eosio::account_control_history_object, (controlled_account)(controlled_permission)(controlling_account) )
+FC_REFLECT( hawknwk::account_control_history_object, (controlled_account)(controlled_permission)(controlling_account) )
 

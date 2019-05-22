@@ -12,7 +12,7 @@ import re
 
 ###############################################################
 # nodeos_run_test
-# --dump-error-details <Upon error print etc/eosio/node_*/config.ini and var/lib/node_*/stderr.log to stdout>
+# --dump-error-details <Upon error print etc/hawknwk/node_*/config.ini and var/lib/node_*/stderr.log to stdout>
 # --keep-logs <Don't delete var/lib/node_* folders upon test completion>
 ###############################################################
 
@@ -117,7 +117,7 @@ try:
     Print("Creating wallet \"%s\"." % (testWalletName))
     walletAccounts=[cluster.defproduceraAccount,cluster.defproducerbAccount]
     if not dontLaunch:
-        walletAccounts.append(cluster.eosioAccount)
+        walletAccounts.append(cluster.hawknwkAccount)
     testWallet=walletMgr.create(testWalletName, walletAccounts)
 
     Print("Wallet \"%s\" password=%s." % (testWalletName, testWallet.password.encode("utf-8")))
@@ -321,9 +321,9 @@ try:
     if hashNum != 0:
         errorExit("FAILURE - get code currency1111 failed", raw=True)
 
-    contractDir="unittests/contracts/eosio.token"
-    wasmFile="eosio.token.wasm"
-    abiFile="eosio.token.abi"
+    contractDir="unittests/contracts/hawknwk.token"
+    wasmFile="hawknwk.token.wasm"
+    abiFile="hawknwk.token.abi"
     Print("Publish contract")
     trans=node.publishContract(currencyAccount.name, contractDir, wasmFile, abiFile, waitForTransBlock=True)
     if trans is None:

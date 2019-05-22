@@ -4,10 +4,10 @@
  */
 #pragma once
 #include <appbase/application.hpp>
-#include <eosio/http_plugin/http_plugin.hpp>
-#include <eosio/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/http_plugin/http_plugin.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
 
-namespace eosio {
+namespace hawknwk {
 
 using namespace appbase;
 

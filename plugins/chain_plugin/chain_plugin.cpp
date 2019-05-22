@@ -2,21 +2,21 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/chain_plugin/chain_plugin.hpp>
-#include <eosio/chain/fork_database.hpp>
-#include <eosio/chain/block_log.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/authorization_manager.hpp>
-#include <eosio/chain/producer_object.hpp>
-#include <eosio/chain/config.hpp>
-#include <eosio/chain/wasm_interface.hpp>
-#include <eosio/chain/resource_limits.hpp>
-#include <eosio/chain/reversible_block_object.hpp>
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/generated_transaction_object.hpp>
-#include <eosio/chain/snapshot.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/chain/fork_database.hpp>
+#include <hawknwk/chain/block_log.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/authorization_manager.hpp>
+#include <hawknwk/chain/producer_object.hpp>
+#include <hawknwk/chain/config.hpp>
+#include <hawknwk/chain/wasm_interface.hpp>
+#include <hawknwk/chain/resource_limits.hpp>
+#include <hawknwk/chain/reversible_block_object.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/generated_transaction_object.hpp>
+#include <hawknwk/chain/snapshot.hpp>
 
-#include <eosio/chain/eosio_contract.hpp>
+#include <hawknwk/chain/hawknwk_contract.hpp>
 
 #include <boost/signals2/connection.hpp>
 #include <boost/algorithm/string.hpp>
@@ -27,19 +27,19 @@
 #include <signal.h>
 #include <cstdlib>
 
-namespace eosio {
+namespace hawknwk {
 
 //declare operator<< and validate funciton for read_mode in the same namespace as read_mode itself
 namespace chain {
 
-std::ostream& operator<<(std::ostream& osm, eosio::chain::db_read_mode m) {
-   if ( m == eosio::chain::db_read_mode::SPECULATIVE ) {
+std::ostream& operator<<(std::ostream& osm, hawknwk::chain::db_read_mode m) {
+   if ( m == hawknwk::chain::db_read_mode::SPECULATIVE ) {
       osm << "speculative";
-   } else if ( m == eosio::chain::db_read_mode::HEAD ) {
+   } else if ( m == hawknwk::chain::db_read_mode::HEAD ) {
       osm << "head";
-   } else if ( m == eosio::chain::db_read_mode::READ_ONLY ) {
+   } else if ( m == hawknwk::chain::db_read_mode::READ_ONLY ) {
       osm << "read-only";
-   } else if ( m == eosio::chain::db_read_mode::IRREVERSIBLE ) {
+   } else if ( m == hawknwk::chain::db_read_mode::IRREVERSIBLE ) {
       osm << "irreversible";
    }
 
@@ -48,7 +48,7 @@ std::ostream& operator<<(std::ostream& osm, eosio::chain::db_read_mode m) {
 
 void validate(boost::any& v,
               const std::vector<std::string>& values,
-              eosio::chain::db_read_mode* /* target_type */,
+              hawknwk::chain::db_read_mode* /* target_type */,
               int)
 {
   using namespace boost::program_options;
@@ -61,22 +61,22 @@ void validate(boost::any& v,
   std::string const& s = validators::get_single_string(values);
 
   if ( s == "speculative" ) {
-     v = boost::any(eosio::chain::db_read_mode::SPECULATIVE);
+     v = boost::any(hawknwk::chain::db_read_mode::SPECULATIVE);
   } else if ( s == "head" ) {
-     v = boost::any(eosio::chain::db_read_mode::HEAD);
+     v = boost::any(hawknwk::chain::db_read_mode::HEAD);
   } else if ( s == "read-only" ) {
-     v = boost::any(eosio::chain::db_read_mode::READ_ONLY);
+     v = boost::any(hawknwk::chain::db_read_mode::READ_ONLY);
   } else if ( s == "irreversible" ) {
-     v = boost::any(eosio::chain::db_read_mode::IRREVERSIBLE);
+     v = boost::any(hawknwk::chain::db_read_mode::IRREVERSIBLE);
   } else {
      throw validation_error(validation_error::invalid_option_value);
   }
 }
 
-std::ostream& operator<<(std::ostream& osm, eosio::chain::validation_mode m) {
-   if ( m == eosio::chain::validation_mode::FULL ) {
+std::ostream& operator<<(std::ostream& osm, hawknwk::chain::validation_mode m) {
+   if ( m == hawknwk::chain::validation_mode::FULL ) {
       osm << "full";
-   } else if ( m == eosio::chain::validation_mode::LIGHT ) {
+   } else if ( m == hawknwk::chain::validation_mode::LIGHT ) {
       osm << "light";
    }
 
@@ -85,7 +85,7 @@ std::ostream& operator<<(std::ostream& osm, eosio::chain::validation_mode m) {
 
 void validate(boost::any& v,
               const std::vector<std::string>& values,
-              eosio::chain::validation_mode* /* target_type */,
+              hawknwk::chain::validation_mode* /* target_type */,
               int)
 {
   using namespace boost::program_options;
@@ -98,9 +98,9 @@ void validate(boost::any& v,
   std::string const& s = validators::get_single_string(values);
 
   if ( s == "full" ) {
-     v = boost::any(eosio::chain::validation_mode::FULL);
+     v = boost::any(hawknwk::chain::validation_mode::FULL);
   } else if ( s == "light" ) {
-     v = boost::any(eosio::chain::validation_mode::LIGHT);
+     v = boost::any(hawknwk::chain::validation_mode::LIGHT);
   } else {
      throw validation_error(validation_error::invalid_option_value);
   }
@@ -108,10 +108,10 @@ void validate(boost::any& v,
 
 }
 
-using namespace eosio;
-using namespace eosio::chain;
-using namespace eosio::chain::config;
-using namespace eosio::chain::plugin_interface;
+using namespace hawknwk;
+using namespace hawknwk::chain;
+using namespace hawknwk::chain::config;
+using namespace hawknwk::chain::plugin_interface;
 using vm_type = wasm_interface::vm_type;
 using fc::flat_map;
 
@@ -197,8 +197,8 @@ public:
 
 chain_plugin::chain_plugin()
 :my(new chain_plugin_impl()) {
-   app().register_config_type<eosio::chain::db_read_mode>();
-   app().register_config_type<eosio::chain::validation_mode>();
+   app().register_config_type<hawknwk::chain::db_read_mode>();
+   app().register_config_type<hawknwk::chain::validation_mode>();
 }
 
 chain_plugin::~chain_plugin(){}
@@ -209,7 +209,7 @@ void chain_plugin::set_program_options(options_description& cli, options_descrip
          ("blocks-dir", bpo::value<bfs::path>()->default_value("blocks"),
           "the location of the blocks directory (absolute path or relative to application data dir)")
          ("checkpoint", bpo::value<vector<string>>()->composing(), "Pairs of [BLOCK_NUM,BLOCK_ID] that should be enforced as checkpoints.")
-         ("wasm-runtime", bpo::value<eosio::chain::wasm_interface::vm_type>()->value_name("wavm/wabt"), "Override default WASM runtime")
+         ("wasm-runtime", bpo::value<hawknwk::chain::wasm_interface::vm_type>()->value_name("wavm/wabt"), "Override default WASM runtime")
          ("abi-serializer-max-time-ms", bpo::value<uint32_t>()->default_value(config::default_abi_serializer_max_time_ms),
           "Override default maximum ABI serialization time allowed in ms")
          ("chain-state-db-size-mb", bpo::value<uint64_t>()->default_value(config::default_state_size / (1024  * 1024)), "Maximum size (in MiB) of the chain state database")
@@ -236,14 +236,14 @@ void chain_plugin::set_program_options(options_description& cli, options_descrip
           "Public key added to blacklist of keys that should not be included in authorities (may specify multiple times)")
          ("sender-bypass-whiteblacklist", boost::program_options::value<vector<string>>()->composing()->multitoken(),
           "Deferred transactions sent by accounts in this list do not have any of the subjective whitelist/blacklist checks applied to them (may specify multiple times)")
-         ("read-mode", boost::program_options::value<eosio::chain::db_read_mode>()->default_value(eosio::chain::db_read_mode::SPECULATIVE),
+         ("read-mode", boost::program_options::value<hawknwk::chain::db_read_mode>()->default_value(hawknwk::chain::db_read_mode::SPECULATIVE),
           "Database read mode (\"speculative\", \"head\", or \"read-only\").\n"// or \"irreversible\").\n"
           "In \"speculative\" mode database contains changes done up to the head block plus changes made by transactions not yet included to the blockchain.\n"
           "In \"head\" mode database contains changes done up to the current head block.\n"
           "In \"read-only\" mode database contains incoming block changes but no speculative transaction processing.\n"
           )
           //"In \"irreversible\" mode database contains changes done up the current irreversible block.\n")
-         ("validation-mode", boost::program_options::value<eosio::chain::validation_mode>()->default_value(eosio::chain::validation_mode::FULL),
+         ("validation-mode", boost::program_options::value<hawknwk::chain::validation_mode>()->default_value(hawknwk::chain::validation_mode::FULL),
           "Chain validation mode (\"full\" or \"light\").\n"
           "In \"full\" mode all incoming blocks will be fully validated.\n"
           "In \"light\" mode all incoming blocks headers will be fully validated; transactions in those validated blocks will be trusted \n")
@@ -337,7 +337,7 @@ void chain_plugin::plugin_initialize(const variables_map& options) {
          genesis_state gs; // Check if HAWK-NETWORK_ROOT_KEY is bad
       } catch ( const fc::exception& ) {
          elog( "HAWK-NETWORK_ROOT_KEY ('${root_key}') is invalid. Recompile with a valid public key.",
-               ("root_key", genesis_state::eosio_root_key));
+               ("root_key", genesis_state::hawknwk_root_key));
          throw;
       }
 
@@ -1101,13 +1101,13 @@ uint64_t convert_to_type(const string& str, const string& desc) {
 
    if (str.find(',') != string::npos) { // fix #6274 only match formats like 4,EOS
       try {
-         auto symb = eosio::chain::symbol::from_string(str);
+         auto symb = hawknwk::chain::symbol::from_string(str);
          return symb.value();
       } catch( ... ) { }
    }
    
    try {
-      return ( eosio::chain::string_to_symbol( 0, str.c_str() ) >> 8 );
+      return ( hawknwk::chain::string_to_symbol( 0, str.c_str() ) >> 8 );
    } catch( ... ) {
       EOS_ASSERT( false, chain_type_exception, "Could not convert ${desc} string '${str}' to any of the following: "
                         "uint64_t, valid name, or valid symbol (with or without the precision)",
@@ -1147,7 +1147,7 @@ string get_table_type( const abi_def& abi, const name& table_name ) {
 }
 
 read_only::get_table_rows_result read_only::get_table_rows( const read_only::get_table_rows_params& p )const {
-   const abi_def abi = eosio::chain_apis::get_abi( db, p.code );
+   const abi_def abi = hawknwk::chain_apis::get_abi( db, p.code );
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
    bool primary = false;
@@ -1257,7 +1257,7 @@ read_only::get_table_by_scope_result read_only::get_table_by_scope( const read_o
 
 vector<asset> read_only::get_currency_balance( const read_only::get_currency_balance_params& p )const {
 
-   const abi_def abi = eosio::chain_apis::get_abi( db, p.code );
+   const abi_def abi = hawknwk::chain_apis::get_abi( db, p.code );
    (void)get_table_type( abi, "accounts" );
 
    vector<asset> results;
@@ -1284,10 +1284,10 @@ vector<asset> read_only::get_currency_balance( const read_only::get_currency_bal
 fc::variant read_only::get_currency_stats( const read_only::get_currency_stats_params& p )const {
    fc::mutable_variant_object results;
 
-   const abi_def abi = eosio::chain_apis::get_abi( db, p.code );
+   const abi_def abi = hawknwk::chain_apis::get_abi( db, p.code );
    (void)get_table_type( abi, "stat" );
 
-   uint64_t scope = ( eosio::chain::string_to_symbol( 0, boost::algorithm::to_upper_copy(p.symbol).c_str() ) >> 8 );
+   uint64_t scope = ( hawknwk::chain::string_to_symbol( 0, boost::algorithm::to_upper_copy(p.symbol).c_str() ) >> 8 );
 
    walk_key_value_table(p.code, scope, N(stat), [&](const key_value_object& obj){
       EOS_ASSERT( obj.value.size() >= sizeof(read_only::get_currency_stats_result), chain::asset_type_exception, "Invalid data on table");
@@ -1323,7 +1323,7 @@ fc::variant get_global_row( const database& db, const abi_def& abi, const abi_se
 }
 
 read_only::get_producers_result read_only::get_producers( const read_only::get_producers_params& p ) const try {
-   const abi_def abi = eosio::chain_apis::get_abi(db, config::system_account_name);
+   const abi_def abi = hawknwk::chain_apis::get_abi(db, config::system_account_name);
    const auto table_type = get_table_type(abi, N(producers));
    const abi_serializer abis{ abi, abi_serializer_max_time };
    EOS_ASSERT(table_type == KEYi64, chain::contract_table_query_exception, "Invalid table type ${type} for table producers", ("type",table_type));
@@ -1742,7 +1742,7 @@ read_only::get_account_results read_only::get_account( const get_account_params&
    if( abi_serializer::to_abi(code_account.abi, abi) ) {
       abi_serializer abis( abi, abi_serializer_max_time );
 
-      const auto token_code = N(eosio.token);
+      const auto token_code = N(hawknwk.token);
 
       auto core_symbol = extract_core_symbol();
 
@@ -1884,12 +1884,12 @@ namespace detail {
 chain::symbol read_only::extract_core_symbol()const {
    symbol core_symbol(0);
 
-   // The following code makes assumptions about the contract deployed on eosio account (i.e. the system contract) and how it stores its data.
+   // The following code makes assumptions about the contract deployed on hawknwk account (i.e. the system contract) and how it stores its data.
    const auto& d = db.db();
-   const auto* t_id = d.find<chain::table_id_object, chain::by_code_scope_table>(boost::make_tuple( N(eosio), N(eosio), N(rammarket) ));
+   const auto* t_id = d.find<chain::table_id_object, chain::by_code_scope_table>(boost::make_tuple( N(hawknwk), N(hawknwk), N(rammarket) ));
    if( t_id != nullptr ) {
       const auto &idx = d.get_index<key_value_index, by_scope_primary>();
-      auto it = idx.find(boost::make_tuple( t_id->id, eosio::chain::string_to_symbol_c(4,"RAMCORE") ));
+      auto it = idx.find(boost::make_tuple( t_id->id, hawknwk::chain::string_to_symbol_c(4,"RAMCORE") ));
       if( it != idx.end() ) {
          detail::ram_market_exchange_state_t ram_market_exchange_state;
 
@@ -1911,6 +1911,6 @@ chain::symbol read_only::extract_core_symbol()const {
 }
 
 } // namespace chain_apis
-} // namespace eosio
+} // namespace hawknwk
 
-FC_REFLECT( eosio::chain_apis::detail::ram_market_exchange_state_t, (ignore1)(ignore2)(ignore3)(core_symbol)(ignore4) )
+FC_REFLECT( hawknwk::chain_apis::detail::ram_market_exchange_state_t, (ignore1)(ignore2)(ignore3)(core_symbol)(ignore4) )

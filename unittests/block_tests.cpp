@@ -3,9 +3,9 @@
  *  @copyright defined in eos/LICENSE
  */
 #include <boost/test/unit_test.hpp>
-#include <eosio/testing/tester.hpp>
+#include <hawknwk/testing/tester.hpp>
 
-using namespace eosio;
+using namespace hawknwk;
 using namespace testing;
 using namespace chain;
 

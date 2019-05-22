@@ -41,7 +41,7 @@ mkdir -p $LIB_LOCATION
 
 CMAKE_BUILD_TYPE=Release
 TIME_BEGIN=$( date -u +%s )
-INSTALL_PREFIX=$OPT_LOCATION/eosio
+INSTALL_PREFIX=$OPT_LOCATION/hawknwk
 VERSION=1.2
 
 txtbld=$(tput bold)
@@ -49,7 +49,7 @@ bldred=${txtbld}$(tput setaf 1)
 txtrst=$(tput sgr0)
 
 if [ ! -d $BUILD_DIR ]; then
-   printf "\\nError, eosio_build.sh has not ran.  Please run ./eosio_build.sh first!\\n\\n"
+   printf "\\nError, hawknwk_build.sh has not ran.  Please run ./hawknwk_build.sh first!\\n\\n"
    exit -1
 fi
 
@@ -77,10 +77,10 @@ printf "    \\  \\::/       \\  \\::/        /__/:/        \\__\\/      \\  \\::
 printf "     \\__\\/         \\__\\/         \\__\\/                     \\__\\/ \n\n${txtrst}"
 
 printf "==============================================================================================\\n"
-printf "HAWK-NETWORK has been installed into ${OPT_LOCATION}/eosio/bin!\\n"
-printf "If you need to, you can fully uninstall using eosio_uninstall.sh && scripts/clean_old_install.sh.\\n"
+printf "HAWK-NETWORK has been installed into ${OPT_LOCATION}/hawknwk/bin!\\n"
+printf "If you need to, you can fully uninstall using hawknwk_uninstall.sh && scripts/clean_old_install.sh.\\n"
 printf "==============================================================================================\\n\\n"
 
 printf "HAWK-NETWORK website: https://eos.io\\n"
 printf "HAWK-NETWORK resources: https://eos.io/resources/\\n"
-printf "HAWK-NETWORK Stack Exchange: https://eosio.stackexchange.com\\n"
+printf "HAWK-NETWORK Stack Exchange: https://hawknwk.stackexchange.com\\n"

@@ -3,14 +3,14 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain_plugin/chain_plugin.hpp>
-#include <eosio/http_plugin/http_plugin.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/http_plugin/http_plugin.hpp>
 
 #include <appbase/application.hpp>
-#include <eosio/chain/controller.hpp>
+#include <hawknwk/chain/controller.hpp>
 
-namespace eosio {
-   using eosio::chain::controller;
+namespace hawknwk {
+   using hawknwk::chain::controller;
    using std::unique_ptr;
    using namespace appbase;
 

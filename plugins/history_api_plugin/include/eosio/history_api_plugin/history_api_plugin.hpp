@@ -4,13 +4,13 @@
  */
 
 #pragma once
-#include <eosio/history_plugin/history_plugin.hpp>
-#include <eosio/chain_plugin/chain_plugin.hpp>
-#include <eosio/http_plugin/http_plugin.hpp>
+#include <hawknwk/history_plugin/history_plugin.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/http_plugin/http_plugin.hpp>
 
 #include <appbase/application.hpp>
 
-namespace eosio {
+namespace hawknwk {
 
    using namespace appbase;
 

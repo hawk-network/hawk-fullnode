@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# eosio-tn_down.sh is used by the eosio-tn_bounce.sh and eosio-tn_roll.sh scripts.
+# hawknwk-tn_down.sh is used by the hawknwk-tn_bounce.sh and hawknwk-tn_roll.sh scripts.
 # It is intended to terminate specific EOS.IO daemon processes.
 #
 

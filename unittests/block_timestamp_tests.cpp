@@ -2,14 +2,14 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/chain/block_timestamp.hpp>
+#include <hawknwk/chain/block_timestamp.hpp>
 
 #include <boost/test/unit_test.hpp>
 
 #include <fc/time.hpp>
 #include <fc/exception/exception.hpp>
 
-using namespace eosio;
+using namespace hawknwk;
 using namespace chain;
 
 BOOST_AUTO_TEST_SUITE(block_timestamp_tests)

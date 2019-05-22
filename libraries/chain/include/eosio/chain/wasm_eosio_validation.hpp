@@ -1,9 +1,9 @@
 #pragma once
 
 #include <fc/exception/exception.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/wasm_eosio_binary_ops.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/wasm_hawknwk_binary_ops.hpp>
 #include <functional>
 #include <vector>
 #include <iostream>
@@ -11,7 +11,7 @@
 #include "IR/Operators.h"
 #include "WASM/WASM.h"
 
-namespace eosio { namespace chain { namespace wasm_validations {
+namespace hawknwk { namespace chain { namespace wasm_validations {
 
    // module validators
    // effectively do nothing and pass
@@ -330,7 +330,7 @@ namespace eosio { namespace chain { namespace wasm_validations {
                                                                              maximum_function_stack_visitor,
                                                                              ensure_apply_exported_visitor>;
       public:
-         wasm_binary_validation( const eosio::chain::controller& control, IR::Module& mod ) : _module( &mod ) {
+         wasm_binary_validation( const hawknwk::chain::controller& control, IR::Module& mod ) : _module( &mod ) {
             // initialize validators here
             nested_validator::init(!control.is_producing_block());
          }
@@ -351,4 +351,4 @@ namespace eosio { namespace chain { namespace wasm_validations {
          static standard_module_constraints_validators _module_validators;
    };
 
-}}} // namespace wasm_constraints, chain, eosio
+}}} // namespace wasm_constraints, chain, hawknwk

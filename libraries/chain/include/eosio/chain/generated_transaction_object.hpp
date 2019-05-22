@@ -3,10 +3,10 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/config.hpp>
-#include <eosio/chain/database_utils.hpp>
+#include <hawknwk/chain/config.hpp>
+#include <hawknwk/chain/database_utils.hpp>
 
-#include <eosio/chain/transaction.hpp>
+#include <hawknwk/chain/transaction.hpp>
 #include <fc/uint128.hpp>
 
 #include <boost/multi_index/hashed_index.hpp>
@@ -14,7 +14,7 @@
 
 #include "multi_index_includes.hpp"
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
    using boost::multi_index_container;
    using namespace boost::multi_index;
    /**
@@ -113,8 +113,8 @@ namespace eosio { namespace chain {
          static const uint64_t value = 96 + 4 + overhead; ///< 96 bytes for our constant size fields, 4 bytes for a varint for packed_trx size and 96 bytes of implementation overhead
       };
    }
-} } // eosio::chain
+} } // hawknwk::chain
 
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::generated_transaction_object, eosio::chain::generated_transaction_multi_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::generated_transaction_object, hawknwk::chain::generated_transaction_multi_index)
 
-FC_REFLECT(eosio::chain::generated_transaction_object, (trx_id)(sender)(sender_id)(payer)(delay_until)(expiration)(published)(packed_trx))
+FC_REFLECT(hawknwk::chain::generated_transaction_object, (trx_id)(sender)(sender_id)(payer)(delay_until)(expiration)(published)(packed_trx))

@@ -2,13 +2,13 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/test_control_plugin/test_control_plugin.hpp>
+#include <hawknwk/test_control_plugin/test_control_plugin.hpp>
 #include <fc/optional.hpp>
 #include <atomic>
 
 namespace fc { class variant; }
 
-namespace eosio {
+namespace hawknwk {
 
 static appbase::abstract_plugin& _test_control_plugin = app().register_plugin<test_control_plugin>();
 
@@ -150,4 +150,4 @@ read_write::kill_node_on_producer_results read_write::kill_node_on_producer(cons
 
 } // namespace test_control_apis
 
-} // namespace eosio
+} // namespace hawknwk

@@ -2,16 +2,16 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/chain/types.hpp>
+#include <hawknwk/chain/types.hpp>
 
-#include <eosio/net_plugin/net_plugin.hpp>
-#include <eosio/net_plugin/protocol.hpp>
-#include <eosio/chain/controller.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/block.hpp>
-#include <eosio/chain/plugin_interface.hpp>
-#include <eosio/producer_plugin/producer_plugin.hpp>
-#include <eosio/chain/contract_types.hpp>
+#include <hawknwk/net_plugin/net_plugin.hpp>
+#include <hawknwk/net_plugin/protocol.hpp>
+#include <hawknwk/chain/controller.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/block.hpp>
+#include <hawknwk/chain/plugin_interface.hpp>
+#include <hawknwk/producer_plugin/producer_plugin.hpp>
+#include <hawknwk/chain/contract_types.hpp>
 
 #include <fc/network/message_buffer.hpp>
 #include <fc/network/ip.hpp>
@@ -26,13 +26,13 @@
 #include <boost/asio/ip/host_name.hpp>
 #include <boost/asio/steady_timer.hpp>
 
-using namespace eosio::chain::plugin_interface::compat;
+using namespace hawknwk::chain::plugin_interface::compat;
 
 namespace fc {
    extern std::unordered_map<std::string,logger>& get_logger_map();
 }
 
-namespace eosio {
+namespace hawknwk {
    static appbase::abstract_plugin& _net_plugin = app().register_plugin<net_plugin>();
 
    using std::vector;
@@ -44,7 +44,7 @@ namespace eosio {
 
    using fc::time_point;
    using fc::time_point_sec;
-   using eosio::chain::transaction_id_type;
+   using hawknwk::chain::transaction_id_type;
 
    class connection;
 
@@ -368,10 +368,10 @@ namespace eosio {
    };
 
    typedef multi_index_container<
-      eosio::peer_block_state,
+      hawknwk::peer_block_state,
       indexed_by<
-         ordered_unique< tag<by_id>, member<eosio::peer_block_state, block_id_type, &eosio::peer_block_state::id >, sha256_less >,
-         ordered_unique< tag<by_block_num>, member<eosio::peer_block_state, uint32_t, &eosio::peer_block_state::block_num > >
+         ordered_unique< tag<by_id>, member<hawknwk::peer_block_state, block_id_type, &hawknwk::peer_block_state::id >, sha256_less >,
+         ordered_unique< tag<by_block_num>, member<hawknwk::peer_block_state, uint32_t, &hawknwk::peer_block_state::block_num > >
          >
       > peer_block_state_index;
 
@@ -2472,7 +2472,7 @@ namespace eosio {
       fc_dlog(logger, "got a packed transaction, cancel wait");
       peer_ilog(c, "received packed_transaction");
       controller& cc = my_impl->chain_plug->chain();
-      if( cc.get_read_mode() == eosio::db_read_mode::READ_ONLY ) {
+      if( cc.get_read_mode() == hawknwk::db_read_mode::READ_ONLY ) {
          fc_dlog(logger, "got a txn in read-only mode - dropping");
          return;
       }

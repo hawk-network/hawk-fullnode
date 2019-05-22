@@ -1,12 +1,12 @@
 #pragma once
-#include <eosio/chain/types.hpp>
-#include <eosio/chain/config.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/chain/config.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 
 #include "multi_index_includes.hpp"
 
 
-namespace eosio { namespace chain { namespace resource_limits {
+namespace hawknwk { namespace chain { namespace resource_limits {
 
    namespace impl {
       template<typename T>
@@ -258,17 +258,17 @@ namespace eosio { namespace chain { namespace resource_limits {
       >
    >;
 
-} } } /// eosio::chain::resource_limits
+} } } /// hawknwk::chain::resource_limits
 
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::resource_limits::resource_limits_object,        eosio::chain::resource_limits::resource_limits_index)
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::resource_limits::resource_usage_object,         eosio::chain::resource_limits::resource_usage_index)
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::resource_limits::resource_limits_config_object, eosio::chain::resource_limits::resource_limits_config_index)
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::resource_limits::resource_limits_state_object,  eosio::chain::resource_limits::resource_limits_state_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::resource_limits::resource_limits_object,        hawknwk::chain::resource_limits::resource_limits_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::resource_limits::resource_usage_object,         hawknwk::chain::resource_limits::resource_usage_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::resource_limits::resource_limits_config_object, hawknwk::chain::resource_limits::resource_limits_config_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::resource_limits::resource_limits_state_object,  hawknwk::chain::resource_limits::resource_limits_state_index)
 
-FC_REFLECT(eosio::chain::resource_limits::usage_accumulator, (last_ordinal)(value_ex)(consumed))
+FC_REFLECT(hawknwk::chain::resource_limits::usage_accumulator, (last_ordinal)(value_ex)(consumed))
 
 // @ignore pending
-FC_REFLECT(eosio::chain::resource_limits::resource_limits_object, (owner)(net_weight)(cpu_weight)(ram_bytes))
-FC_REFLECT(eosio::chain::resource_limits::resource_usage_object,  (owner)(net_usage)(cpu_usage)(ram_usage))
-FC_REFLECT(eosio::chain::resource_limits::resource_limits_config_object, (cpu_limit_parameters)(net_limit_parameters)(account_cpu_usage_average_window)(account_net_usage_average_window))
-FC_REFLECT(eosio::chain::resource_limits::resource_limits_state_object, (average_block_net_usage)(average_block_cpu_usage)(pending_net_usage)(pending_cpu_usage)(total_net_weight)(total_cpu_weight)(total_ram_bytes)(virtual_net_limit)(virtual_cpu_limit))
+FC_REFLECT(hawknwk::chain::resource_limits::resource_limits_object, (owner)(net_weight)(cpu_weight)(ram_bytes))
+FC_REFLECT(hawknwk::chain::resource_limits::resource_usage_object,  (owner)(net_usage)(cpu_usage)(ram_usage))
+FC_REFLECT(hawknwk::chain::resource_limits::resource_limits_config_object, (cpu_limit_parameters)(net_limit_parameters)(account_cpu_usage_average_window)(account_net_usage_average_window))
+FC_REFLECT(hawknwk::chain::resource_limits::resource_limits_state_object, (average_block_net_usage)(average_block_cpu_usage)(pending_net_usage)(pending_cpu_usage)(total_net_weight)(total_cpu_weight)(total_ram_bytes)(virtual_net_limit)(virtual_cpu_limit))

@@ -1,12 +1,12 @@
 #pragma once
-#include <eosio/chain/block_state.hpp>
-#include <eosio/chain/trace.hpp>
-#include <eosio/chain/genesis_state.hpp>
+#include <hawknwk/chain/block_state.hpp>
+#include <hawknwk/chain/trace.hpp>
+#include <hawknwk/chain/genesis_state.hpp>
 #include <boost/signals2/signal.hpp>
 
-#include <eosio/chain/abi_serializer.hpp>
-#include <eosio/chain/account_object.hpp>
-#include <eosio/chain/snapshot.hpp>
+#include <hawknwk/chain/abi_serializer.hpp>
+#include <hawknwk/chain/account_object.hpp>
+#include <hawknwk/chain/snapshot.hpp>
 
 namespace chainbase {
    class database;
@@ -15,7 +15,7 @@ namespace boost { namespace asio {
    class thread_pool;
 }}
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    class authorization_manager;
 
@@ -288,9 +288,9 @@ namespace eosio { namespace chain {
 
    };
 
-} }  /// eosio::chain
+} }  /// hawknwk::chain
 
-FC_REFLECT( eosio::chain::controller::config,
+FC_REFLECT( hawknwk::chain::controller::config,
             (actor_whitelist)
             (actor_blacklist)
             (contract_whitelist)

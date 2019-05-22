@@ -8,7 +8,7 @@
 
 #include <fc/network/message_buffer.hpp>
 
-namespace eosio {
+namespace hawknwk {
 using namespace std;
 
 size_t mb_size(boost::asio::mutable_buffer& mb) {
@@ -359,4 +359,4 @@ BOOST_AUTO_TEST_CASE(message_buffer_datastream) {
 
 BOOST_AUTO_TEST_SUITE_END()
 
-} // namespace eosio
+} // namespace hawknwk

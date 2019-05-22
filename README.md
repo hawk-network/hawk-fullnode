@@ -1,7 +1,7 @@
 
 # HAWK-NETWORK - The Most Powerful Infrastructure for Decentralized Applications
 
-[![Build status](https://badge.buildkite.com/370fe5c79410f7d695e4e34c500b4e86e3ac021c6b1f739e20.svg?branch=master)](https://buildkite.com/HAWK-NETWORK/eosio)
+[![Build status](https://badge.buildkite.com/370fe5c79410f7d695e4e34c500b4e86e3ac021c6b1f739e20.svg?branch=master)](https://buildkite.com/HAWK-NETWORK/hawknwk)
 
 Welcome to the HAWK-NETWORK source code repository! This software enables businesses to rapidly build and deploy high-performance and high-security blockchain-based applications.
 
@@ -26,48 +26,48 @@ Block.one is neither launching nor operating any initial public blockchains base
 
 There is no public testnet running currently.
 
-**If you have previously installed HAWK-NETWORK, please run the `eosio_uninstall` script (it is in the directory where you cloned HAWK-NETWORK) before downloading and using the binary releases.**
+**If you have previously installed HAWK-NETWORK, please run the `hawknwk_uninstall` script (it is in the directory where you cloned HAWK-NETWORK) before downloading and using the binary releases.**
 
 #### Mac OS X Brew Install
 ```sh
-$ brew tap eosio/eosio
-$ brew install eosio
+$ brew tap hawknwk/hawknwk
+$ brew install hawknwk
 ```
 #### Mac OS X Brew Uninstall
 ```sh
-$ brew remove eosio
+$ brew remove hawknwk
 ```
 #### Ubuntu 18.04 Debian Package Install
 ```sh
-$ wget https://github.com/eosio/eos/releases/download/v1.7.3/eosio_1.7.3-1-ubuntu-18.04_amd64.deb
-$ sudo apt install ./eosio_1.7.3-1-ubuntu-18.04_amd64.deb
+$ wget https://github.com/hawknwk/eos/releases/download/v1.7.3/hawknwk_1.7.3-1-ubuntu-18.04_amd64.deb
+$ sudo apt install ./hawknwk_1.7.3-1-ubuntu-18.04_amd64.deb
 ```
 #### Ubuntu 16.04 Debian Package Install
 ```sh
-$ wget https://github.com/eosio/eos/releases/download/v1.7.3/eosio_1.7.3-1-ubuntu-16.04_amd64.deb
-$ sudo apt install ./eosio_1.7.3-1-ubuntu-16.04_amd64.deb
+$ wget https://github.com/hawknwk/eos/releases/download/v1.7.3/hawknwk_1.7.3-1-ubuntu-16.04_amd64.deb
+$ sudo apt install ./hawknwk_1.7.3-1-ubuntu-16.04_amd64.deb
 ```
 #### Debian Package Uninstall
 ```sh
-$ sudo apt remove eosio
+$ sudo apt remove hawknwk
 ```
 #### Centos RPM Package Install
 ```sh
-$ wget https://github.com/eosio/eos/releases/download/v1.7.3/eosio-1.7.3-1.el7.x86_64.rpm
-$ sudo yum install ./eosio-1.7.3-1.el7.x86_64.rpm
+$ wget https://github.com/hawknwk/eos/releases/download/v1.7.3/hawknwk-1.7.3-1.el7.x86_64.rpm
+$ sudo yum install ./hawknwk-1.7.3-1.el7.x86_64.rpm
 ```
 #### Centos RPM Package Uninstall
 ```sh
-$ sudo yum remove eosio
+$ sudo yum remove hawknwk
 ```
 #### Fedora RPM Package Install
 ```sh
-$ wget https://github.com/eosio/eos/releases/download/v1.7.3/eosio-1.7.3-1.fc27.x86_64.rpm
-$ sudo yum install ./eosio-1.7.3-1.fc27.x86_64.rpm
+$ wget https://github.com/hawknwk/eos/releases/download/v1.7.3/hawknwk-1.7.3-1.fc27.x86_64.rpm
+$ sudo yum install ./hawknwk-1.7.3-1.fc27.x86_64.rpm
 ```
 #### Fedora RPM Package Uninstall
 ```sh
-$ sudo yum remove eosio
+$ sudo yum remove hawknwk
 ```
 
 ## Supported Operating Systems
@@ -82,9 +82,9 @@ HAWK-NETWORK currently supports the following operating systems:
 
 ## Resources
 1. [Website](https://eos.io)
-1. [Blog](https://medium.com/eosio)
+1. [Blog](https://medium.com/hawknwk)
 1. [Developer Portal](https://developers.eos.io)
-1. [StackExchange for Q&A](https://eosio.stackexchange.com/)
+1. [StackExchange for Q&A](https://hawknwk.stackexchange.com/)
 1. [Community Telegram Group](https://t.me/EOSProject)
 1. [Developer Telegram Group](https://t.me/joinchat/EaEnSUPktgfoI-XPfMYtcQ)
 1. [White Paper](https://github.com/HAWK-NETWORK/Documentation/blob/master/TechnicalWhitePaper.md)
@@ -92,7 +92,7 @@ HAWK-NETWORK currently supports the following operating systems:
 
 <a name="gettingstarted"></a>
 ## Getting Started
-Instructions detailing the process of getting the software, building it, running a simple test network that produces blocks, account creation and uploading a sample contract to the blockchain can be found in [Getting Started](https://developers.eos.io/eosio-home/docs) on the [HAWK-NETWORK Developer Portal](https://developers.eos.io).
+Instructions detailing the process of getting the software, building it, running a simple test network that produces blocks, account creation and uploading a sample contract to the blockchain can be found in [Getting Started](https://developers.eos.io/hawknwk-home/docs) on the [HAWK-NETWORK Developer Portal](https://developers.eos.io).
 
 ## Contributing
 

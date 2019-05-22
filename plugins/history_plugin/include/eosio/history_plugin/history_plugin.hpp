@@ -5,11 +5,11 @@
 #pragma once
 #include <appbase/application.hpp>
 
-#include <eosio/chain_plugin/chain_plugin.hpp>
+#include <hawknwk/chain_plugin/chain_plugin.hpp>
 
 namespace fc { class variant; }
 
-namespace eosio {
+namespace hawknwk {
    using chain::transaction_id_type;
    using std::shared_ptr;
    using namespace appbase;
@@ -135,22 +135,22 @@ class history_plugin : public plugin<history_plugin> {
       history_ptr my;
 };
 
-} /// namespace eosio
+} /// namespace hawknwk
 
-FC_REFLECT( eosio::history_apis::read_only::get_actions_params, (account_name)(pos)(offset) )
-FC_REFLECT( eosio::history_apis::read_only::get_actions_result, (actions)(last_irreversible_block)(time_limit_exceeded_error) )
-FC_REFLECT( eosio::history_apis::read_only::ordered_action_result, (global_action_seq)(account_action_seq)(block_num)(block_time)(action_trace) )
+FC_REFLECT( hawknwk::history_apis::read_only::get_actions_params, (account_name)(pos)(offset) )
+FC_REFLECT( hawknwk::history_apis::read_only::get_actions_result, (actions)(last_irreversible_block)(time_limit_exceeded_error) )
+FC_REFLECT( hawknwk::history_apis::read_only::ordered_action_result, (global_action_seq)(account_action_seq)(block_num)(block_time)(action_trace) )
 
-FC_REFLECT( eosio::history_apis::read_only::get_transaction_params, (id)(block_num_hint) )
-FC_REFLECT( eosio::history_apis::read_only::get_transaction_result, (id)(trx)(block_time)(block_num)(last_irreversible_block)(traces) )
+FC_REFLECT( hawknwk::history_apis::read_only::get_transaction_params, (id)(block_num_hint) )
+FC_REFLECT( hawknwk::history_apis::read_only::get_transaction_result, (id)(trx)(block_time)(block_num)(last_irreversible_block)(traces) )
 /*
-FC_REFLECT(eosio::history_apis::read_only::get_transaction_params, (transaction_id) )
-FC_REFLECT(eosio::history_apis::read_only::get_transaction_results, (transaction_id)(transaction) )
-FC_REFLECT(eosio::history_apis::read_only::get_transactions_params, (account_name)(skip_seq)(num_seq) )
-FC_REFLECT(eosio::history_apis::read_only::ordered_transaction_results, (seq_num)(transaction_id)(transaction) )
-FC_REFLECT(eosio::history_apis::read_only::get_transactions_results, (transactions)(time_limit_exceeded_error) )
+FC_REFLECT(hawknwk::history_apis::read_only::get_transaction_params, (transaction_id) )
+FC_REFLECT(hawknwk::history_apis::read_only::get_transaction_results, (transaction_id)(transaction) )
+FC_REFLECT(hawknwk::history_apis::read_only::get_transactions_params, (account_name)(skip_seq)(num_seq) )
+FC_REFLECT(hawknwk::history_apis::read_only::ordered_transaction_results, (seq_num)(transaction_id)(transaction) )
+FC_REFLECT(hawknwk::history_apis::read_only::get_transactions_results, (transactions)(time_limit_exceeded_error) )
 */
-FC_REFLECT(eosio::history_apis::read_only::get_key_accounts_params, (public_key) )
-FC_REFLECT(eosio::history_apis::read_only::get_key_accounts_results, (account_names) )
-FC_REFLECT(eosio::history_apis::read_only::get_controlled_accounts_params, (controlling_account) )
-FC_REFLECT(eosio::history_apis::read_only::get_controlled_accounts_results, (controlled_accounts) )
+FC_REFLECT(hawknwk::history_apis::read_only::get_key_accounts_params, (public_key) )
+FC_REFLECT(hawknwk::history_apis::read_only::get_key_accounts_results, (account_names) )
+FC_REFLECT(hawknwk::history_apis::read_only::get_controlled_accounts_params, (controlling_account) )
+FC_REFLECT(hawknwk::history_apis::read_only::get_controlled_accounts_results, (controlled_accounts) )

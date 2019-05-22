@@ -2,16 +2,16 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/test_control_api_plugin/test_control_api_plugin.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/test_control_api_plugin/test_control_api_plugin.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 
 #include <fc/io/json.hpp>
 
-namespace eosio {
+namespace hawknwk {
 
 static appbase::abstract_plugin& _test_control_api_plugin = app().register_plugin<test_control_api_plugin>();
 
-using namespace eosio;
+using namespace hawknwk;
 
 class test_control_api_plugin_impl {
 public:

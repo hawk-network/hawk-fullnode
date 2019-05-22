@@ -4,7 +4,7 @@
  */
 #include "snapshot_test.hpp"
 
-using namespace eosio;
+using namespace hawknwk;
 
 void snapshot_test::increment( uint32_t value ) {
    require_auth( get_self() );

@@ -1,8 +1,8 @@
 #pragma once
-#include <eosio/chain/block_timestamp.hpp>
-#include <eosio/chain/producer_schedule.hpp>
+#include <hawknwk/chain/block_timestamp.hpp>
+#include <hawknwk/chain/producer_schedule.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    struct block_header
    {
@@ -53,12 +53,12 @@ namespace eosio { namespace chain {
       signature_type  producer_signature;
    };
 
-} } /// namespace eosio::chain
+} } /// namespace hawknwk::chain
 
-FC_REFLECT(eosio::chain::block_header, 
+FC_REFLECT(hawknwk::chain::block_header, 
            (timestamp)(producer)(confirmed)(previous)
            (transaction_mroot)(action_mroot)
            (schedule_version)(new_producers)(header_extensions))
 
-FC_REFLECT_DERIVED(eosio::chain::signed_block_header, (eosio::chain::block_header), (producer_signature))
-FC_REFLECT(eosio::chain::header_confirmation,  (block_id)(producer)(producer_signature) )
+FC_REFLECT_DERIVED(hawknwk::chain::signed_block_header, (hawknwk::chain::block_header), (producer_signature))
+FC_REFLECT(hawknwk::chain::header_confirmation,  (block_id)(producer)(producer_signature) )

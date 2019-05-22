@@ -8,7 +8,7 @@
 
 #include <fc/reflect/reflect.hpp>
 
-namespace eosio {
+namespace hawknwk {
    using namespace appbase;
 
    /**
@@ -153,7 +153,7 @@ namespace eosio {
    };
 }
 
-FC_REFLECT(eosio::error_results::error_info::error_detail, (message)(file)(line_number)(method))
-FC_REFLECT(eosio::error_results::error_info, (code)(name)(what)(details))
-FC_REFLECT(eosio::error_results, (code)(message)(error))
-FC_REFLECT(eosio::http_plugin::get_supported_apis_result, (apis))
+FC_REFLECT(hawknwk::error_results::error_info::error_detail, (message)(file)(line_number)(method))
+FC_REFLECT(hawknwk::error_results::error_info, (code)(name)(what)(details))
+FC_REFLECT(hawknwk::error_results, (code)(message)(error))
+FC_REFLECT(hawknwk::http_plugin::get_supported_apis_result, (apis))

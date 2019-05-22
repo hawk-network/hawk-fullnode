@@ -4,9 +4,9 @@
  */
 #pragma once
 
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 struct chain_snapshot_header {
    /**
@@ -31,4 +31,4 @@ struct chain_snapshot_header {
 
 } }
 
-FC_REFLECT(eosio::chain::chain_snapshot_header,(version))
+FC_REFLECT(hawknwk::chain::chain_snapshot_header,(version))

@@ -2,13 +2,13 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/producer_plugin/producer_plugin.hpp>
-#include <eosio/chain/producer_object.hpp>
-#include <eosio/chain/plugin_interface.hpp>
-#include <eosio/chain/global_property_object.hpp>
-#include <eosio/chain/generated_transaction_object.hpp>
-#include <eosio/chain/transaction_object.hpp>
-#include <eosio/chain/snapshot.hpp>
+#include <hawknwk/producer_plugin/producer_plugin.hpp>
+#include <hawknwk/chain/producer_object.hpp>
+#include <hawknwk/chain/plugin_interface.hpp>
+#include <hawknwk/chain/global_property_object.hpp>
+#include <hawknwk/chain/generated_transaction_object.hpp>
+#include <hawknwk/chain/transaction_object.hpp>
+#include <hawknwk/chain/snapshot.hpp>
 
 #include <fc/io/json.hpp>
 #include <fc/smart_ref_impl.hpp>
@@ -54,12 +54,12 @@ fc::logger _log;
 const fc::string trx_trace_logger_name("transaction_tracing");
 fc::logger _trx_trace_log;
 
-namespace eosio {
+namespace hawknwk {
 
 static appbase::abstract_plugin& _producer_plugin = app().register_plugin<producer_plugin>();
 
-using namespace eosio::chain;
-using namespace eosio::chain::plugin_interface;
+using namespace hawknwk::chain;
+using namespace hawknwk::chain::plugin_interface;
 
 namespace {
    bool failure_is_subjective(const fc::exception& e, bool deadline_is_subjective) {
@@ -123,7 +123,7 @@ class producer_plugin_impl : public std::enable_shared_from_this<producer_plugin
       boost::program_options::variables_map _options;
       bool     _production_enabled                 = false;
       bool     _pause_production                   = false;
-      uint32_t _production_skip_flags              = 0; //eosio::chain::skip_nothing;
+      uint32_t _production_skip_flags              = 0; //hawknwk::chain::skip_nothing;
 
       using signature_provider_type = std::function<chain::signature_type(chain::digest_type)>;
       std::map<chain::public_key_type, signature_provider_type> _signature_providers;
@@ -481,7 +481,7 @@ class producer_plugin_impl : public std::enable_shared_from_this<producer_plugin
       void schedule_delayed_production_loop(const std::weak_ptr<producer_plugin_impl>& weak_this, const block_timestamp_type& current_block_time);
 };
 
-void new_chain_banner(const eosio::chain::controller& db)
+void new_chain_banner(const hawknwk::chain::controller& db)
 {
    std::cerr << "\n"
       "*******************************\n"
@@ -769,7 +769,7 @@ void producer_plugin::plugin_startup()
          if (chain.head_block_num() == 0) {
             new_chain_banner(chain);
          }
-         //_production_skip_flags |= eosio::chain::skip_undo_history_check;
+         //_production_skip_flags |= hawknwk::chain::skip_undo_history_check;
       }
    }
 
@@ -1598,4 +1598,4 @@ void producer_plugin_impl::produce_block() {
 
 }
 
-} // namespace eosio
+} // namespace hawknwk

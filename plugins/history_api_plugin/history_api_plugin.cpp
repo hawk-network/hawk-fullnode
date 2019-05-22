@@ -2,14 +2,14 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/history_api_plugin/history_api_plugin.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/history_api_plugin/history_api_plugin.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 
 #include <fc/io/json.hpp>
 
-namespace eosio {
+namespace hawknwk {
 
-using namespace eosio;
+using namespace hawknwk;
 
 static appbase::abstract_plugin& _history_api_plugin = app().register_plugin<history_api_plugin>();
 

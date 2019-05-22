@@ -6,15 +6,15 @@
 #include <fc/uint128.hpp>
 #include <fc/array.hpp>
 
-#include <eosio/chain/types.hpp>
-#include <eosio/chain/block_timestamp.hpp>
-#include <eosio/chain/chain_config.hpp>
-#include <eosio/chain/producer_schedule.hpp>
-#include <eosio/chain/incremental_merkle.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/chain/block_timestamp.hpp>
+#include <hawknwk/chain/chain_config.hpp>
+#include <hawknwk/chain/producer_schedule.hpp>
+#include <hawknwk/chain/incremental_merkle.hpp>
 #include <chainbase/chainbase.hpp>
 #include "multi_index_includes.hpp"
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    /**
     * @class global_property_object
@@ -73,14 +73,14 @@ namespace eosio { namespace chain {
 
 }}
 
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::global_property_object, eosio::chain::global_property_multi_index)
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::dynamic_global_property_object,
-                         eosio::chain::dynamic_global_property_multi_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::global_property_object, hawknwk::chain::global_property_multi_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::dynamic_global_property_object,
+                         hawknwk::chain::dynamic_global_property_multi_index)
 
-FC_REFLECT(eosio::chain::dynamic_global_property_object,
+FC_REFLECT(hawknwk::chain::dynamic_global_property_object,
            (global_action_sequence)
           )
 
-FC_REFLECT(eosio::chain::global_property_object,
+FC_REFLECT(hawknwk::chain::global_property_object,
            (proposed_schedule_block_num)(proposed_schedule)(configuration)
           )

@@ -4,15 +4,15 @@
  */
 #pragma once
 
-#include <eosio/eosio.hpp>
+#include <hawknwk/hawknwk.hpp>
 
-class [[eosio::contract]] asserter : public eosio::contract {
+class [[hawknwk::contract]] asserter : public hawknwk::contract {
 public:
-   using eosio::contract::contract;
+   using hawknwk::contract::contract;
 
-   [[eosio::action]]
+   [[hawknwk::action]]
    void procassert( int8_t condition, std::string message );
 
-   [[eosio::action]]
+   [[hawknwk::action]]
    void provereset();
 };

@@ -4,12 +4,12 @@
  */
 #pragma once
 
-#include <eosio/eosio.hpp>
+#include <hawknwk/hawknwk.hpp>
 
-class [[eosio::contract]] payloadless : public eosio::contract {
+class [[hawknwk::contract]] payloadless : public hawknwk::contract {
 public:
-   using eosio::contract::contract;
+   using hawknwk::contract::contract;
 
-   [[eosio::action]]
+   [[hawknwk::action]]
    void doit();
 };

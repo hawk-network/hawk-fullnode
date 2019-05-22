@@ -5,7 +5,7 @@
 #pragma once
 #include <appbase/application.hpp>
 
-namespace eosio {
+namespace hawknwk {
 
 using namespace appbase;
 

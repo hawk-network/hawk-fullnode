@@ -4,16 +4,16 @@
  */
 #pragma once
 
-#include <eosio/chain/types.hpp>
-#include <eosio/wallet_plugin/wallet_api.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/wallet_plugin/wallet_api.hpp>
 
 #include <fc/real128.hpp>
 #include <fc/crypto/base58.hpp>
 
 using namespace std;
-using namespace eosio::chain;
+using namespace hawknwk::chain;
 
-namespace eosio { namespace wallet {
+namespace hawknwk { namespace wallet {
 
 typedef uint16_t transaction_handle_type;
 
@@ -194,6 +194,6 @@ struct plain_keys {
 
 } }
 
-FC_REFLECT( eosio::wallet::wallet_data, (cipher_keys) )
+FC_REFLECT( hawknwk::wallet::wallet_data, (cipher_keys) )
 
-FC_REFLECT( eosio::wallet::plain_keys, (checksum)(keys) )
+FC_REFLECT( hawknwk::wallet::plain_keys, (checksum)(keys) )

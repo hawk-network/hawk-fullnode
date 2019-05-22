@@ -3,8 +3,8 @@
  *  @copyright defined in eos/LICENSE
  */
 #pragma once
-#include <eosio/chain/transaction.hpp>
-#include <eosio/wallet_plugin/wallet_api.hpp>
+#include <hawknwk/chain/transaction.hpp>
+#include <hawknwk/wallet_plugin/wallet_api.hpp>
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/interprocess/sync/file_lock.hpp>
@@ -12,7 +12,7 @@
 
 namespace fc { class variant; }
 
-namespace eosio {
+namespace hawknwk {
 namespace wallet {
 
 /// Provides associate of wallet name to wallet and manages the interaction with each wallet.
@@ -148,6 +148,6 @@ private:
 };
 
 } // namespace wallet
-} // namespace eosio
+} // namespace hawknwk
 
 

@@ -2,11 +2,11 @@
  *  @file
  *  @copyright defined in eos/LICENSE
  */
-#include <eosio/chain/asset.hpp>
+#include <hawknwk/chain/asset.hpp>
 #include <boost/rational.hpp>
 #include <fc/reflect/variant.hpp>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 uint8_t asset::decimals()const {
    return sym.decimals();
@@ -52,7 +52,7 @@ asset asset::from_string(const string& from)
       // Parse symbol
       string precision_digit_str;
       if (dot_pos != string::npos) {
-         precision_digit_str = eosio::chain::to_string(amount_str.size() - dot_pos - 1);
+         precision_digit_str = hawknwk::chain::to_string(amount_str.size() - dot_pos - 1);
       } else {
          precision_digit_str = "0";
       }
@@ -79,4 +79,4 @@ asset asset::from_string(const string& from)
    FC_CAPTURE_LOG_AND_RETHROW( (from) )
 }
 
-} }  // eosio::types
+} }  // hawknwk::types

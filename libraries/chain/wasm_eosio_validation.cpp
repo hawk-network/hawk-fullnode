@@ -1,13 +1,13 @@
-#include <eosio/chain/wasm_eosio_constraints.hpp>
-#include <eosio/chain/wasm_eosio_validation.hpp>
-#include <eosio/chain/wasm_eosio_binary_ops.hpp>
+#include <hawknwk/chain/wasm_hawknwk_constraints.hpp>
+#include <hawknwk/chain/wasm_hawknwk_validation.hpp>
+#include <hawknwk/chain/wasm_hawknwk_binary_ops.hpp>
 #include <fc/exception/exception.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 #include "IR/Module.h"
 #include "IR/Operators.h"
 #include "WASM/WASM.h"
 
-namespace eosio { namespace chain { namespace wasm_validations {
+namespace hawknwk { namespace chain { namespace wasm_validations {
 using namespace IR;
 
 void noop_validation_visitor::validate( const Module& m ) {
@@ -93,4 +93,4 @@ void ensure_apply_exported_visitor::validate( const IR::Module& m ) {
 
 uint16_t nested_validator::depth = 0;
 bool     nested_validator::disabled = false;
-}}} // namespace eosio chain validation
+}}} // namespace hawknwk chain validation

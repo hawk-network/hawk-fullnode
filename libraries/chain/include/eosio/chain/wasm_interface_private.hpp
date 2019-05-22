@@ -1,12 +1,12 @@
 #pragma once
 
-#include <eosio/chain/wasm_interface.hpp>
-#include <eosio/chain/webassembly/wavm.hpp>
-#include <eosio/chain/webassembly/wabt.hpp>
-#include <eosio/chain/webassembly/runtime_interface.hpp>
-#include <eosio/chain/wasm_eosio_injection.hpp>
-#include <eosio/chain/transaction_context.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/wasm_interface.hpp>
+#include <hawknwk/chain/webassembly/wavm.hpp>
+#include <hawknwk/chain/webassembly/wabt.hpp>
+#include <hawknwk/chain/webassembly/runtime_interface.hpp>
+#include <hawknwk/chain/wasm_hawknwk_injection.hpp>
+#include <hawknwk/chain/transaction_context.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 #include <fc/scoped_exit.hpp>
 
 #include "IR/Module.h"
@@ -16,11 +16,11 @@
 #include "IR/Validate.h"
 
 using namespace fc;
-using namespace eosio::chain::webassembly;
+using namespace hawknwk::chain::webassembly;
 using namespace IR;
 using namespace Runtime;
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    struct wasm_interface_impl {
       wasm_interface_impl(wasm_interface::vm_type vm) {
@@ -129,4 +129,4 @@ namespace eosio { namespace chain {
 #define REGISTER_INJECTED_INTRINSICS(CLS, MEMBERS)\
    BOOST_PP_SEQ_FOR_EACH(_REGISTER_INJECTED_INTRINSIC, CLS, _WRAPPED_SEQ(MEMBERS))
 
-} } // eosio::chain
+} } // hawknwk::chain

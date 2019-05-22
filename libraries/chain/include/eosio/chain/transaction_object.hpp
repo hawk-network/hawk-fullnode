@@ -5,7 +5,7 @@
 #pragma once
 #include <fc/io/raw.hpp>
 
-#include <eosio/chain/transaction.hpp>
+#include <hawknwk/chain/transaction.hpp>
 #include <fc/uint128.hpp>
 
 #include <boost/multi_index/hashed_index.hpp>
@@ -13,7 +13,7 @@
 
 #include "multi_index_includes.hpp"
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
    using boost::multi_index_container;
    using namespace boost::multi_index;
    /**
@@ -49,6 +49,6 @@ namespace eosio { namespace chain {
    typedef chainbase::generic_index<transaction_multi_index> transaction_index;
 } }
 
-CHAINBASE_SET_INDEX_TYPE(eosio::chain::transaction_object, eosio::chain::transaction_multi_index)
+CHAINBASE_SET_INDEX_TYPE(hawknwk::chain::transaction_object, hawknwk::chain::transaction_multi_index)
 
-FC_REFLECT(eosio::chain::transaction_object, (expiration)(trx_id))
+FC_REFLECT(hawknwk::chain::transaction_object, (expiration)(trx_id))

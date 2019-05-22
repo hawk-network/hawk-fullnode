@@ -4,14 +4,14 @@
  */
 #pragma once
 
-#include <eosio/chain/types.hpp>
-#include <eosio/chain/permission_object.hpp>
-#include <eosio/chain/snapshot.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/chain/permission_object.hpp>
+#include <hawknwk/chain/snapshot.hpp>
 
 #include <utility>
 #include <functional>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
    class controller;
    struct updateauth;
@@ -134,4 +134,4 @@ namespace eosio { namespace chain {
                                                            )const;
    };
 
-} } /// namespace eosio::chain
+} } /// namespace hawknwk::chain

@@ -4,10 +4,10 @@
  */
 #pragma once
 
-#include <eosio/chain/types.hpp>
-#include <eosio/chain/authority.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/parallel_markers.hpp>
+#include <hawknwk/chain/types.hpp>
+#include <hawknwk/chain/authority.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/parallel_markers.hpp>
 
 #include <fc/scoped_exit.hpp>
 
@@ -16,7 +16,7 @@
 
 #include <functional>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 namespace detail {
 
@@ -289,4 +289,4 @@ namespace detail {
                                                             checktime );
    }
 
-} } // namespace eosio::chain
+} } // namespace hawknwk::chain

@@ -1,13 +1,13 @@
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/resource_limits.hpp>
-#include <eosio/chain/resource_limits_private.hpp>
-#include <eosio/chain/transaction_metadata.hpp>
-#include <eosio/chain/transaction.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/resource_limits.hpp>
+#include <hawknwk/chain/resource_limits_private.hpp>
+#include <hawknwk/chain/transaction_metadata.hpp>
+#include <hawknwk/chain/transaction.hpp>
 #include <boost/tuple/tuple_io.hpp>
-#include <eosio/chain/database_utils.hpp>
+#include <hawknwk/chain/database_utils.hpp>
 #include <algorithm>
 
-namespace eosio { namespace chain { namespace resource_limits {
+namespace hawknwk { namespace chain { namespace resource_limits {
 
 using resource_index_set = index_set<
    resource_limits_index,
@@ -441,4 +441,4 @@ account_resource_limit resource_limits_manager::get_account_net_limit_ex( const 
    return arl;
 }
 
-} } } /// eosio::chain::resource_limits
+} } } /// hawknwk::chain::resource_limits

@@ -1,9 +1,9 @@
 #pragma once
 
-#include <eosio/chain/webassembly/common.hpp>
-#include <eosio/chain/webassembly/runtime_interface.hpp>
-#include <eosio/chain/exceptions.hpp>
-#include <eosio/chain/apply_context.hpp>
+#include <hawknwk/chain/webassembly/common.hpp>
+#include <hawknwk/chain/webassembly/runtime_interface.hpp>
+#include <hawknwk/chain/exceptions.hpp>
+#include <hawknwk/chain/apply_context.hpp>
 #include <softfloat_types.h>
 
 //wabt includes
@@ -11,12 +11,12 @@
 #include <src/common.h>
 #include <src/interp.h>
 
-namespace eosio { namespace chain { namespace webassembly { namespace wabt_runtime {
+namespace hawknwk { namespace chain { namespace webassembly { namespace wabt_runtime {
 
 using namespace fc;
 using namespace wabt;
 using namespace wabt::interp;
-using namespace eosio::chain::webassembly::common;
+using namespace hawknwk::chain::webassembly::common;
 
 struct wabt_apply_instance_vars {
    Memory* memory;
@@ -47,7 +47,7 @@ struct intrinsic_registrator {
    }
 };
 
-class wabt_runtime : public eosio::chain::wasm_runtime_interface {
+class wabt_runtime : public hawknwk::chain::wasm_runtime_interface {
    public:
       wabt_runtime();
       std::unique_ptr<wasm_instantiated_module_interface> instantiate_module(const char* code_bytes, size_t code_size, std::vector<uint8_t> initial_memory) override;
@@ -710,11 +710,11 @@ struct intrinsic_function_invoker_wrapper<Ret (Cls::*)(Params...) const volatile
 #define _INTRINSIC_NAME(LABEL, SUFFIX) __INTRINSIC_NAME(LABEL,SUFFIX)
 
 #define _REGISTER_WABT_INTRINSIC(CLS, MOD, METHOD, WASM_SIG, NAME, SIG)\
-   static eosio::chain::webassembly::wabt_runtime::intrinsic_registrator _INTRINSIC_NAME(__wabt_intrinsic_fn, __COUNTER__) (\
+   static hawknwk::chain::webassembly::wabt_runtime::intrinsic_registrator _INTRINSIC_NAME(__wabt_intrinsic_fn, __COUNTER__) (\
       MOD,\
       NAME,\
-      eosio::chain::webassembly::wabt_runtime::wabt_function_type_provider<WASM_SIG>::type(),\
-      eosio::chain::webassembly::wabt_runtime::intrinsic_function_invoker_wrapper<SIG>::type::fn<&CLS::METHOD>()\
+      hawknwk::chain::webassembly::wabt_runtime::wabt_function_type_provider<WASM_SIG>::type(),\
+      hawknwk::chain::webassembly::wabt_runtime::intrinsic_function_invoker_wrapper<SIG>::type::fn<&CLS::METHOD>()\
    );\
 
-} } } }// eosio::chain::webassembly::wabt_runtime
+} } } }// hawknwk::chain::webassembly::wabt_runtime

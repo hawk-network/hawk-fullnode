@@ -1,8 +1,8 @@
-#include <eosio/chain/block_header_state.hpp>
-#include <eosio/chain/exceptions.hpp>
+#include <hawknwk/chain/block_header_state.hpp>
+#include <hawknwk/chain/exceptions.hpp>
 #include <limits>
 
-namespace eosio { namespace chain {
+namespace hawknwk { namespace chain {
 
 
    bool block_header_state::is_active_producer( account_name n )const {
@@ -251,4 +251,4 @@ namespace eosio { namespace chain {
   }
 
 
-} } /// namespace eosio::chain
+} } /// namespace hawknwk::chain
