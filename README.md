@@ -47,28 +47,6 @@ $ sudo apt install ./hawknwk_1.7.3-1-ubuntu-18.04_amd64.deb
 $ wget https://github.com/hawknwk/eos/releases/download/v1.7.3/hawknwk_1.7.3-1-ubuntu-16.04_amd64.deb
 $ sudo apt install ./hawknwk_1.7.3-1-ubuntu-16.04_amd64.deb
 ```
-#### Debian Package Uninstall
-```sh
-$ sudo apt remove hawknwk
-```
-#### Centos RPM Package Install
-```sh
-$ wget https://github.com/hawknwk/eos/releases/download/v1.7.3/hawknwk-1.7.3-1.el7.x86_64.rpm
-$ sudo yum install ./hawknwk-1.7.3-1.el7.x86_64.rpm
-```
-#### Centos RPM Package Uninstall
-```sh
-$ sudo yum remove hawknwk
-```
-#### Fedora RPM Package Install
-```sh
-$ wget https://github.com/hawknwk/eos/releases/download/v1.7.3/hawknwk-1.7.3-1.fc27.x86_64.rpm
-$ sudo yum install ./hawknwk-1.7.3-1.fc27.x86_64.rpm
-```
-#### Fedora RPM Package Uninstall
-```sh
-$ sudo yum remove hawknwk
-```
 
 ## Supported Operating Systems
 HAWK-NETWORK currently supports the following operating systems:  
