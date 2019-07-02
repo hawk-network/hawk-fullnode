@@ -1,7 +1,8 @@
 
 # HAWK-NETWORK - The Most Powerful Infrastructure for Decentralized Applications
 
-[![Build status](https://badge.buildkite.com/370fe5c79410f7d695e4e34c500b4e86e3ac021c6b1f739e20.svg?branch=master)](https://buildkite.com/HAWK-NETWORK/hawknwk)
+[![White Page](https://hawk.cool/HAWK%20WP-EN0622.pdf)](https://hawk.cool/HAWK%20WP-EN0622.pdf)
+
 
 Welcome to the HAWK-NETWORK source code repository! This software enables businesses to rapidly build and deploy high-performance and high-security blockchain-based applications.
 
