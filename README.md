@@ -60,11 +60,6 @@ HAWK-NETWORK currently supports the following operating systems:
 1. [Website](https://www.hawk.cool)
 1. [White Paper](https://hawk.cool/HAWK%20WP-EN0622.pdf)
 
-## Contributing
-
-[Contributing Guide](./CONTRIBUTING.md)
-
-[Code of Conduct](./CONTRIBUTING.md#conduct)
 
 ## License
 
