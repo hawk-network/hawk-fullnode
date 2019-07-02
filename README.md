@@ -60,10 +60,6 @@ HAWK-NETWORK currently supports the following operating systems:
 1. [Website](https://www.hawk.cool)
 1. [White Paper](https://hawk.cool/HAWK%20WP-EN0622.pdf)
 
-<a name="gettingstarted"></a>
-## Getting Started
-Instructions detailing the process of getting the software, building it, running a simple test network that produces blocks, account creation and uploading a sample contract to the blockchain can be found in [Getting Started](https://developers.eos.io/hawknwk-home/docs) on the [HAWK-NETWORK Developer Portal](https://developers.eos.io).
-
 ## Contributing
 
 [Contributing Guide](./CONTRIBUTING.md)
