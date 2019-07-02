@@ -24,27 +24,6 @@ Block.one is neither launching nor operating any initial public blockchains base
 
 There is no public testnet running currently.
 
-**If you have previously installed HAWK-NETWORK, please run the `hawknwk_uninstall` script (it is in the directory where you cloned HAWK-NETWORK) before downloading and using the binary releases.**
-
-#### Mac OS X Brew Install
-```sh
-$ brew tap hawknwk/hawknwk
-$ brew install hawknwk
-```
-#### Mac OS X Brew Uninstall
-```sh
-$ brew remove hawknwk
-```
-#### Ubuntu 18.04 Debian Package Install
-```sh
-$ wget https://github.com/hawknwk/eos/releases/download/v1.7.3/hawknwk_1.7.3-1-ubuntu-18.04_amd64.deb
-$ sudo apt install ./hawknwk_1.7.3-1-ubuntu-18.04_amd64.deb
-```
-#### Ubuntu 16.04 Debian Package Install
-```sh
-$ wget https://github.com/hawknwk/eos/releases/download/v1.7.3/hawknwk_1.7.3-1-ubuntu-16.04_amd64.deb
-$ sudo apt install ./hawknwk_1.7.3-1-ubuntu-16.04_amd64.deb
-```
 
 ## Supported Operating Systems
 HAWK-NETWORK currently supports the following operating systems:  
