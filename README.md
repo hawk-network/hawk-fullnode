@@ -1,9 +1,5 @@
 
 # HAWK-NETWORK - The Most Powerful Infrastructure for Decentralized Applications
-#### White Page
-```
-https://hawk.cool/HAWK%20WP-EN0622.pdf
-```
 
 Welcome to the HAWK-NETWORK source code repository! This software enables businesses to rapidly build and deploy high-performance and high-security blockchain-based applications.
 
@@ -61,14 +57,8 @@ HAWK-NETWORK currently supports the following operating systems:
 7. MacOS Darwin 10.12 and higher (MacOS 10.14.x recommended)
 
 ## Resources
-1. [Website](https://eos.io)
-1. [Blog](https://medium.com/hawknwk)
-1. [Developer Portal](https://developers.eos.io)
-1. [StackExchange for Q&A](https://hawknwk.stackexchange.com/)
-1. [Community Telegram Group](https://t.me/EOSProject)
-1. [Developer Telegram Group](https://t.me/joinchat/EaEnSUPktgfoI-XPfMYtcQ)
-1. [White Paper](https://github.com/HAWK-NETWORK/Documentation/blob/master/TechnicalWhitePaper.md)
-1. [Roadmap](https://github.com/HAWK-NETWORK/Documentation/blob/master/Roadmap.md)
+1. [Website](https://www.hawk.cool)
+1. [White Paper](https://hawk.cool/HAWK%20WP-EN0622.pdf)
 
 <a name="gettingstarted"></a>
 ## Getting Started
